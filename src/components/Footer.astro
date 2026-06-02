@@ -2,17 +2,22 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="bg-black text-white/60">
-  <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row gap-5 justify-between text-[13px]">
-    <div class="flex items-center gap-2">
-      <span class="w-6 h-6 rounded-md bg-white text-black font-display font-bold flex items-center justify-center text-xs">S</span>
-      <span class="font-display font-semibold text-white">Shopfront Studio</span>
-      <span class="ml-2 text-white/40">— Ballarat, Victoria</span>
+<footer class="bg-graphite text-paper/55">
+  <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row gap-6 justify-between text-[13px]">
+    <div class="flex items-center gap-3">
+      <span
+        class="w-7 h-7 rounded-md bg-paper text-graphite font-display italic flex items-center justify-center text-base"
+        style="font-variation-settings: 'WONK' 1;"
+        >S</span
+      >
+      <span class="font-display font-medium text-paper text-base tracking-tight">Shopfront Studio</span>
+      <span class="text-paper/35">·</span>
+      <span class="text-paper/45">Ballarat, Victoria</span>
     </div>
-    <div class="flex flex-wrap gap-x-6 gap-y-2 text-white/50">
-      <a href="mailto:hello@shopfrontstudio.com.au" class="hover:text-white transition-colors">hello@shopfrontstudio.com.au</a>
-      <a href="#contact" class="hover:text-white transition-colors">Get a quote</a>
-      <span>© {year}</span>
+    <div class="flex flex-wrap gap-x-6 gap-y-2">
+      <a href="mailto:hello@shopfrontstudio.com.au" class="hover:text-paper transition-colors">hello@shopfrontstudio.com.au</a>
+      <a href="#contact" class="hover:text-paper transition-colors">Enquire</a>
+      <span class="text-paper/35">© {year}</span>
     </div>
   </div>
 </footer>

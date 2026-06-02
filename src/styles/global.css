@@ -1,67 +1,126 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #1d1d1f;
-  --color-ink-soft: #6e6e73;
-  --color-bg: #ffffff;
-  --color-bg-alt: #f5f5f7;
-  --color-dark: #000000;
-  --color-dark-soft: #86868b;
-  --color-accent: #0071e3;
-  --color-accent-hover: #0077ed;
-  --color-accent-2: #bf5af2;
-  --color-line: #d2d2d7;
-  --color-line-dark: #424245;
+  /* Warm paper tones */
+  --color-paper: #f3ede2;
+  --color-paper-soft: #eae1d1;
+  --color-paper-deep: #ddd1bd;
 
+  /* Warm clay / blush accent surface */
+  --color-blush: #e6cdb8;
+  --color-blush-soft: #efdcc9;
+
+  /* Sage — quiet support */
+  --color-sage: #aab09a;
+  --color-sage-soft: #c5cab8;
+
+  /* Ink — warm near-black, not pure black */
+  --color-ink: #2a2520;
+  --color-ink-soft: #6b6157;
+  --color-ink-mute: #948a7e;
+
+  /* Graphite — deep warm grey for dark sections */
+  --color-graphite: #2f2a26;
+  --color-graphite-soft: #4a4138;
+
+  /* Antique gold — muted, never shiny */
+  --color-gold: #a8854a;
+  --color-gold-dark: #836636;
+  --color-gold-soft: #c9ad7d;
+
+  /* Silver / pewter */
+  --color-silver: #b8b1a4;
+
+  /* Lines */
+  --color-line: #d9cdb8;
+  --color-line-soft: #e5dcc9;
+  --color-line-dark: #4a4138;
+
+  /* Type */
   --font-display:
-    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
-    system-ui, sans-serif;
+    "Fraunces", "EB Garamond", Georgia, "Times New Roman", serif;
   --font-body:
-    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
-    sans-serif;
+    "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--color-bg);
+  background: var(--color-paper);
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-bg);
+  background-color: var(--color-paper);
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.005em;
+}
+
+/* Subtle paper grain — sits behind everything, very faint */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  0 0 0 0.55 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+}
+
+main,
+header,
+footer {
+  position: relative;
+  z-index: 1;
 }
 
 .font-display {
   font-family: var(--font-display);
-  letter-spacing: -0.04em;
-  font-weight: 600;
+  font-optical-sizing: auto;
+  font-variation-settings: "SOFT" 50, "WONK" 1;
+  font-weight: 500;
+  letter-spacing: -0.025em;
 }
 
 .display-tight {
-  letter-spacing: -0.055em;
-  line-height: 0.95;
+  letter-spacing: -0.035em;
+  line-height: 0.98;
 }
 
-.gradient-text {
-  background: linear-gradient(120deg, #2997ff 0%, #bf5af2 50%, #ff375f 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
+.italic-gold {
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  color: var(--color-gold);
 }
 
-.glass {
-  background: rgba(255, 255, 255, 0.72);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-dark);
 }
 
-.glass-dark {
-  background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: saturate(180%) blur(20px);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
+.eyebrow-light {
+  color: var(--color-gold-soft);
+}
+
+.hairline {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-gold) 20%,
+    var(--color-gold) 80%,
+    transparent
+  );
+}
+
+.glass-paper {
+  background: rgba(243, 237, 226, 0.78);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
 }

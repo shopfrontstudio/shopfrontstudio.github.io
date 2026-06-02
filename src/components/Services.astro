@@ -1,117 +1,127 @@
 ---
 const services = [
   {
-    eyebrow: "01 — Websites",
-    title: "Sites that load before people leave.",
+    n: "I",
+    eyebrow: "Websites",
+    title: "A proper shopfront, online.",
     body:
-      "Custom-built. Mobile-first. Wired to Google so locals find you. No bloated templates, no 30-second load times — just a clean shopfront that converts visits into bookings, calls and walk-ins.",
-    bullets: ["Custom design", "<2s on 4G", "Google-connected", "Care plan optional"],
+      "Custom, mobile-first, wired to Google so locals find you. We don't reach for a Wix template. Each site is hand-built, fast to load, and easy to update — yours to keep, with optional monthly care.",
+    bullets: ["Bespoke design", "Under two seconds", "Google-connected", "Care from $79/mo"],
     price: "From $1,800",
-    theme: "light",
+    surface: "paper-soft",
   },
   {
-    eyebrow: "02 — Social media",
-    title: "Posts that fill tables.",
+    n: "II",
+    eyebrow: "Social",
+    title: "Posts that fill the room.",
     body:
-      "We plan, shoot, write and schedule — weekly or monthly. You approve in ten minutes. The goal isn't follower count, it's a busier Saturday.",
-    bullets: ["Monthly content plan", "On-site photography", "Reels + stories + posts", "Honest reporting"],
+      "Planned, photographed, written and scheduled — by the week or the month. You approve in ten minutes. The measure isn't followers, it's a fuller Saturday.",
+    bullets: ["Monthly content plan", "On-site photography", "Reels and stories", "Plain-English reporting"],
     price: "From $650/mo",
-    theme: "dark",
+    surface: "graphite",
   },
   {
-    eyebrow: "03 — Catalogues",
-    title: "Catalogues people keep.",
+    n: "III",
+    eyebrow: "Catalogues",
+    title: "Pieces worth keeping.",
     body:
-      "Print and digital, designed together. A seasonal lookbook for boutiques. A tasting card for wineries. A wholesale catalogue for makers. Press-ready files and an interactive PDF — same project, same fee.",
-    bullets: ["Print-ready files", "Interactive PDF", "Local print partner", "Reusable templates"],
+      "Print and digital, designed as one. A seasonal lookbook for a boutique. A tasting card for a cellar door. A wholesale catalogue for a maker. Press-ready files and an interactive PDF — same project, same fee.",
+    bullets: ["Press-ready artwork", "Interactive PDF", "Local print partner", "Reusable templates"],
     price: "From $850",
-    theme: "light",
+    surface: "blush",
   },
 ];
+
+const surfaceClass = {
+  "paper-soft": "bg-paper-soft text-ink",
+  graphite: "bg-graphite text-paper",
+  blush: "bg-blush-soft text-ink",
+};
+const bodyClass = {
+  "paper-soft": "text-ink-soft",
+  graphite: "text-paper/70",
+  blush: "text-ink-soft",
+};
+const eyebrowClass = {
+  "paper-soft": "eyebrow",
+  graphite: "eyebrow eyebrow-light",
+  blush: "eyebrow",
+};
+const priceClass = {
+  "paper-soft": "bg-paper text-ink border border-line",
+  graphite: "bg-paper/10 text-paper border border-paper/15",
+  blush: "bg-paper text-ink border border-line",
+};
+const checkClass = {
+  "paper-soft": "bg-gold text-paper",
+  graphite: "bg-gold-soft text-graphite",
+  blush: "bg-gold text-paper",
+};
 ---
 
-<section id="services" class="bg-white">
-  <div class="max-w-6xl mx-auto px-6 pt-28 pb-10 md:pt-40 md:pb-16 text-center">
-    <div class="text-[12px] font-medium uppercase tracking-[0.18em] text-accent mb-5">
-      What we do
+<section id="services" class="bg-paper">
+  <div class="max-w-6xl mx-auto px-6 pt-28 pb-12 md:pt-40 md:pb-16">
+    <div class="max-w-3xl">
+      <div class="flex items-center gap-3 mb-6">
+        <span class="w-10 h-px bg-gold"></span>
+        <span class="eyebrow">What we make</span>
+      </div>
+      <h2 class="font-display display-tight text-5xl md:text-7xl text-ink">
+        Three things,
+        <br />
+        <span class="italic-gold">done with care.</span>
+      </h2>
+      <p class="mt-6 text-lg md:text-xl text-ink-soft max-w-2xl">
+        We've kept the menu short on purpose. Start with one. Add the others when the time is right.
+      </p>
     </div>
-    <h2 class="font-display display-tight text-5xl md:text-7xl font-bold">
-      Three things.
-      <br />
-      <span class="text-ink/40">Done properly.</span>
-    </h2>
-    <p class="mt-6 max-w-2xl mx-auto text-lg text-ink-soft">
-      We kept the menu short on purpose. Start with one, add the others when you're ready.
-    </p>
   </div>
 
-  <div class="space-y-0">
+  <div>
     {
-      services.map((s) => {
-        const isDark = s.theme === "dark";
-        return (
-          <article
-            class:list={[
-              "border-t",
-              isDark ? "bg-black text-white border-black" : "bg-bg-alt text-ink border-line",
-            ]}
-          >
-            <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 grid md:grid-cols-12 gap-10">
-              <div class="md:col-span-5">
-                <div
-                  class:list={[
-                    "text-[12px] font-medium uppercase tracking-[0.18em] mb-5",
-                    isDark ? "text-accent" : "text-accent",
-                  ]}
-                >
-                  {s.eyebrow}
-                </div>
-                <h3 class="font-display display-tight text-4xl md:text-6xl font-bold">
-                  {s.title}
-                </h3>
-                <div
-                  class:list={[
-                    "mt-8 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full",
-                    isDark ? "bg-white/10 text-white" : "bg-white text-ink border border-line",
-                  ]}
-                >
-                  {s.price}
-                </div>
+      services.map((s) => (
+        <article class:list={["border-t border-line/40", surfaceClass[s.surface]]}>
+          <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 grid md:grid-cols-12 gap-10">
+            <div class="md:col-span-5">
+              <div class:list={[eyebrowClass[s.surface], "mb-6"]}>
+                <span class="font-display text-base italic mr-3" style="font-variation-settings: 'WONK' 1;">{s.n}</span>
+                {s.eyebrow}
               </div>
-              <div class="md:col-span-7 md:pt-2">
-                <p
-                  class:list={[
-                    "text-lg md:text-xl leading-relaxed",
-                    isDark ? "text-white/75" : "text-ink-soft",
-                  ]}
-                >
-                  {s.body}
-                </p>
-                <ul class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6">
-                  {s.bullets.map((b) => (
-                    <li
-                      class:list={[
-                        "flex items-center gap-3 text-[15px]",
-                        isDark ? "text-white/90" : "text-ink",
-                      ]}
-                    >
-                      <span
-                        class:list={[
-                          "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0",
-                          isDark ? "bg-accent text-white" : "bg-accent text-white",
-                        ]}
-                      >
-                        ✓
-                      </span>
-                      {b}
-                    </li>
-                  ))}
-                </ul>
+              <h3 class="font-display display-tight text-4xl md:text-6xl">
+                {s.title}
+              </h3>
+              <div
+                class:list={[
+                  "mt-10 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full tracking-wide",
+                  priceClass[s.surface],
+                ]}
+              >
+                {s.price}
               </div>
             </div>
-          </article>
-        );
-      })
+            <div class="md:col-span-7 md:pt-2">
+              <p class:list={["text-lg md:text-xl leading-relaxed", bodyClass[s.surface]]}>
+                {s.body}
+              </p>
+              <ul class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6">
+                {s.bullets.map((b) => (
+                  <li class="flex items-center gap-3 text-[15px]">
+                    <span
+                      class:list={[
+                        "w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0",
+                        checkClass[s.surface],
+                      ]}
+                    >
+                      ✓
+                    </span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </article>
+      ))
     }
   </div>
 </section>

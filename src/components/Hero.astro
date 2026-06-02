@@ -1,67 +1,79 @@
 ---
 ---
 
-<section class="relative overflow-hidden bg-black text-white">
+<section class="relative bg-paper overflow-hidden">
   <div
-    class="absolute inset-0 -z-0 opacity-60"
+    class="absolute inset-0 pointer-events-none opacity-50"
     style="background:
-      radial-gradient(60% 50% at 20% 10%, rgba(41,151,255,0.35) 0%, rgba(0,0,0,0) 60%),
-      radial-gradient(50% 50% at 80% 20%, rgba(191,90,242,0.32) 0%, rgba(0,0,0,0) 60%),
-      radial-gradient(70% 60% at 50% 100%, rgba(255,55,95,0.22) 0%, rgba(0,0,0,0) 60%);"
+      radial-gradient(60% 45% at 80% 0%, rgba(168,133,74,0.18) 0%, rgba(243,237,226,0) 60%),
+      radial-gradient(50% 50% at 0% 100%, rgba(230,205,184,0.4) 0%, rgba(243,237,226,0) 60%);"
   ></div>
 
-  <div class="relative max-w-6xl mx-auto px-6 pt-28 pb-32 md:pt-40 md:pb-44 text-center">
-    <div class="inline-flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.18em] text-white/60 mb-8">
-      <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-      Made in Ballarat
-    </div>
-
-    <h1 class="font-display display-tight text-[56px] sm:text-7xl md:text-8xl lg:text-[128px] font-bold">
-      Your shopfront.
-      <br />
-      <span class="gradient-text">Reimagined online.</span>
-    </h1>
-
-    <p class="mt-8 mx-auto max-w-2xl text-lg md:text-xl text-white/70 leading-relaxed font-normal">
-      A small studio in Ballarat. We build websites that load before the page above them.
-      Run social media that actually fills tables. Design catalogues people keep.
-    </p>
-
-    <div class="mt-12 flex flex-wrap gap-3 justify-center">
-      <a
-        href="#contact"
-        class="inline-flex items-center gap-2 bg-accent hover:bg-accent-hover text-white px-7 py-3 rounded-full text-[15px] font-medium transition-colors"
-      >
-        Start a project
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <path d="M5 12h14M13 5l7 7-7 7" />
-        </svg>
-      </a>
-      <a
-        href="#services"
-        class="inline-flex items-center px-7 py-3 rounded-full text-[15px] font-medium text-white border border-white/20 hover:border-white/50 transition-colors"
-      >
-        See what we do
-      </a>
-    </div>
-
-    <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto text-left">
-      <div>
-        <div class="font-display text-3xl md:text-4xl font-bold">2–3<span class="text-white/40">wk</span></div>
-        <div class="mt-1 text-xs uppercase tracking-wider text-white/50">Site launch</div>
+  <div class="relative max-w-6xl mx-auto px-6 pt-28 pb-28 md:pt-44 md:pb-40">
+    <div class="max-w-4xl">
+      <div class="flex items-center gap-3 mb-10">
+        <span class="w-10 h-px bg-gold"></span>
+        <span class="eyebrow">Est. Ballarat · Victoria</span>
       </div>
-      <div>
-        <div class="font-display text-3xl md:text-4xl font-bold">&lt;2<span class="text-white/40">s</span></div>
-        <div class="mt-1 text-xs uppercase tracking-wider text-white/50">Page load</div>
-      </div>
-      <div>
-        <div class="font-display text-3xl md:text-4xl font-bold">100<span class="text-white/40">%</span></div>
-        <div class="mt-1 text-xs uppercase tracking-wider text-white/50">Mobile first</div>
-      </div>
-      <div>
-        <div class="font-display text-3xl md:text-4xl font-bold">0<span class="text-white/40">bs</span></div>
-        <div class="mt-1 text-xs uppercase tracking-wider text-white/50">Lock-in</div>
+
+      <h1 class="font-display display-tight text-[58px] sm:text-7xl md:text-8xl lg:text-[120px] text-ink">
+        Your shopfront,
+        <br />
+        <span class="italic-gold">considered online.</span>
+      </h1>
+
+      <p class="mt-10 max-w-2xl text-xl md:text-2xl text-ink-soft leading-[1.5] font-normal">
+        A small studio for the local trades that already know what they're doing — and just
+        need their corner of the internet to feel the same. Websites, social, and catalogues,
+        made with care.
+      </p>
+
+      <div class="mt-12 flex flex-wrap gap-3">
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 bg-graphite text-paper px-7 py-3.5 rounded-full text-[14px] font-medium tracking-wide hover:bg-gold-dark transition-colors"
+        >
+          Begin a project
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a
+          href="#services"
+          class="inline-flex items-center px-7 py-3.5 rounded-full text-[14px] font-medium tracking-wide text-ink border border-line hover:border-gold transition-colors"
+        >
+          What we do
+        </a>
       </div>
     </div>
+
+    <div class="hairline mt-24 max-w-3xl"></div>
+
+    <dl class="mt-12 grid grid-cols-2 md:grid-cols-4 gap-y-8 gap-x-6 max-w-3xl">
+      <div>
+        <dt class="eyebrow">Site launch</dt>
+        <dd class="font-display text-3xl md:text-4xl mt-2 text-ink">
+          Two to three <span class="italic-gold">weeks</span>
+        </dd>
+      </div>
+      <div>
+        <dt class="eyebrow">Page weight</dt>
+        <dd class="font-display text-3xl md:text-4xl mt-2 text-ink">
+          Under two <span class="italic-gold">seconds</span>
+        </dd>
+      </div>
+      <div>
+        <dt class="eyebrow">Pricing</dt>
+        <dd class="font-display text-3xl md:text-4xl mt-2 text-ink">
+          Fixed, <span class="italic-gold">in writing</span>
+        </dd>
+      </div>
+      <div>
+        <dt class="eyebrow">Contracts</dt>
+        <dd class="font-display text-3xl md:text-4xl mt-2 text-ink">
+          No annual <span class="italic-gold">lock-in</span>
+        </dd>
+      </div>
+    </dl>
   </div>
 </section>

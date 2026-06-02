@@ -1,26 +1,27 @@
 ---
 const nav = [
   { href: "#services", label: "Services" },
-  { href: "#how", label: "How it works" },
-  { href: "#about", label: "About" },
+  { href: "#how", label: "Process" },
+  { href: "#about", label: "Studio" },
   { href: "#contact", label: "Contact" },
 ];
 ---
 
-<header class="sticky top-0 z-50 glass border-b border-line/60">
-  <div class="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
-    <a href="/" class="flex items-center gap-2">
+<header class="sticky top-0 z-50 glass-paper border-b border-line/60">
+  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5">
       <span
-        class="w-7 h-7 rounded-md bg-black text-white font-display font-bold flex items-center justify-center text-sm"
+        class="w-7 h-7 rounded-md bg-graphite text-paper font-display italic flex items-center justify-center text-base"
+        style="font-variation-settings: 'WONK' 1; color: #c9ad7d;"
         >S</span
       >
-      <span class="font-display text-[15px] font-semibold tracking-tight text-ink">Shopfront Studio</span>
+      <span class="font-display text-[17px] font-medium tracking-tight text-ink">Shopfront Studio</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-8 text-[13px] font-normal text-ink/85">
+    <nav class="hidden md:flex items-center gap-9 text-[13px] tracking-wide text-ink/70">
       {
         nav.map((item) => (
-          <a href={item.href} class="hover:text-ink transition-opacity hover:opacity-70">
+          <a href={item.href} class="hover:text-ink transition-colors">
             {item.label}
           </a>
         ))
@@ -29,8 +30,8 @@ const nav = [
 
     <a
       href="#contact"
-      class="hidden md:inline-flex bg-accent text-white px-4 py-1.5 rounded-full text-[13px] font-medium hover:bg-accent-hover transition-colors"
-      >Get a quote</a
+      class="hidden md:inline-flex items-center bg-graphite text-paper px-4 py-2 rounded-full text-[12.5px] font-medium hover:bg-gold-dark transition-colors tracking-wide"
+      >Enquire</a
     >
 
     <button
@@ -38,25 +39,25 @@ const nav = [
       class="md:hidden p-2 text-ink"
       aria-label="Toggle menu"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M3 6h18M3 12h18M3 18h18" />
       </svg>
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden border-t border-line bg-white">
-    <nav class="px-6 py-5 flex flex-col gap-4 text-sm font-medium">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-line/60 bg-paper">
+    <nav class="px-6 py-5 flex flex-col gap-4 text-sm">
       {
         nav.map((item) => (
-          <a href={item.href} class="hover:text-accent" data-mobile-link>
+          <a href={item.href} class="hover:text-gold-dark" data-mobile-link>
             {item.label}
           </a>
         ))
       }
       <a
         href="#contact"
-        class="bg-accent text-white px-4 py-2 rounded-full text-center"
-        data-mobile-link>Get a quote</a
+        class="bg-graphite text-paper px-4 py-2 rounded-full text-center"
+        data-mobile-link>Enquire</a
       >
     </nav>
   </div>
