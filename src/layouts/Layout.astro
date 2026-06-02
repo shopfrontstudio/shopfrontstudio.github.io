@@ -36,7 +36,8 @@ const {
   </head>
   <body class="min-h-screen flex flex-col bg-black">
     <Header />
-    <main class="flex-1">
+    <main class="flex-1 relative">
+      <div class="page-bg-photo" aria-hidden="true"></div>
       <slot />
     </main>
     <Footer />
