@@ -1,0 +1,91 @@
+---
+---
+
+<section id="contact" class="py-24 md:py-32">
+  <div class="max-w-4xl mx-auto px-6">
+    <div class="text-center mb-12">
+      <div class="text-xs font-medium uppercase tracking-wider text-rust mb-4">
+        Let's talk
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold tracking-tight">
+        Tell us about your business.
+      </h2>
+      <p class="mt-5 text-lg text-ink/70 max-w-xl mx-auto">
+        A short note is enough. We'll reply within one working day with honest next steps —
+        even if those steps are "you don't need us yet."
+      </p>
+    </div>
+
+    <form
+      action="https://formspree.io/f/your-form-id"
+      method="POST"
+      class="grid gap-5 bg-white border border-stone rounded-xl p-6 md:p-10"
+    >
+      <div class="grid sm:grid-cols-2 gap-5">
+        <label class="block">
+          <span class="text-sm font-medium text-ink">Your name</span>
+          <input
+            type="text"
+            name="name"
+            required
+            class="mt-2 w-full rounded-md border border-stone bg-cream/50 px-4 py-3 text-ink focus:border-rust focus:outline-none focus:ring-2 focus:ring-rust/20"
+          />
+        </label>
+        <label class="block">
+          <span class="text-sm font-medium text-ink">Business name</span>
+          <input
+            type="text"
+            name="business"
+            class="mt-2 w-full rounded-md border border-stone bg-cream/50 px-4 py-3 text-ink focus:border-rust focus:outline-none focus:ring-2 focus:ring-rust/20"
+          />
+        </label>
+      </div>
+      <label class="block">
+        <span class="text-sm font-medium text-ink">Email or phone</span>
+        <input
+          type="text"
+          name="contact"
+          required
+          class="mt-2 w-full rounded-md border border-stone bg-cream/50 px-4 py-3 text-ink focus:border-rust focus:outline-none focus:ring-2 focus:ring-rust/20"
+        />
+      </label>
+
+      <fieldset class="block">
+        <legend class="text-sm font-medium text-ink mb-2">What are you after?</legend>
+        <div class="flex flex-wrap gap-2">
+          {
+            ["Website", "Social media", "Catalogue", "Not sure yet"].map((opt) => (
+              <label class="inline-flex items-center gap-2 bg-cream/60 border border-stone rounded-full px-4 py-2 text-sm cursor-pointer has-checked:bg-rust has-checked:text-cream has-checked:border-rust">
+                <input type="checkbox" name="interest" value={opt} class="sr-only" />
+                {opt}
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <label class="block">
+        <span class="text-sm font-medium text-ink">Tell us a bit about your business</span>
+        <textarea
+          name="message"
+          rows="4"
+          class="mt-2 w-full rounded-md border border-stone bg-cream/50 px-4 py-3 text-ink focus:border-rust focus:outline-none focus:ring-2 focus:ring-rust/20"
+        ></textarea>
+      </label>
+
+      <button
+        type="submit"
+        class="justify-self-start inline-flex items-center gap-2 bg-ink text-cream px-6 py-3 rounded-md font-medium hover:bg-rust transition-colors"
+      >
+        Send it through
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </button>
+
+      <p class="text-xs text-ink/50">
+        Prefer email? <a href="mailto:hello@shopfrontstudio.com.au" class="text-rust underline underline-offset-4">hello@shopfrontstudio.com.au</a>
+      </p>
+    </form>
+  </div>
+</section>

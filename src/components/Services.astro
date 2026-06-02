@@ -1,0 +1,97 @@
+---
+const services = [
+  {
+    number: "01",
+    title: "Websites",
+    tagline: "A proper online shopfront — fast, mobile-first, easy to update.",
+    body:
+      "Most small businesses lose customers before they even walk in, because their website is slow, broken on a phone, or just hard to look at. We build clean, fast websites that show up on Google and make people want to call you, book you, or visit.",
+    bullets: [
+      "Custom design, not a Wix template",
+      "Loads in under two seconds on 4G",
+      "Connected to your Google Business Profile",
+      "Optional monthly care plan ($79/mo)",
+    ],
+    price: "From $1,800",
+  },
+  {
+    number: "02",
+    title: "Social media",
+    tagline: "Instagram and Facebook handled, so you can run the shop.",
+    body:
+      "We plan, photograph, and post — weekly, monthly, or on a campaign basis. The goal isn't follower count, it's filling tables, selling product, and getting locals to recommend you.",
+    bullets: [
+      "Monthly content plan you can approve in 10 minutes",
+      "On-site photography in Ballarat",
+      "Reels, stories, posts — whatever's working that month",
+      "Reporting that actually says something useful",
+    ],
+    price: "From $650/mo",
+  },
+  {
+    number: "03",
+    title: "Catalogues",
+    tagline: "Printed and digital — for stockists, markets, and customers.",
+    body:
+      "Whether it's a seasonal lookbook for a boutique, a tasting notes card for a winery, or a wholesale catalogue for a maker selling into other shops — we design both the printed piece and a matching digital version you can email or text.",
+    bullets: [
+      "Print-ready files, plus interactive PDF",
+      "Coordinated with a trusted local printer",
+      "Reusable templates for seasonal updates",
+      "Sized for markets, mail, or QR-code displays",
+    ],
+    price: "From $850",
+  },
+];
+---
+
+<section id="services" class="py-24 md:py-32 bg-cream">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <div class="text-xs font-medium uppercase tracking-wider text-rust mb-4">
+        What we do
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold tracking-tight">
+        Three things, done properly.
+      </h2>
+      <p class="mt-5 text-lg text-ink/70">
+        We've kept it deliberately small. Three services that work together — you can start
+        with one and add the others as you grow.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:gap-8">
+      {
+        services.map((s) => (
+          <article class="group bg-white rounded-xl border border-stone p-8 md:p-10 hover:border-rust/40 transition-colors">
+            <div class="grid md:grid-cols-12 gap-6 md:gap-10">
+              <div class="md:col-span-3">
+                <div class="font-display text-5xl text-rust/30 font-semibold">{s.number}</div>
+                <h3 class="font-display text-2xl md:text-3xl font-semibold mt-2">{s.title}</h3>
+                <div class="mt-4 text-sm font-medium text-ink/60">{s.price}</div>
+              </div>
+              <div class="md:col-span-9">
+                <p class="font-display text-xl md:text-2xl text-ink leading-snug">
+                  {s.tagline}
+                </p>
+                <p class="mt-4 text-ink/70 leading-relaxed">{s.body}</p>
+                <ul class="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-ink/80">
+                  {s.bullets.map((b) => (
+                    <li class="flex items-start gap-2">
+                      <span class="text-rust mt-1">•</span>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 text-center text-sm text-ink/60">
+      Not sure which one you need? <a href="#contact" class="text-rust underline underline-offset-4 hover:text-rust-dark">Tell us about your business</a> and we'll be honest.
+    </div>
+  </div>
+</section>

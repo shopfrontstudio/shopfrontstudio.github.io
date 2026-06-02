@@ -1,0 +1,72 @@
+---
+const nav = [
+  { href: "#services", label: "Services" },
+  { href: "#how", label: "How it works" },
+  { href: "#about", label: "About" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<header class="sticky top-0 z-50 bg-cream/85 backdrop-blur border-b border-stone">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2 group">
+      <span
+        class="w-8 h-8 rounded-md bg-rust text-cream font-display font-bold flex items-center justify-center text-lg"
+        >S</span
+      >
+      <span class="font-display text-lg font-semibold tracking-tight">Shopfront Studio</span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-ink/80">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="hover:text-rust transition-colors">
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <a
+      href="#contact"
+      class="hidden md:inline-flex bg-ink text-cream px-4 py-2 rounded-md text-sm font-medium hover:bg-rust transition-colors"
+      >Get a quote</a
+    >
+
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden p-2 text-ink"
+      aria-label="Toggle menu"
+    >
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 6h18M3 12h18M3 18h18" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="mobile-menu" class="hidden md:hidden border-t border-stone bg-cream">
+    <nav class="px-6 py-4 flex flex-col gap-4 text-sm font-medium">
+      {
+        nav.map((item) => (
+          <a href={item.href} class="hover:text-rust" data-mobile-link>
+            {item.label}
+          </a>
+        ))
+      }
+      <a
+        href="#contact"
+        class="bg-ink text-cream px-4 py-2 rounded-md text-center"
+        data-mobile-link>Get a quote</a
+      >
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById("mobile-menu-btn");
+  const menu = document.getElementById("mobile-menu");
+  btn?.addEventListener("click", () => menu?.classList.toggle("hidden"));
+  document
+    .querySelectorAll("[data-mobile-link]")
+    .forEach((a) => a.addEventListener("click", () => menu?.classList.add("hidden")));
+</script>

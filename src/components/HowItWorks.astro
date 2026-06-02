@@ -1,0 +1,57 @@
+---
+const steps = [
+  {
+    n: "01",
+    title: "A coffee, no obligation",
+    body:
+      "We meet at your shop or a café in town, look at what you've got, and figure out whether we're the right fit. If we're not, we'll say so.",
+  },
+  {
+    n: "02",
+    title: "A small, fixed proposal",
+    body:
+      "One page. What we'll do, what it costs, when it's done. No surprise invoices, no twelve-month contracts.",
+  },
+  {
+    n: "03",
+    title: "Built in weeks, not months",
+    body:
+      "A website usually goes live in 2–3 weeks. Social media starts within a week. Catalogues turn around in 10 working days.",
+  },
+  {
+    n: "04",
+    title: "We stay in touch",
+    body:
+      "Optional monthly care, training so you can update things yourself, and a real person to call when something breaks.",
+  },
+];
+---
+
+<section id="how" class="py-24 md:py-32 border-t border-stone">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="max-w-2xl mb-16">
+      <div class="text-xs font-medium uppercase tracking-wider text-rust mb-4">
+        How it works
+      </div>
+      <h2 class="font-display text-4xl md:text-5xl font-semibold tracking-tight">
+        Four steps. No jargon.
+      </h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-x-12 gap-y-10">
+      {
+        steps.map((s) => (
+          <div class="flex gap-5">
+            <div class="font-display text-3xl text-rust font-semibold w-12 shrink-0">
+              {s.n}
+            </div>
+            <div>
+              <h3 class="font-display text-xl font-semibold">{s.title}</h3>
+              <p class="mt-2 text-ink/70 leading-relaxed">{s.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
