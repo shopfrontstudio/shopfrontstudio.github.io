@@ -7,21 +7,20 @@ const nav = [
 ];
 ---
 
-<header class="sticky top-0 z-50 glass-paper border-b border-line/60">
-  <div class="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+<header class="sticky top-0 z-50 glass-dark border-b border-line-bright">
+  <div class="max-w-6xl mx-auto px-6 h-12 flex items-center justify-between">
     <a href="/" class="flex items-center gap-2.5">
       <span
-        class="w-7 h-7 rounded-md bg-graphite text-paper font-display italic flex items-center justify-center text-base"
-        style="font-variation-settings: 'WONK' 1; color: #c9ad7d;"
+        class="w-7 h-7 rounded-md bg-graphite-soft border border-line-bright text-platinum-bright font-display font-extrabold flex items-center justify-center text-sm silver-text"
         >S</span
       >
-      <span class="font-display text-[17px] font-medium tracking-tight text-ink">Shopfront Studio</span>
+      <span class="font-display text-[15px] font-semibold tracking-tight text-silver-100">Shopfront Studio</span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-9 text-[13px] tracking-wide text-ink/70">
+    <nav class="hidden md:flex items-center gap-8 text-[13px] font-normal text-silver-300">
       {
         nav.map((item) => (
-          <a href={item.href} class="hover:text-ink transition-colors">
+          <a href={item.href} class="hover:text-silver-50 transition-colors">
             {item.label}
           </a>
         ))
@@ -30,33 +29,33 @@ const nav = [
 
     <a
       href="#contact"
-      class="hidden md:inline-flex items-center bg-graphite text-paper px-4 py-2 rounded-full text-[12.5px] font-medium hover:bg-gold-dark transition-colors tracking-wide"
+      class="hidden md:inline-flex bg-silver-100 text-onyx px-4 py-1.5 rounded-full text-[13px] font-semibold hover:bg-white transition-colors"
       >Enquire</a
     >
 
     <button
       id="mobile-menu-btn"
-      class="md:hidden p-2 text-ink"
+      class="md:hidden p-2 text-silver-100"
       aria-label="Toggle menu"
     >
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
         <path d="M3 6h18M3 12h18M3 18h18" />
       </svg>
     </button>
   </div>
 
-  <div id="mobile-menu" class="hidden md:hidden border-t border-line/60 bg-paper">
-    <nav class="px-6 py-5 flex flex-col gap-4 text-sm">
+  <div id="mobile-menu" class="hidden md:hidden border-t border-line-bright glass-dark">
+    <nav class="px-6 py-5 flex flex-col gap-4 text-sm text-silver-200">
       {
         nav.map((item) => (
-          <a href={item.href} class="hover:text-gold-dark" data-mobile-link>
+          <a href={item.href} class="hover:text-white" data-mobile-link>
             {item.label}
           </a>
         ))
       }
       <a
         href="#contact"
-        class="bg-graphite text-paper px-4 py-2 rounded-full text-center"
+        class="bg-silver-100 text-onyx px-4 py-2 rounded-full text-center font-semibold"
         data-mobile-link>Enquire</a
       >
     </nav>

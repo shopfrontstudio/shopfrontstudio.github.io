@@ -1,123 +1,92 @@
 ---
 const services = [
   {
-    n: "I",
+    index: "01",
     eyebrow: "Websites",
-    title: "A proper shopfront, online.",
+    title: "Sites that load before people leave.",
     body:
-      "Custom, mobile-first, wired to Google so locals find you. We don't reach for a Wix template. Each site is hand-built, fast to load, and easy to update — yours to keep, with optional monthly care.",
-    bullets: ["Bespoke design", "Under two seconds", "Google-connected", "Care from $79/mo"],
+      "Custom-built. Mobile-first. Wired to Google so locals find you. No bloated templates, no 30-second load times — just a clean shopfront that converts visits into bookings, calls and walk-ins.",
+    bullets: ["Custom design", "Under 2 seconds", "Google-connected", "Care plan optional"],
     price: "From $1,800",
-    surface: "paper-soft",
   },
   {
-    n: "II",
-    eyebrow: "Social",
-    title: "Posts that fill the room.",
+    index: "02",
+    eyebrow: "Social media",
+    title: "Posts that fill the tables.",
     body:
-      "Planned, photographed, written and scheduled — by the week or the month. You approve in ten minutes. The measure isn't followers, it's a fuller Saturday.",
-    bullets: ["Monthly content plan", "On-site photography", "Reels and stories", "Plain-English reporting"],
+      "We plan, shoot, write and schedule — weekly or monthly. You approve in ten minutes. The goal isn't follower count, it's a busier Saturday.",
+    bullets: ["Monthly content plan", "On-site photography", "Reels and stories", "Plain reporting"],
     price: "From $650/mo",
-    surface: "graphite",
   },
   {
-    n: "III",
+    index: "03",
     eyebrow: "Catalogues",
-    title: "Pieces worth keeping.",
+    title: "Catalogues people keep.",
     body:
-      "Print and digital, designed as one. A seasonal lookbook for a boutique. A tasting card for a cellar door. A wholesale catalogue for a maker. Press-ready files and an interactive PDF — same project, same fee.",
+      "Print and digital, designed together. A seasonal lookbook. A tasting card for a cellar door. A wholesale catalogue for a maker. Press-ready files and an interactive PDF — same project, same fee.",
     bullets: ["Press-ready artwork", "Interactive PDF", "Local print partner", "Reusable templates"],
     price: "From $850",
-    surface: "blush",
   },
 ];
-
-const surfaceClass = {
-  "paper-soft": "bg-paper-soft text-ink",
-  graphite: "bg-graphite text-paper",
-  blush: "bg-blush-soft text-ink",
-};
-const bodyClass = {
-  "paper-soft": "text-ink-soft",
-  graphite: "text-paper/70",
-  blush: "text-ink-soft",
-};
-const eyebrowClass = {
-  "paper-soft": "eyebrow",
-  graphite: "eyebrow eyebrow-light",
-  blush: "eyebrow",
-};
-const priceClass = {
-  "paper-soft": "bg-paper text-ink border border-line",
-  graphite: "bg-paper/10 text-paper border border-paper/15",
-  blush: "bg-paper text-ink border border-line",
-};
-const checkClass = {
-  "paper-soft": "bg-gold text-paper",
-  graphite: "bg-gold-soft text-graphite",
-  blush: "bg-gold text-paper",
-};
 ---
 
-<section id="services" class="bg-paper">
-  <div class="max-w-6xl mx-auto px-6 pt-28 pb-12 md:pt-40 md:pb-16">
-    <div class="max-w-3xl">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-px bg-gold"></span>
-        <span class="eyebrow">What we make</span>
-      </div>
-      <h2 class="font-display display-tight text-5xl md:text-7xl text-ink">
-        Three things,
-        <br />
-        <span class="italic-gold">done with care.</span>
-      </h2>
-      <p class="mt-6 text-lg md:text-xl text-ink-soft max-w-2xl">
-        We've kept the menu short on purpose. Start with one. Add the others when the time is right.
-      </p>
+<section id="services" class="bg-black text-silver-100">
+  <div class="max-w-6xl mx-auto px-6 pt-28 pb-20 md:pt-40 md:pb-24 text-center">
+    <div class="text-[12px] font-medium uppercase tracking-[0.22em] text-silver-400 mb-5">
+      What we do
     </div>
+    <h2 class="font-display display-tight text-5xl md:text-7xl">
+      <span class="text-white">Three things.</span>
+      <br />
+      <span class="silver-text-soft">Done properly.</span>
+    </h2>
+    <p class="mt-6 max-w-2xl mx-auto text-lg text-silver-300">
+      Scroll. Each one slides over the last — start with one, add the others when you're ready.
+    </p>
   </div>
 
-  <div>
+  <div class="relative">
     {
-      services.map((s) => (
-        <article class:list={["border-t border-line/40", surfaceClass[s.surface]]}>
-          <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 grid md:grid-cols-12 gap-10">
+      services.map((s, i) => (
+        <article class="stack-card">
+          <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 w-full">
             <div class="md:col-span-5">
-              <div class:list={[eyebrowClass[s.surface], "mb-6"]}>
-                <span class="font-display text-base italic mr-3" style="font-variation-settings: 'WONK' 1;">{s.n}</span>
-                {s.eyebrow}
+              <div class="flex items-center gap-3 mb-6">
+                <span class="font-display text-[64px] md:text-[88px] leading-none font-bold silver-text">
+                  {s.index}
+                </span>
+                <div class="flex flex-col">
+                  <span class="text-[11px] uppercase tracking-[0.22em] text-silver-400">Service</span>
+                  <span class="font-display text-lg text-silver-100 font-semibold">{s.eyebrow}</span>
+                </div>
               </div>
-              <h3 class="font-display display-tight text-4xl md:text-6xl">
+              <h3 class="font-display display-tight text-3xl md:text-5xl text-white mt-6">
                 {s.title}
               </h3>
-              <div
-                class:list={[
-                  "mt-10 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full tracking-wide",
-                  priceClass[s.surface],
-                ]}
-              >
+              <div class="mt-8 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-graphite-soft border border-line-bright text-silver-100">
                 {s.price}
               </div>
             </div>
             <div class="md:col-span-7 md:pt-2">
-              <p class:list={["text-lg md:text-xl leading-relaxed", bodyClass[s.surface]]}>
+              <p class="text-lg md:text-xl leading-relaxed text-silver-300">
                 {s.body}
               </p>
               <ul class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6">
                 {s.bullets.map((b) => (
-                  <li class="flex items-center gap-3 text-[15px]">
-                    <span
-                      class:list={[
-                        "w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0",
-                        checkClass[s.surface],
-                      ]}
-                    >
+                  <li class="flex items-center gap-3 text-[15px] text-silver-100">
+                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 silver-text border border-line-bright">
                       ✓
                     </span>
                     {b}
                   </li>
                 ))}
               </ul>
+
+              <div class="mt-10 flex items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-silver-500">
+                <span>0{i + 1}</span>
+                <span class="flex-1 h-px bg-line-bright"></span>
+                <span>0{services.length}</span>
+              </div>
             </div>
           </div>
         </article>

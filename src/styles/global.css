@@ -1,126 +1,189 @@
 @import "tailwindcss";
 
 @theme {
-  /* Warm paper tones */
-  --color-paper: #f3ede2;
-  --color-paper-soft: #eae1d1;
-  --color-paper-deep: #ddd1bd;
+  /* Dark foundations */
+  --color-black: #000000;
+  --color-onyx: #06070a;
+  --color-graphite: #0e1014;
+  --color-graphite-soft: #16181d;
+  --color-ink: #1d1d1f;
 
-  /* Warm clay / blush accent surface */
-  --color-blush: #e6cdb8;
-  --color-blush-soft: #efdcc9;
+  /* Silver / platinum spectrum */
+  --color-silver-50: #f4f5f7;
+  --color-silver-100: #e6e8ec;
+  --color-silver-200: #cfd3da;
+  --color-silver-300: #b3b8c2;
+  --color-silver-400: #8e9499;
+  --color-silver-500: #6e7480;
+  --color-silver-600: #4a4f57;
+  --color-silver-700: #2c2f35;
+  --color-silver-800: #1c1e22;
 
-  /* Sage — quiet support */
-  --color-sage: #aab09a;
-  --color-sage-soft: #c5cab8;
+  /* Cool platinum accent (replaces multi-color gradient) */
+  --color-platinum: #c0c5cc;
+  --color-platinum-bright: #e8eaed;
 
-  /* Ink — warm near-black, not pure black */
-  --color-ink: #2a2520;
-  --color-ink-soft: #6b6157;
-  --color-ink-mute: #948a7e;
-
-  /* Graphite — deep warm grey for dark sections */
-  --color-graphite: #2f2a26;
-  --color-graphite-soft: #4a4138;
-
-  /* Antique gold — muted, never shiny */
-  --color-gold: #a8854a;
-  --color-gold-dark: #836636;
-  --color-gold-soft: #c9ad7d;
-
-  /* Silver / pewter */
-  --color-silver: #b8b1a4;
+  /* Single accent — quiet blue, used very sparingly */
+  --color-accent: #6ea8ff;
+  --color-accent-soft: #2a6dd1;
 
   /* Lines */
-  --color-line: #d9cdb8;
-  --color-line-soft: #e5dcc9;
-  --color-line-dark: #4a4138;
+  --color-line: #2a2d33;
+  --color-line-soft: #1c1e22;
+  --color-line-bright: rgba(255, 255, 255, 0.09);
 
-  /* Type */
   --font-display:
-    "Fraunces", "EB Garamond", Georgia, "Times New Roman", serif;
+    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    system-ui, sans-serif;
   --font-body:
-    "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui,
+    sans-serif;
 }
 
 html {
   scroll-behavior: smooth;
-  background: var(--color-paper);
+  background: var(--color-black);
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--color-paper);
-  color: var(--color-ink);
+  background-color: var(--color-black);
+  color: var(--color-silver-100);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: -0.005em;
-}
-
-/* Subtle paper grain — sits behind everything, very faint */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3'/><feColorMatrix values='0 0 0 0 0.16  0 0 0 0 0.14  0 0 0 0 0.12  0 0 0 0.55 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
-  opacity: 0.06;
-  mix-blend-mode: multiply;
-}
-
-main,
-header,
-footer {
-  position: relative;
-  z-index: 1;
+  letter-spacing: -0.01em;
 }
 
 .font-display {
   font-family: var(--font-display);
-  font-optical-sizing: auto;
-  font-variation-settings: "SOFT" 50, "WONK" 1;
-  font-weight: 500;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.04em;
+  font-weight: 600;
 }
 
 .display-tight {
-  letter-spacing: -0.035em;
-  line-height: 0.98;
+  letter-spacing: -0.055em;
+  line-height: 0.95;
+  font-weight: 700;
 }
 
-.italic-gold {
-  font-style: italic;
-  font-variation-settings: "SOFT" 100, "WONK" 1;
-  color: var(--color-gold);
+/* Brushed-silver gradient on display text */
+.silver-text {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #c0c5cc 35%,
+    #6e7480 60%,
+    #e8eaed 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.silver-text-soft {
+  background: linear-gradient(
+    180deg,
+    #e6e8ec 0%,
+    #8e9499 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
 }
 
 .eyebrow {
-  font-family: var(--font-body);
   font-size: 11px;
   font-weight: 500;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--color-gold-dark);
+  color: var(--color-silver-300);
 }
 
-.eyebrow-light {
-  color: var(--color-gold-soft);
-}
-
-.hairline {
+.hairline-silver {
   height: 1px;
   background: linear-gradient(
     to right,
     transparent,
-    var(--color-gold) 20%,
-    var(--color-gold) 80%,
+    rgba(208, 213, 220, 0.5) 20%,
+    rgba(208, 213, 220, 0.5) 80%,
     transparent
   );
 }
 
-.glass-paper {
-  background: rgba(243, 237, 226, 0.78);
-  backdrop-filter: saturate(160%) blur(18px);
-  -webkit-backdrop-filter: saturate(160%) blur(18px);
+.glass-dark {
+  background: rgba(6, 7, 10, 0.72);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+/* Sticky-stack scroll effect on services */
+.stack-card {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  /* Translucent dark surface so previous card shows through faintly during overlap */
+  background: rgba(6, 7, 10, 0.88);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  backdrop-filter: blur(28px) saturate(160%);
+}
+
+/* Subtle top edge so the card boundary is visible while stacking */
+.stack-card::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    rgba(208, 213, 220, 0.18) 20%,
+    rgba(208, 213, 220, 0.35) 50%,
+    rgba(208, 213, 220, 0.18) 80%,
+    transparent
+  );
+  z-index: 2;
+}
+
+/* Soft shadow above each card hints at depth — the new card "casts" upward */
+.stack-card::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: -40px;
+  height: 40px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.55) 100%);
+  pointer-events: none;
+}
+
+/* Scroll-driven fade on cards as they're covered by the next one (modern browsers) */
+@supports (animation-timeline: view()) {
+  .stack-card {
+    animation: card-recede linear both;
+    animation-timeline: view();
+    animation-range: cover 50% cover 100%;
+  }
+  @keyframes card-recede {
+    to {
+      transform: scale(0.96);
+      opacity: 0.55;
+      filter: blur(2px);
+    }
+  }
+}
+
+/* Hero glow */
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 50% at 20% 10%, rgba(208, 213, 220, 0.18) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(50% 50% at 80% 20%, rgba(110, 168, 255, 0.14) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(192, 197, 204, 0.12) 0%, rgba(0, 0, 0, 0) 60%);
 }

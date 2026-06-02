@@ -1,63 +1,57 @@
 ---
 const steps = [
   {
-    n: "I",
+    n: "01",
     title: "A coffee, no obligation.",
     body: "We meet at your shop or a café in town. Look at what you've got. If we're not the right fit, we'll say so.",
   },
   {
-    n: "II",
+    n: "02",
     title: "A one-page proposal.",
     body: "What we'll do, what it costs, when it's done. No surprise invoices. No twelve-month contracts.",
   },
   {
-    n: "III",
+    n: "03",
     title: "Built in weeks.",
-    body: "Websites go live in two or three weeks. Social starts within a week. Catalogues turn around in ten working days.",
+    body: "Websites go live in 2–3 weeks. Social starts within a week. Catalogues turn around in 10 working days.",
   },
   {
-    n: "IV",
+    n: "04",
     title: "We stay in touch.",
     body: "Optional monthly care. Training so you can update things yourself. A real person to call when something breaks.",
   },
 ];
 ---
 
-<section id="how" class="bg-paper py-28 md:py-40 border-t border-line/50">
+<section id="how" class="bg-black text-silver-100 py-28 md:py-40 border-t border-line">
   <div class="max-w-6xl mx-auto px-6">
-    <div class="max-w-3xl mb-20">
-      <div class="flex items-center gap-3 mb-6">
-        <span class="w-10 h-px bg-gold"></span>
-        <span class="eyebrow">The process</span>
+    <div class="text-center max-w-3xl mx-auto mb-20">
+      <div class="text-[12px] font-medium uppercase tracking-[0.22em] text-silver-400 mb-5">
+        How it works
       </div>
-      <h2 class="font-display display-tight text-5xl md:text-7xl text-ink">
-        Four steps,
+      <h2 class="font-display display-tight text-5xl md:text-7xl">
+        <span class="text-white">Four steps.</span>
         <br />
-        <span class="italic-gold">plainly stated.</span>
+        <span class="silver-text-soft">No jargon.</span>
       </h2>
     </div>
 
-    <ol class="grid md:grid-cols-2 gap-x-16 gap-y-14">
+    <div class="grid md:grid-cols-2 gap-12 md:gap-x-16 md:gap-y-16">
       {
         steps.map((s) => (
-          <li class="flex gap-6">
-            <div
-              class="font-display italic text-5xl md:text-6xl text-gold leading-none shrink-0 w-14 tracking-tight"
-              style="font-variation-settings: 'WONK' 1;"
-            >
+          <div class="group">
+            <div class="font-display text-[80px] md:text-[120px] font-bold leading-none silver-text-soft opacity-50 group-hover:opacity-100 group-hover:silver-text transition-all">
               {s.n}
             </div>
-            <div>
-              <h3 class="font-display text-2xl md:text-3xl text-ink display-tight">
-                {s.title}
-              </h3>
-              <p class="mt-3 text-ink-soft leading-relaxed text-[17px] max-w-md">
-                {s.body}
-              </p>
-            </div>
-          </li>
+            <h3 class="font-display display-tight text-2xl md:text-3xl text-white mt-4">
+              {s.title}
+            </h3>
+            <p class="mt-3 text-silver-300 leading-relaxed text-lg max-w-md">
+              {s.body}
+            </p>
+          </div>
         ))
       }
-    </ol>
+    </div>
   </div>
 </section>
