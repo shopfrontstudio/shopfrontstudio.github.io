@@ -216,15 +216,24 @@ body {
   );
 }
 
-/* The blurred photo itself — scaled up to hide blur-edge artifacts */
+/* The blurred photo itself — scaled up to hide blur-edge artifacts.
+   Current: illuminated shopfront at night by Tanya Barrow on Unsplash.
+   Alternates (swap the URL):
+     • Cozy cafe interior, warm light:
+         https://images.unsplash.com/photo-1749871615234-98bff62995ba?w=1920&q=80&auto=format&fit=crop
+     • Artist's studio with large window:
+         https://images.unsplash.com/photo-1755520795091-adf1f3f307e0?w=1920&q=80&auto=format&fit=crop
+     • Central cafe at night on film (Maximilian Bungart):
+         https://images.unsplash.com/photo-1758649863410-2d35a9d36f70?w=1920&q=80&auto=format&fit=crop
+*/
 .page-bg-photo::before {
   content: "";
   position: absolute;
   inset: -8%;
-  background-image: url("https://picsum.photos/seed/shopfront-studio-ballarat/1920/1280");
+  background-image: url("https://images.unsplash.com/photo-1761208158937-9f30aaea46b1?w=1920&q=80&auto=format&fit=crop");
   background-size: cover;
   background-position: center;
-  filter: blur(48px) saturate(140%) brightness(0.55);
+  filter: blur(44px) saturate(135%) brightness(0.58);
   transform: scale(1.18);
 }
 
