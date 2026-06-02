@@ -1,97 +1,117 @@
 ---
 const services = [
   {
-    number: "01",
-    title: "Websites",
-    tagline: "A proper online shopfront — fast, mobile-first, easy to update.",
+    eyebrow: "01 — Websites",
+    title: "Sites that load before people leave.",
     body:
-      "Most small businesses lose customers before they even walk in, because their website is slow, broken on a phone, or just hard to look at. We build clean, fast websites that show up on Google and make people want to call you, book you, or visit.",
-    bullets: [
-      "Custom design, not a Wix template",
-      "Loads in under two seconds on 4G",
-      "Connected to your Google Business Profile",
-      "Optional monthly care plan ($79/mo)",
-    ],
+      "Custom-built. Mobile-first. Wired to Google so locals find you. No bloated templates, no 30-second load times — just a clean shopfront that converts visits into bookings, calls and walk-ins.",
+    bullets: ["Custom design", "<2s on 4G", "Google-connected", "Care plan optional"],
     price: "From $1,800",
+    theme: "light",
   },
   {
-    number: "02",
-    title: "Social media",
-    tagline: "Instagram and Facebook handled, so you can run the shop.",
+    eyebrow: "02 — Social media",
+    title: "Posts that fill tables.",
     body:
-      "We plan, photograph, and post — weekly, monthly, or on a campaign basis. The goal isn't follower count, it's filling tables, selling product, and getting locals to recommend you.",
-    bullets: [
-      "Monthly content plan you can approve in 10 minutes",
-      "On-site photography in Ballarat",
-      "Reels, stories, posts — whatever's working that month",
-      "Reporting that actually says something useful",
-    ],
+      "We plan, shoot, write and schedule — weekly or monthly. You approve in ten minutes. The goal isn't follower count, it's a busier Saturday.",
+    bullets: ["Monthly content plan", "On-site photography", "Reels + stories + posts", "Honest reporting"],
     price: "From $650/mo",
+    theme: "dark",
   },
   {
-    number: "03",
-    title: "Catalogues",
-    tagline: "Printed and digital — for stockists, markets, and customers.",
+    eyebrow: "03 — Catalogues",
+    title: "Catalogues people keep.",
     body:
-      "Whether it's a seasonal lookbook for a boutique, a tasting notes card for a winery, or a wholesale catalogue for a maker selling into other shops — we design both the printed piece and a matching digital version you can email or text.",
-    bullets: [
-      "Print-ready files, plus interactive PDF",
-      "Coordinated with a trusted local printer",
-      "Reusable templates for seasonal updates",
-      "Sized for markets, mail, or QR-code displays",
-    ],
+      "Print and digital, designed together. A seasonal lookbook for boutiques. A tasting card for wineries. A wholesale catalogue for makers. Press-ready files and an interactive PDF — same project, same fee.",
+    bullets: ["Print-ready files", "Interactive PDF", "Local print partner", "Reusable templates"],
     price: "From $850",
+    theme: "light",
   },
 ];
 ---
 
-<section id="services" class="py-24 md:py-32 bg-cream">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="max-w-2xl mb-16">
-      <div class="text-xs font-medium uppercase tracking-wider text-rust mb-4">
-        What we do
-      </div>
-      <h2 class="font-display text-4xl md:text-5xl font-semibold tracking-tight">
-        Three things, done properly.
-      </h2>
-      <p class="mt-5 text-lg text-ink/70">
-        We've kept it deliberately small. Three services that work together — you can start
-        with one and add the others as you grow.
-      </p>
+<section id="services" class="bg-white">
+  <div class="max-w-6xl mx-auto px-6 pt-28 pb-10 md:pt-40 md:pb-16 text-center">
+    <div class="text-[12px] font-medium uppercase tracking-[0.18em] text-accent mb-5">
+      What we do
     </div>
+    <h2 class="font-display display-tight text-5xl md:text-7xl font-bold">
+      Three things.
+      <br />
+      <span class="text-ink/40">Done properly.</span>
+    </h2>
+    <p class="mt-6 max-w-2xl mx-auto text-lg text-ink-soft">
+      We kept the menu short on purpose. Start with one, add the others when you're ready.
+    </p>
+  </div>
 
-    <div class="grid gap-6 md:gap-8">
-      {
-        services.map((s) => (
-          <article class="group bg-white rounded-xl border border-stone p-8 md:p-10 hover:border-rust/40 transition-colors">
-            <div class="grid md:grid-cols-12 gap-6 md:gap-10">
-              <div class="md:col-span-3">
-                <div class="font-display text-5xl text-rust/30 font-semibold">{s.number}</div>
-                <h3 class="font-display text-2xl md:text-3xl font-semibold mt-2">{s.title}</h3>
-                <div class="mt-4 text-sm font-medium text-ink/60">{s.price}</div>
+  <div class="space-y-0">
+    {
+      services.map((s) => {
+        const isDark = s.theme === "dark";
+        return (
+          <article
+            class:list={[
+              "border-t",
+              isDark ? "bg-black text-white border-black" : "bg-bg-alt text-ink border-line",
+            ]}
+          >
+            <div class="max-w-6xl mx-auto px-6 py-24 md:py-32 grid md:grid-cols-12 gap-10">
+              <div class="md:col-span-5">
+                <div
+                  class:list={[
+                    "text-[12px] font-medium uppercase tracking-[0.18em] mb-5",
+                    isDark ? "text-accent" : "text-accent",
+                  ]}
+                >
+                  {s.eyebrow}
+                </div>
+                <h3 class="font-display display-tight text-4xl md:text-6xl font-bold">
+                  {s.title}
+                </h3>
+                <div
+                  class:list={[
+                    "mt-8 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full",
+                    isDark ? "bg-white/10 text-white" : "bg-white text-ink border border-line",
+                  ]}
+                >
+                  {s.price}
+                </div>
               </div>
-              <div class="md:col-span-9">
-                <p class="font-display text-xl md:text-2xl text-ink leading-snug">
-                  {s.tagline}
+              <div class="md:col-span-7 md:pt-2">
+                <p
+                  class:list={[
+                    "text-lg md:text-xl leading-relaxed",
+                    isDark ? "text-white/75" : "text-ink-soft",
+                  ]}
+                >
+                  {s.body}
                 </p>
-                <p class="mt-4 text-ink/70 leading-relaxed">{s.body}</p>
-                <ul class="mt-6 grid sm:grid-cols-2 gap-x-6 gap-y-2 text-sm text-ink/80">
+                <ul class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6">
                   {s.bullets.map((b) => (
-                    <li class="flex items-start gap-2">
-                      <span class="text-rust mt-1">•</span>
-                      <span>{b}</span>
+                    <li
+                      class:list={[
+                        "flex items-center gap-3 text-[15px]",
+                        isDark ? "text-white/90" : "text-ink",
+                      ]}
+                    >
+                      <span
+                        class:list={[
+                          "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0",
+                          isDark ? "bg-accent text-white" : "bg-accent text-white",
+                        ]}
+                      >
+                        ✓
+                      </span>
+                      {b}
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
           </article>
-        ))
-      }
-    </div>
-
-    <div class="mt-12 text-center text-sm text-ink/60">
-      Not sure which one you need? <a href="#contact" class="text-rust underline underline-offset-4 hover:text-rust-dark">Tell us about your business</a> and we'll be honest.
-    </div>
+        );
+      })
+    }
   </div>
 </section>
