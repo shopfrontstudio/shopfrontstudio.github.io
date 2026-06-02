@@ -52,24 +52,24 @@ const services = [
     {
       services.map((s, i) => (
         <article class="stack-card" data-service={s.slug}>
-          {/* Background illustration — pinned right, softly faded behind text */}
+          {/* Background illustration — pinned right, visible but not loud */}
           <div
             class="absolute inset-0 pointer-events-none"
             aria-hidden="true"
             style={`
               background-image: url('/illustrations/${s.slug}.svg');
               background-repeat: no-repeat;
-              background-position: 115% center;
-              background-size: auto 78%;
-              opacity: 0.085;
+              background-position: 108% center;
+              background-size: auto 86%;
+              opacity: 0.22;
               mix-blend-mode: lighten;
             `}
           />
-          {/* Left-to-right fade so the text side stays cleanest */}
+          {/* Left-to-right fade so the text side stays cleanest, right stays open for the illustration */}
           <div
             class="absolute inset-0 pointer-events-none"
             aria-hidden="true"
-            style="background: linear-gradient(95deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.15) 85%);"
+            style="background: linear-gradient(95deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.05) 85%);"
           />
 
           <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 w-full">
