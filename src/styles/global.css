@@ -233,8 +233,8 @@ body {
   background-image: url("https://images.unsplash.com/photo-1761208158937-9f30aaea46b1?w=1920&q=80&auto=format&fit=crop");
   background-size: cover;
   background-position: center;
-  filter: blur(44px) saturate(135%) brightness(0.58);
-  transform: scale(1.18);
+  filter: blur(34px) saturate(145%) brightness(0.85);
+  transform: scale(1.15);
 }
 
 /* Blue tint + frost — what makes it feel like translucent glass */
@@ -243,9 +243,9 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(10, 22, 55, 0.55) 0%, rgba(0, 0, 8, 0.85) 100%),
-    radial-gradient(70% 50% at 50% 25%, rgba(48, 100, 210, 0.30) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(10, 22, 55, 0.32) 0%, rgba(2, 5, 18, 0.55) 100%),
+    radial-gradient(70% 50% at 50% 30%, rgba(80, 140, 230, 0.22) 0%, transparent 65%),
     /* fine noise speckle reinforces the "glass" feel */
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.90  0 0 0 0 1  0 0 0 0.25 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='5'/><feColorMatrix values='0 0 0 0 0.85  0 0 0 0 0.90  0 0 0 0 1  0 0 0 0.18 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
   background-blend-mode: normal, normal, overlay;
 }
