@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none" stroke="#c0c5cc" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <!-- Phone body -->
+  <rect x="430" y="60" width="380" height="780" rx="50"/>
+  <!-- Inner screen bezel -->
+  <rect x="450" y="80" width="340" height="740" rx="36"/>
+  <!-- Notch / dynamic island -->
+  <rect x="555" y="100" width="130" height="28" rx="14"/>
+  <!-- Side button -->
+  <line x1="430" y1="220" x2="430" y2="290" stroke-width="3"/>
+  <line x1="430" y1="320" x2="430" y2="370" stroke-width="3"/>
+  <line x1="810" y1="240" x2="810" y2="330" stroke-width="3"/>
+
+  <!-- Profile header inside phone -->
+  <circle cx="510" cy="200" r="32"/>
+  <line x1="560" y1="185" x2="700" y2="185" stroke-width="3"/>
+  <line x1="560" y1="210" x2="660" y2="210" stroke-width="1.5"/>
+  <!-- Stats row -->
+  <line x1="478" y1="265" x2="510" y2="265" stroke-width="3"/>
+  <line x1="468" y1="280" x2="520" y2="280" stroke-width="1.5"/>
+  <line x1="580" y1="265" x2="612" y2="265" stroke-width="3"/>
+  <line x1="568" y1="280" x2="624" y2="280" stroke-width="1.5"/>
+  <line x1="680" y1="265" x2="712" y2="265" stroke-width="3"/>
+  <line x1="668" y1="280" x2="724" y2="280" stroke-width="1.5"/>
+  <!-- Bio lines -->
+  <line x1="478" y1="320" x2="760" y2="320" stroke-width="1.5"/>
+  <line x1="478" y1="338" x2="720" y2="338" stroke-width="1.5"/>
+  <line x1="478" y1="356" x2="680" y2="356" stroke-width="1.5"/>
+  <!-- Follow button -->
+  <rect x="478" y="380" width="120" height="34" rx="6"/>
+  <rect x="612" y="380" width="120" height="34" rx="6"/>
+  <!-- 3x3 grid of posts -->
+  <rect x="478" y="440" width="92" height="92" rx="4"/>
+  <rect x="580" y="440" width="92" height="92" rx="4"/>
+  <rect x="682" y="440" width="92" height="92" rx="4"/>
+  <rect x="478" y="542" width="92" height="92" rx="4"/>
+  <rect x="580" y="542" width="92" height="92" rx="4"/>
+  <rect x="682" y="542" width="92" height="92" rx="4"/>
+  <rect x="478" y="644" width="92" height="92" rx="4"/>
+  <rect x="580" y="644" width="92" height="92" rx="4"/>
+  <rect x="682" y="644" width="92" height="92" rx="4"/>
+  <!-- Bottom nav -->
+  <line x1="468" y1="770" x2="780" y2="770"/>
+
+  <!-- Floating reaction icons (subtle, outside phone for composition) -->
+  <!-- Heart -->
+  <g transform="translate(220 320)">
+    <path d="M 60 80 L 30 50 a 18 18 0 0 1 30 -20 a 18 18 0 0 1 30 20 Z" stroke-width="2.5"/>
+  </g>
+  <!-- Chat bubble -->
+  <g transform="translate(900 480)">
+    <path d="M 0 0 H 120 a 16 16 0 0 1 16 16 V 80 a 16 16 0 0 1 -16 16 H 40 L 14 116 V 96 H 16 a 16 16 0 0 1 -16 -16 V 16 a 16 16 0 0 1 16 -16 Z" stroke-width="2.5"/>
+  </g>
+  <!-- Bookmark -->
+  <g transform="translate(260 600)">
+    <path d="M 0 0 V 90 L 30 65 L 60 90 V 0 Z" stroke-width="2.5"/>
+  </g>
+</svg>

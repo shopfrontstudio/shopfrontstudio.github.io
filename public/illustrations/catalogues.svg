@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none" stroke="#c0c5cc" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <!-- Subtle base shadow shape under spread (very faint) -->
+  <ellipse cx="600" cy="800" rx="460" ry="14" stroke-width="1.5" stroke-opacity="0.45"/>
+
+  <!-- Open spread: two facing pages -->
+  <!-- Left page -->
+  <path d="M 120 140 L 120 760 Q 360 800 600 770 L 600 130 Q 360 100 120 140 Z"/>
+  <!-- Right page -->
+  <path d="M 1080 140 L 1080 760 Q 840 800 600 770 L 600 130 Q 840 100 1080 140 Z"/>
+  <!-- Page rib/fold detail -->
+  <path d="M 600 130 Q 605 450 600 770" stroke-width="1.5"/>
+
+  <!-- LEFT PAGE — editorial layout -->
+  <!-- Eyebrow -->
+  <line x1="180" y1="200" x2="270" y2="200" stroke-width="2.5"/>
+  <!-- Big title (two lines) -->
+  <line x1="180" y1="240" x2="500" y2="240" stroke-width="6"/>
+  <line x1="180" y1="280" x2="440" y2="280" stroke-width="6"/>
+  <!-- Hairline divider -->
+  <line x1="180" y1="320" x2="540" y2="320" stroke-width="1"/>
+  <!-- Body columns -->
+  <line x1="180" y1="350" x2="350" y2="350" stroke-width="1.5"/>
+  <line x1="180" y1="370" x2="370" y2="370" stroke-width="1.5"/>
+  <line x1="180" y1="390" x2="340" y2="390" stroke-width="1.5"/>
+  <line x1="180" y1="410" x2="360" y2="410" stroke-width="1.5"/>
+  <line x1="180" y1="430" x2="330" y2="430" stroke-width="1.5"/>
+
+  <line x1="390" y1="350" x2="540" y2="350" stroke-width="1.5"/>
+  <line x1="390" y1="370" x2="550" y2="370" stroke-width="1.5"/>
+  <line x1="390" y1="390" x2="520" y2="390" stroke-width="1.5"/>
+  <line x1="390" y1="410" x2="545" y2="410" stroke-width="1.5"/>
+  <line x1="390" y1="430" x2="510" y2="430" stroke-width="1.5"/>
+  <!-- Small product chip / price tag -->
+  <rect x="180" y="500" width="120" height="36" rx="18"/>
+  <line x1="200" y1="518" x2="280" y2="518" stroke-width="1.5"/>
+  <!-- Image placeholder bottom-left -->
+  <rect x="180" y="560" width="360" height="170" rx="6"/>
+  <!-- Image corner diagonal -->
+  <path d="M 180 560 L 540 730 M 540 560 L 180 730" stroke-width="0.8" stroke-opacity="0.5"/>
+
+  <!-- RIGHT PAGE — product feature -->
+  <!-- Hero image placeholder -->
+  <rect x="660" y="180" width="360" height="280" rx="6"/>
+  <path d="M 660 180 L 1020 460 M 1020 180 L 660 460" stroke-width="0.8" stroke-opacity="0.5"/>
+  <!-- Eyebrow under image -->
+  <line x1="660" y1="500" x2="740" y2="500" stroke-width="2.5"/>
+  <!-- Title -->
+  <line x1="660" y1="540" x2="980" y2="540" stroke-width="5"/>
+  <line x1="660" y1="575" x2="920" y2="575" stroke-width="5"/>
+  <!-- Caption lines -->
+  <line x1="660" y1="615" x2="1000" y2="615" stroke-width="1.5"/>
+  <line x1="660" y1="635" x2="980" y2="635" stroke-width="1.5"/>
+  <line x1="660" y1="655" x2="960" y2="655" stroke-width="1.5"/>
+  <!-- Price block -->
+  <line x1="660" y1="700" x2="760" y2="700" stroke-width="3"/>
+  <line x1="660" y1="725" x2="820" y2="725" stroke-width="1.5"/>
+  <!-- CTA pill bottom-right -->
+  <rect x="880" y="690" width="140" height="40" rx="20"/>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" fill="none" stroke="#c0c5cc" stroke-width="2" stroke-linejoin="round" stroke-linecap="round">
+  <!-- Browser frame -->
+  <rect x="80" y="100" width="1040" height="720" rx="18"/>
+  <!-- Title bar -->
+  <line x1="80" y1="170" x2="1120" y2="170"/>
+  <!-- Traffic lights -->
+  <circle cx="120" cy="135" r="9"/>
+  <circle cx="155" cy="135" r="9"/>
+  <circle cx="190" cy="135" r="9"/>
+  <!-- URL bar -->
+  <rect x="260" y="120" width="700" height="30" rx="15"/>
+  <line x1="290" y1="135" x2="500" y2="135" stroke-width="1.5"/>
+  <!-- Page content: hero -->
+  <rect x="130" y="210" width="940" height="240" rx="10"/>
+  <line x1="170" y1="270" x2="520" y2="270" stroke-width="3"/>
+  <line x1="170" y1="305" x2="460" y2="305" stroke-width="3"/>
+  <line x1="170" y1="365" x2="380" y2="365" stroke-width="2"/>
+  <line x1="170" y1="395" x2="340" y2="395" stroke-width="2"/>
+  <!-- CTA button -->
+  <rect x="170" y="420" width="150" height="40" rx="20"/>
+  <!-- 3-column grid -->
+  <rect x="130" y="490" width="290" height="240" rx="10"/>
+  <rect x="455" y="490" width="290" height="240" rx="10"/>
+  <rect x="780" y="490" width="290" height="240" rx="10"/>
+  <!-- Card content lines -->
+  <line x1="160" y1="530" x2="280" y2="530" stroke-width="2"/>
+  <line x1="160" y1="555" x2="320" y2="555" stroke-width="1.5"/>
+  <line x1="160" y1="575" x2="300" y2="575" stroke-width="1.5"/>
+  <line x1="160" y1="595" x2="320" y2="595" stroke-width="1.5"/>
+  <line x1="485" y1="530" x2="605" y2="530" stroke-width="2"/>
+  <line x1="485" y1="555" x2="645" y2="555" stroke-width="1.5"/>
+  <line x1="485" y1="575" x2="625" y2="575" stroke-width="1.5"/>
+  <line x1="485" y1="595" x2="645" y2="595" stroke-width="1.5"/>
+  <line x1="810" y1="530" x2="930" y2="530" stroke-width="2"/>
+  <line x1="810" y1="555" x2="970" y2="555" stroke-width="1.5"/>
+  <line x1="810" y1="575" x2="950" y2="575" stroke-width="1.5"/>
+  <line x1="810" y1="595" x2="970" y2="595" stroke-width="1.5"/>
+  <!-- Footer hint -->
+  <line x1="130" y1="780" x2="1070" y2="780"/>
+  <!-- Cursor arrow -->
+  <path d="M 880 380 L 880 432 L 893 419 L 902 437 L 912 432 L 902 414 L 920 414 Z" fill="#c0c5cc" stroke="none"/>
+</svg>

@@ -1,6 +1,7 @@
 ---
 const services = [
   {
+    slug: "websites",
     index: "01",
     eyebrow: "Websites",
     title: "Sites that load before people leave.",
@@ -10,6 +11,7 @@ const services = [
     price: "From $1,800",
   },
   {
+    slug: "social",
     index: "02",
     eyebrow: "Social media",
     title: "Posts that fill the tables.",
@@ -19,6 +21,7 @@ const services = [
     price: "From $650/mo",
   },
   {
+    slug: "catalogues",
     index: "03",
     eyebrow: "Catalogues",
     title: "Catalogues people keep.",
@@ -48,7 +51,27 @@ const services = [
   <div class="relative">
     {
       services.map((s, i) => (
-        <article class="stack-card">
+        <article class="stack-card" data-service={s.slug}>
+          {/* Background illustration — pinned right, softly faded behind text */}
+          <div
+            class="absolute inset-0 pointer-events-none"
+            aria-hidden="true"
+            style={`
+              background-image: url('/illustrations/${s.slug}.svg');
+              background-repeat: no-repeat;
+              background-position: 115% center;
+              background-size: auto 78%;
+              opacity: 0.085;
+              mix-blend-mode: lighten;
+            `}
+          />
+          {/* Left-to-right fade so the text side stays cleanest */}
+          <div
+            class="absolute inset-0 pointer-events-none"
+            aria-hidden="true"
+            style="background: linear-gradient(95deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.55) 45%, rgba(0,0,0,0.15) 85%);"
+          />
+
           <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 w-full">
             <div class="md:col-span-5">
               <div class="flex items-center gap-3 mb-6">
@@ -63,7 +86,7 @@ const services = [
               <h3 class="font-display display-tight text-3xl md:text-5xl text-white mt-6">
                 {s.title}
               </h3>
-              <div class="mt-8 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-graphite-soft border border-line-bright text-silver-100">
+              <div class="mt-8 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-graphite-soft/80 backdrop-blur border border-line-bright text-silver-100">
                 {s.price}
               </div>
             </div>
