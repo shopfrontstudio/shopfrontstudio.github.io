@@ -2,16 +2,19 @@
 const year = new Date().getFullYear();
 ---
 
-<footer class="relative bg-onyx/30 text-silver-400 border-t border-line/40">
+<footer class="relative bg-night/40 text-cream-mute border-t border-line/40">
   <div class="max-w-6xl mx-auto px-6 py-10 flex flex-col md:flex-row gap-5 justify-between text-[13px]">
-    <div class="flex items-center gap-2">
-      <span class="w-6 h-6 rounded-md bg-graphite-soft border border-line-bright font-display font-extrabold flex items-center justify-center text-xs silver-text">S</span>
-      <span class="font-display font-semibold text-silver-100">Shopfront Studio</span>
-      <span class="ml-2 text-silver-500">— Ballarat, Victoria</span>
+    <div class="flex items-center gap-3">
+      <span class="w-7 h-7 rounded-md bg-cream/95 ring-1 ring-gold/30 flex items-center justify-center overflow-hidden">
+        <img src="/images/anara-logo.jpg" alt="Anara" class="w-full h-full object-cover" style="object-position: center 32%;" />
+      </span>
+      <span class="font-display font-medium text-cream tracking-tight">Anara</span>
+      <span class="text-cream-mute">—</span>
+      <span class="text-cream-mute">Marketing Solutions, Ballarat</span>
     </div>
     <div class="flex flex-wrap gap-x-6 gap-y-2">
-      <a href="mailto:hello@shopfrontstudio.com.au" class="hover:text-silver-100 transition-colors">hello@shopfrontstudio.com.au</a>
-      <a href="#contact" class="hover:text-silver-100 transition-colors">Enquire</a>
+      <a href="mailto:hello@anaramarketing.com.au" class="hover:text-cream transition-colors">hello@anaramarketing.com.au</a>
+      <a href="#contact" class="hover:text-cream transition-colors">Enquire</a>
       <span>© {year}</span>
     </div>
   </div>

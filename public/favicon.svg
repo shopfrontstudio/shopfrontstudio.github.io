@@ -1,11 +1,19 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <defs>
-    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#ffffff"/>
-      <stop offset="40%" stop-color="#c0c5cc"/>
-      <stop offset="100%" stop-color="#6e7480"/>
-    </linearGradient>
+    <radialGradient id="pom" cx="50%" cy="55%" r="55%">
+      <stop offset="0%" stop-color="#d23a5a"/>
+      <stop offset="50%" stop-color="#b91d3a"/>
+      <stop offset="100%" stop-color="#5a0817"/>
+    </radialGradient>
   </defs>
-  <rect width="32" height="32" rx="7" fill="#000000"/>
-  <text x="16" y="22" font-family="-apple-system, Inter, system-ui, sans-serif" font-size="18" font-weight="800" fill="url(#silver)" text-anchor="middle">S</text>
+  <rect width="32" height="32" rx="7" fill="#0a0608"/>
+  <!-- pomegranate leaves -->
+  <path d="M16 6 L14 10 L16 9 L18 10 Z" fill="#8a0e25"/>
+  <path d="M16 7 L15 11 L17 11 Z" fill="#b91d3a"/>
+  <!-- body -->
+  <circle cx="16" cy="19" r="8" fill="url(#pom)"/>
+  <!-- a few darker seed dots -->
+  <circle cx="14" cy="18" r="1.2" fill="#5a0817" opacity="0.7"/>
+  <circle cx="18" cy="20" r="1.2" fill="#5a0817" opacity="0.7"/>
+  <circle cx="16" cy="22" r="1" fill="#5a0817" opacity="0.6"/>
 </svg>

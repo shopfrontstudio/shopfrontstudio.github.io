@@ -1,19 +1,20 @@
 ---
 ---
 
-<section id="contact" class="relative text-silver-100 py-28 md:py-40 border-t border-line/40">
+<section id="contact" class="relative text-cream py-28 md:py-40 border-t border-line/40">
   <div class="max-w-3xl mx-auto px-6">
     <div class="text-center mb-14">
-      <div class="text-[12px] font-medium uppercase tracking-[0.22em] text-silver-400 mb-5">
-        Let's talk
+      <div class="text-[12px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+        Begin
       </div>
       <h2 class="font-display display-tight text-5xl md:text-7xl">
-        <span class="text-white">Tell us about</span>
+        <span class="gradient-cream">Tell us about</span>
         <br />
-        <span class="silver-text">your business.</span>
+        <span class="gradient-crimson italic">your business.</span>
       </h2>
-      <p class="mt-6 text-lg text-silver-300 max-w-xl mx-auto">
-        A short note is enough. We reply within one working day with honest next steps — even if those steps are "you don't need us yet."
+      <p class="mt-6 text-lg text-cream-soft max-w-xl mx-auto">
+        A short note is enough. We reply within one working day with honest next
+        steps — even if those steps are "you don't need us yet."
       </p>
     </div>
 
@@ -24,39 +25,39 @@
     >
       <div class="grid sm:grid-cols-2 gap-5">
         <label class="block">
-          <span class="text-[13px] font-medium text-silver-200">Your name</span>
+          <span class="text-[13px] font-medium text-cream-soft">Your name</span>
           <input
             type="text"
             name="name"
             required
-            class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-silver-50 focus:border-silver-300 focus:outline-none focus:ring-2 focus:ring-silver-300/20"
+            class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-cream focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
           />
         </label>
         <label class="block">
-          <span class="text-[13px] font-medium text-silver-200">Business name</span>
+          <span class="text-[13px] font-medium text-cream-soft">Business name</span>
           <input
             type="text"
             name="business"
-            class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-silver-50 focus:border-silver-300 focus:outline-none focus:ring-2 focus:ring-silver-300/20"
+            class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-cream focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
           />
         </label>
       </div>
       <label class="block">
-        <span class="text-[13px] font-medium text-silver-200">Email or phone</span>
+        <span class="text-[13px] font-medium text-cream-soft">Email or phone</span>
         <input
           type="text"
           name="contact"
           required
-          class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-silver-50 focus:border-silver-300 focus:outline-none focus:ring-2 focus:ring-silver-300/20"
+          class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-cream focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
         />
       </label>
 
       <fieldset class="block">
-        <legend class="text-[13px] font-medium text-silver-200 mb-3">What are you after?</legend>
+        <legend class="text-[13px] font-medium text-cream-soft mb-3">What are you after?</legend>
         <div class="flex flex-wrap gap-2">
           {
-            ["Website", "Social media", "Catalogue", "Not sure yet"].map((opt) => (
-              <label class="inline-flex items-center gap-2 bg-graphite-soft border border-line rounded-full px-4 py-2 text-sm cursor-pointer text-silver-200 hover:border-silver-400 has-checked:bg-silver-100 has-checked:text-onyx has-checked:border-silver-100 transition-colors">
+            ["Website", "Social", "Catalogue", "Not sure yet"].map((opt) => (
+              <label class="inline-flex items-center gap-2 bg-graphite-soft border border-line rounded-full px-4 py-2 text-sm cursor-pointer text-cream-soft hover:border-gold has-checked:bg-crimson-deep has-checked:text-cream has-checked:border-crimson-deep transition-colors">
                 <input type="checkbox" name="interest" value={opt} class="sr-only" />
                 {opt}
               </label>
@@ -66,26 +67,26 @@
       </fieldset>
 
       <label class="block">
-        <span class="text-[13px] font-medium text-silver-200">Tell us a bit about your business</span>
+        <span class="text-[13px] font-medium text-cream-soft">A line about your business</span>
         <textarea
           name="message"
           rows="4"
-          class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-silver-50 focus:border-silver-300 focus:outline-none focus:ring-2 focus:ring-silver-300/20"
+          class="mt-2 w-full rounded-xl border border-line bg-graphite-soft px-4 py-3 text-cream focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold/20"
         ></textarea>
       </label>
 
       <button
         type="submit"
-        class="justify-self-start inline-flex items-center gap-2 bg-silver-100 hover:bg-white text-onyx px-7 py-3 rounded-full text-[14px] font-semibold transition-colors"
+        class="justify-self-start inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3 rounded-full text-[14px] font-semibold transition-colors tracking-wide"
       >
         Send it through
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
           <path d="M5 12h14M13 5l7 7-7 7" />
         </svg>
       </button>
 
-      <p class="text-xs text-silver-500 pt-2">
-        Prefer email? <a href="mailto:hello@shopfrontstudio.com.au" class="text-silver-200 hover:text-white underline underline-offset-4">hello@shopfrontstudio.com.au</a>
+      <p class="text-xs text-cream-mute pt-2">
+        Or by mail — <a href="mailto:hello@anaramarketing.com.au" class="text-gold hover:underline">hello@anaramarketing.com.au</a>
       </p>
     </form>
   </div>

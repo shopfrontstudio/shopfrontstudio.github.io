@@ -4,19 +4,19 @@ const services = [
     slug: "websites",
     index: "01",
     eyebrow: "Websites",
-    title: "Sites that load before people leave.",
+    title: "Sites built before people leave.",
     body:
-      "Custom-built. Mobile-first. Wired to Google so locals find you. No bloated templates, no 30-second load times — just a clean shopfront that converts visits into bookings, calls and walk-ins.",
-    bullets: ["Custom design", "Under 2 seconds", "Google-connected", "Care plan optional"],
+      "Custom-built. Mobile-first. Wired to Google so the people nearby can actually find you. No bloated templates, no thirty-second loads — a clean shopfront that turns visits into bookings, calls and walk-ins.",
+    bullets: ["Bespoke design", "Under two seconds", "Google-connected", "Care plan optional"],
     price: "From $1,800",
   },
   {
     slug: "social",
     index: "02",
-    eyebrow: "Social media",
-    title: "Posts that fill the tables.",
+    eyebrow: "Social",
+    title: "Posts that fill the room.",
     body:
-      "We plan, shoot, write and schedule — weekly or monthly. You approve in ten minutes. The goal isn't follower count, it's a busier Saturday.",
+      "Planned, shot, written and scheduled — by the week or the month. You approve in ten minutes. The measure isn't follower count, it's a fuller Saturday.",
     bullets: ["Monthly content plan", "On-site photography", "Reels and stories", "Plain reporting"],
     price: "From $650/mo",
   },
@@ -24,7 +24,7 @@ const services = [
     slug: "catalogues",
     index: "03",
     eyebrow: "Catalogues",
-    title: "Catalogues people keep.",
+    title: "Pieces worth keeping.",
     body:
       "Print and digital, designed together. A seasonal lookbook. A tasting card for a cellar door. A wholesale catalogue for a maker. Press-ready files and an interactive PDF — same project, same fee.",
     bullets: ["Press-ready artwork", "Interactive PDF", "Local print partner", "Reusable templates"],
@@ -33,18 +33,18 @@ const services = [
 ];
 ---
 
-<section id="services" class="relative text-silver-100">
+<section id="services" class="relative text-cream">
   <div class="max-w-6xl mx-auto px-6 pt-28 pb-20 md:pt-40 md:pb-24 text-center">
-    <div class="text-[12px] font-medium uppercase tracking-[0.22em] text-silver-400 mb-5">
-      What we do
+    <div class="text-[12px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+      What we make
     </div>
     <h2 class="font-display display-tight text-5xl md:text-7xl">
-      <span class="text-white">Three things.</span>
+      <span class="gradient-cream">Three things.</span>
       <br />
-      <span class="silver-text-soft">Done properly.</span>
+      <span class="italic-gold italic">Done with care.</span>
     </h2>
-    <p class="mt-6 max-w-2xl mx-auto text-lg text-silver-300">
-      Scroll. Each one slides over the last — start with one, add the others when you're ready.
+    <p class="mt-6 max-w-2xl mx-auto text-lg text-cream-soft">
+      The menu is short on purpose. Start with one — add the others when the time is right.
     </p>
   </div>
 
@@ -52,7 +52,7 @@ const services = [
     {
       services.map((s, i) => (
         <article class="stack-card" data-service={s.slug}>
-          {/* Background illustration — pinned right, visible but not loud */}
+          {/* Background illustration */}
           <div
             class="absolute inset-0 pointer-events-none"
             aria-hidden="true"
@@ -65,39 +65,39 @@ const services = [
               mix-blend-mode: lighten;
             `}
           />
-          {/* Left-to-right fade so the text side stays cleanest, right stays open for the illustration */}
+          {/* Left-to-right fade */}
           <div
             class="absolute inset-0 pointer-events-none"
             aria-hidden="true"
-            style="background: linear-gradient(95deg, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.42) 45%, rgba(0,0,0,0.05) 85%);"
+            style="background: linear-gradient(95deg, rgba(10,6,8,0.82) 0%, rgba(10,6,8,0.45) 45%, rgba(10,6,8,0.05) 85%);"
           />
 
           <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 w-full">
             <div class="md:col-span-5">
               <div class="flex items-center gap-3 mb-6">
-                <span class="font-display text-[64px] md:text-[88px] leading-none font-bold silver-text">
+                <span class="font-display text-[64px] md:text-[88px] leading-none gradient-crimson italic">
                   {s.index}
                 </span>
                 <div class="flex flex-col">
-                  <span class="text-[11px] uppercase tracking-[0.22em] text-silver-400">Service</span>
-                  <span class="font-display text-lg text-silver-100 font-semibold">{s.eyebrow}</span>
+                  <span class="text-[11px] uppercase tracking-[0.30em] text-gold">Service</span>
+                  <span class="font-display text-lg text-cream font-medium">{s.eyebrow}</span>
                 </div>
               </div>
-              <h3 class="font-display display-tight text-3xl md:text-5xl text-white mt-6">
+              <h3 class="font-display display-tight text-3xl md:text-5xl text-cream mt-6">
                 {s.title}
               </h3>
-              <div class="mt-8 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-graphite-soft/80 backdrop-blur border border-line-bright text-silver-100">
+              <div class="mt-8 inline-flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-full bg-graphite-soft/80 backdrop-blur border border-line-bright text-cream">
                 {s.price}
               </div>
             </div>
             <div class="md:col-span-7 md:pt-2">
-              <p class="text-lg md:text-xl leading-relaxed text-silver-300">
+              <p class="text-lg md:text-xl leading-relaxed text-cream-soft">
                 {s.body}
               </p>
               <ul class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6">
                 {s.bullets.map((b) => (
-                  <li class="flex items-center gap-3 text-[15px] text-silver-100">
-                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 silver-text border border-line-bright">
+                  <li class="flex items-center gap-3 text-[15px] text-cream">
+                    <span class="w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 bg-crimson-deep text-cream">
                       ✓
                     </span>
                     {b}
@@ -105,7 +105,7 @@ const services = [
                 ))}
               </ul>
 
-              <div class="mt-10 flex items-center gap-4 text-[11px] uppercase tracking-[0.2em] text-silver-500">
+              <div class="mt-10 flex items-center gap-4 text-[11px] uppercase tracking-[0.28em] text-cream-mute">
                 <span>0{i + 1}</span>
                 <span class="flex-1 h-px bg-line-bright"></span>
                 <span>0{services.length}</span>
