@@ -3,12 +3,13 @@
 @theme {
   /* ===== Anara — dark wine, crimson, cream, gold ===== */
 
-  /* Dark foundation — warm near-black with the faintest wine undertone */
-  --color-night: #0a0608;
-  --color-onyx: #0f0a0c;
-  --color-graphite: #14090d;
-  --color-graphite-soft: #1c1015;
-  --color-graphite-line: #2a161d;
+  /* Dark foundation — neutral near-black so the red pomegranate is the
+     only warm element and truly stands out. No wine tint in the base. */
+  --color-night: #08080a;
+  --color-onyx: #0d0d10;
+  --color-graphite: #14141a;
+  --color-graphite-soft: #1c1c22;
+  --color-graphite-line: #26262d;
 
   /* Pomegranate reds — pulled from the logo */
   --color-crimson: #b91d3a;       /* bright pomegranate dot */
@@ -29,8 +30,8 @@
   --color-gold-deep: #8a6735;
 
   /* Lines */
-  --color-line: #2a161d;
-  --color-line-soft: #1c1015;
+  --color-line: #26262d;
+  --color-line-soft: #1c1c22;
   --color-line-bright: rgba(243, 237, 224, 0.10);
 
   --font-display:
@@ -191,9 +192,9 @@ body {
   overflow: hidden;
 }
 
-/* The pomegranate mark, blurred into ambient glow.
-   The SVG is transparent outside the fruit shape, so the wine-black
-   body shows through everywhere except where the fruit sits. */
+/* The pomegranate mark blurred into ambient red glow on the neutral
+   near-black field. The SVG is transparent outside the fruit, so
+   most of the viewport is just the page body colour. */
 .page-bg-photo::before {
   content: "";
   position: absolute;
@@ -202,18 +203,19 @@ body {
   background-repeat: no-repeat;
   background-position: center 42%;
   background-size: auto 130%;
-  filter: blur(54px) saturate(150%) brightness(0.85);
-  opacity: 0.85;
+  filter: blur(72px) saturate(160%) brightness(0.55);
+  opacity: 0.45;
 }
 
-/* Wine-tint overlay — reads as warm translucent glass, no grain */
+/* Subtle ambient warmth — no wine tint over the whole page,
+   just a soft crimson halo behind the fruit and a near-black wash. */
 .page-bg-photo::after {
   content: "";
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(46, 7, 18, 0.45) 0%, rgba(10, 4, 7, 0.78) 100%),
-    radial-gradient(70% 50% at 50% 35%, rgba(185, 29, 58, 0.22) 0%, transparent 60%);
+    linear-gradient(180deg, rgba(8, 8, 12, 0.30) 0%, rgba(4, 4, 6, 0.70) 100%),
+    radial-gradient(60% 45% at 50% 40%, rgba(185, 29, 58, 0.10) 0%, transparent 65%);
 }
 
 /* Hero glow */

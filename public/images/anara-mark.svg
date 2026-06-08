@@ -1,172 +1,248 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" role="img" aria-label="Anara pomegranate mark">
   <defs>
-    <linearGradient id="pomGrad" x1="22%" y1="0%" x2="78%" y2="100%">
-      <stop offset="0%" stop-color="#e34c6c"/>
-      <stop offset="32%" stop-color="#b91d3a"/>
-      <stop offset="68%" stop-color="#7a0a1f"/>
-      <stop offset="100%" stop-color="#2e0510"/>
+    <!-- Gradient with a bright coral highlight, never going darker
+         than a clearly readable burgundy so it doesn't disappear on
+         a near-black background. -->
+    <linearGradient id="pomGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%"   stop-color="#ff8aa0"/>
+      <stop offset="22%"  stop-color="#ee4a68"/>
+      <stop offset="50%"  stop-color="#c91f40"/>
+      <stop offset="78%"  stop-color="#8a0f26"/>
+      <stop offset="100%" stop-color="#5a0817"/>
     </linearGradient>
+
+    <!-- Soft inner glow to give the fruit some volume -->
+    <radialGradient id="innerGlow" cx="38%" cy="32%" r="65%">
+      <stop offset="0%"  stop-color="rgba(255,255,255,0.18)"/>
+      <stop offset="60%" stop-color="rgba(255,255,255,0)"/>
+    </radialGradient>
+
     <mask id="pomDots" maskUnits="userSpaceOnUse" x="0" y="0" width="600" height="600">
       <rect x="0" y="0" width="600" height="600" fill="black"/>
-    <circle cx="246.00" cy="156.00" r="3.70" fill="white"/>
-    <circle cx="282.00" cy="156.00" r="3.83" fill="white"/>
-    <circle cx="318.00" cy="156.00" r="3.83" fill="white"/>
-    <circle cx="354.00" cy="156.00" r="3.70" fill="white"/>
-    <circle cx="192.00" cy="188.00" r="3.82" fill="white"/>
-    <circle cx="228.00" cy="188.00" r="4.24" fill="white"/>
-    <circle cx="264.00" cy="188.00" r="4.55" fill="white"/>
-    <circle cx="300.00" cy="188.00" r="4.67" fill="white"/>
-    <circle cx="336.00" cy="188.00" r="4.55" fill="white"/>
-    <circle cx="372.00" cy="188.00" r="4.24" fill="white"/>
-    <circle cx="408.00" cy="188.00" r="3.82" fill="white"/>
-    <circle cx="138.00" cy="220.00" r="3.59" fill="white"/>
-    <circle cx="174.00" cy="220.00" r="4.15" fill="white"/>
-    <circle cx="210.00" cy="220.00" r="4.79" fill="white"/>
-    <circle cx="246.00" cy="220.00" r="5.35" fill="white"/>
-    <circle cx="282.00" cy="220.00" r="5.67" fill="white"/>
-    <circle cx="318.00" cy="220.00" r="5.67" fill="white"/>
-    <circle cx="354.00" cy="220.00" r="5.35" fill="white"/>
-    <circle cx="390.00" cy="220.00" r="4.79" fill="white"/>
-    <circle cx="426.00" cy="220.00" r="4.15" fill="white"/>
-    <circle cx="462.00" cy="220.00" r="3.59" fill="white"/>
-    <circle cx="120.00" cy="252.00" r="3.65" fill="white"/>
-    <circle cx="156.00" cy="252.00" r="4.36" fill="white"/>
-    <circle cx="192.00" cy="252.00" r="5.23" fill="white"/>
-    <circle cx="228.00" cy="252.00" r="6.07" fill="white"/>
-    <circle cx="264.00" cy="252.00" r="6.69" fill="white"/>
-    <circle cx="300.00" cy="252.00" r="6.93" fill="white"/>
-    <circle cx="336.00" cy="252.00" r="6.69" fill="white"/>
-    <circle cx="372.00" cy="252.00" r="6.07" fill="white"/>
-    <circle cx="408.00" cy="252.00" r="5.23" fill="white"/>
-    <circle cx="444.00" cy="252.00" r="4.36" fill="white"/>
-    <circle cx="480.00" cy="252.00" r="3.65" fill="white"/>
-    <circle cx="102.00" cy="284.00" r="3.62" fill="white"/>
-    <circle cx="138.00" cy="284.00" r="4.40" fill="white"/>
-    <circle cx="174.00" cy="284.00" r="5.44" fill="white"/>
-    <circle cx="210.00" cy="284.00" r="6.55" fill="white"/>
-    <circle cx="246.00" cy="284.00" r="7.56" fill="white"/>
-    <circle cx="282.00" cy="284.00" r="8.19" fill="white"/>
-    <circle cx="318.00" cy="284.00" r="8.19" fill="white"/>
-    <circle cx="354.00" cy="284.00" r="7.56" fill="white"/>
-    <circle cx="390.00" cy="284.00" r="6.55" fill="white"/>
-    <circle cx="426.00" cy="284.00" r="5.44" fill="white"/>
-    <circle cx="462.00" cy="284.00" r="4.40" fill="white"/>
-    <circle cx="498.00" cy="284.00" r="3.62" fill="white"/>
-    <circle cx="120.00" cy="316.00" r="4.25" fill="white"/>
-    <circle cx="156.00" cy="316.00" r="5.37" fill="white"/>
-    <circle cx="192.00" cy="316.00" r="6.68" fill="white"/>
-    <circle cx="228.00" cy="316.00" r="8.04" fill="white"/>
-    <circle cx="264.00" cy="316.00" r="9.22" fill="white"/>
-    <circle cx="300.00" cy="316.00" r="9.75" fill="white"/>
-    <circle cx="336.00" cy="316.00" r="9.22" fill="white"/>
-    <circle cx="372.00" cy="316.00" r="8.04" fill="white"/>
-    <circle cx="408.00" cy="316.00" r="6.68" fill="white"/>
-    <circle cx="444.00" cy="316.00" r="5.37" fill="white"/>
-    <circle cx="480.00" cy="316.00" r="4.25" fill="white"/>
-    <circle cx="102.00" cy="348.00" r="3.96" fill="white"/>
-    <circle cx="138.00" cy="348.00" r="5.04" fill="white"/>
-    <circle cx="174.00" cy="348.00" r="6.40" fill="white"/>
-    <circle cx="210.00" cy="348.00" r="7.95" fill="white"/>
-    <circle cx="246.00" cy="348.00" r="9.60" fill="white"/>
-    <circle cx="282.00" cy="348.00" r="11.04" fill="white"/>
-    <circle cx="318.00" cy="348.00" r="11.04" fill="white"/>
-    <circle cx="354.00" cy="348.00" r="9.60" fill="white"/>
-    <circle cx="390.00" cy="348.00" r="7.95" fill="white"/>
-    <circle cx="426.00" cy="348.00" r="6.40" fill="white"/>
-    <circle cx="462.00" cy="348.00" r="5.04" fill="white"/>
-    <circle cx="498.00" cy="348.00" r="3.96" fill="white"/>
-    <circle cx="84.00" cy="380.00" r="3.63" fill="white"/>
-    <circle cx="120.00" cy="380.00" r="4.53" fill="white"/>
-    <circle cx="156.00" cy="380.00" r="5.81" fill="white"/>
-    <circle cx="192.00" cy="380.00" r="7.33" fill="white"/>
-    <circle cx="228.00" cy="380.00" r="9.06" fill="white"/>
-    <circle cx="264.00" cy="380.00" r="10.95" fill="white"/>
-    <circle cx="300.00" cy="380.00" r="13.00" fill="white"/>
-    <circle cx="336.00" cy="380.00" r="10.95" fill="white"/>
-    <circle cx="372.00" cy="380.00" r="9.06" fill="white"/>
-    <circle cx="408.00" cy="380.00" r="7.33" fill="white"/>
-    <circle cx="444.00" cy="380.00" r="5.81" fill="white"/>
-    <circle cx="480.00" cy="380.00" r="4.53" fill="white"/>
-    <circle cx="516.00" cy="380.00" r="3.63" fill="white"/>
-    <circle cx="102.00" cy="412.00" r="3.96" fill="white"/>
-    <circle cx="138.00" cy="412.00" r="5.04" fill="white"/>
-    <circle cx="174.00" cy="412.00" r="6.40" fill="white"/>
-    <circle cx="210.00" cy="412.00" r="7.95" fill="white"/>
-    <circle cx="246.00" cy="412.00" r="9.60" fill="white"/>
-    <circle cx="282.00" cy="412.00" r="11.04" fill="white"/>
-    <circle cx="318.00" cy="412.00" r="11.04" fill="white"/>
-    <circle cx="354.00" cy="412.00" r="9.60" fill="white"/>
-    <circle cx="390.00" cy="412.00" r="7.95" fill="white"/>
-    <circle cx="426.00" cy="412.00" r="6.40" fill="white"/>
-    <circle cx="462.00" cy="412.00" r="5.04" fill="white"/>
-    <circle cx="498.00" cy="412.00" r="3.96" fill="white"/>
-    <circle cx="120.00" cy="444.00" r="4.25" fill="white"/>
-    <circle cx="156.00" cy="444.00" r="5.37" fill="white"/>
-    <circle cx="192.00" cy="444.00" r="6.68" fill="white"/>
-    <circle cx="228.00" cy="444.00" r="8.04" fill="white"/>
-    <circle cx="264.00" cy="444.00" r="9.22" fill="white"/>
-    <circle cx="300.00" cy="444.00" r="9.75" fill="white"/>
-    <circle cx="336.00" cy="444.00" r="9.22" fill="white"/>
-    <circle cx="372.00" cy="444.00" r="8.04" fill="white"/>
-    <circle cx="408.00" cy="444.00" r="6.68" fill="white"/>
-    <circle cx="444.00" cy="444.00" r="5.37" fill="white"/>
-    <circle cx="480.00" cy="444.00" r="4.25" fill="white"/>
-    <circle cx="102.00" cy="476.00" r="3.62" fill="white"/>
-    <circle cx="138.00" cy="476.00" r="4.40" fill="white"/>
-    <circle cx="174.00" cy="476.00" r="5.44" fill="white"/>
-    <circle cx="210.00" cy="476.00" r="6.55" fill="white"/>
-    <circle cx="246.00" cy="476.00" r="7.56" fill="white"/>
-    <circle cx="282.00" cy="476.00" r="8.19" fill="white"/>
-    <circle cx="318.00" cy="476.00" r="8.19" fill="white"/>
-    <circle cx="354.00" cy="476.00" r="7.56" fill="white"/>
-    <circle cx="390.00" cy="476.00" r="6.55" fill="white"/>
-    <circle cx="426.00" cy="476.00" r="5.44" fill="white"/>
-    <circle cx="462.00" cy="476.00" r="4.40" fill="white"/>
-    <circle cx="498.00" cy="476.00" r="3.62" fill="white"/>
-    <circle cx="120.00" cy="508.00" r="3.65" fill="white"/>
-    <circle cx="156.00" cy="508.00" r="4.36" fill="white"/>
-    <circle cx="192.00" cy="508.00" r="5.23" fill="white"/>
-    <circle cx="228.00" cy="508.00" r="6.07" fill="white"/>
-    <circle cx="264.00" cy="508.00" r="6.69" fill="white"/>
-    <circle cx="300.00" cy="508.00" r="6.93" fill="white"/>
-    <circle cx="336.00" cy="508.00" r="6.69" fill="white"/>
-    <circle cx="372.00" cy="508.00" r="6.07" fill="white"/>
-    <circle cx="408.00" cy="508.00" r="5.23" fill="white"/>
-    <circle cx="444.00" cy="508.00" r="4.36" fill="white"/>
-    <circle cx="480.00" cy="508.00" r="3.65" fill="white"/>
-    <circle cx="138.00" cy="540.00" r="3.59" fill="white"/>
-    <circle cx="174.00" cy="540.00" r="4.15" fill="white"/>
-    <circle cx="210.00" cy="540.00" r="4.79" fill="white"/>
-    <circle cx="246.00" cy="540.00" r="5.35" fill="white"/>
-    <circle cx="282.00" cy="540.00" r="5.67" fill="white"/>
-    <circle cx="318.00" cy="540.00" r="5.67" fill="white"/>
-    <circle cx="354.00" cy="540.00" r="5.35" fill="white"/>
-    <circle cx="390.00" cy="540.00" r="4.79" fill="white"/>
-    <circle cx="426.00" cy="540.00" r="4.15" fill="white"/>
-    <circle cx="462.00" cy="540.00" r="3.59" fill="white"/>
-    <circle cx="192.00" cy="572.00" r="3.82" fill="white"/>
-    <circle cx="228.00" cy="572.00" r="4.24" fill="white"/>
-    <circle cx="264.00" cy="572.00" r="4.55" fill="white"/>
-    <circle cx="300.00" cy="572.00" r="4.67" fill="white"/>
-    <circle cx="336.00" cy="572.00" r="4.55" fill="white"/>
-    <circle cx="372.00" cy="572.00" r="4.24" fill="white"/>
-    <circle cx="408.00" cy="572.00" r="3.82" fill="white"/>
-    <circle cx="246.00" cy="604.00" r="3.70" fill="white"/>
-    <circle cx="282.00" cy="604.00" r="3.83" fill="white"/>
-    <circle cx="318.00" cy="604.00" r="3.83" fill="white"/>
-    <circle cx="354.00" cy="604.00" r="3.70" fill="white"/>
+      <circle cx="210.00" cy="156.00" r="1.50" fill="white"/>
+      <circle cx="240.00" cy="156.00" r="1.86" fill="white"/>
+      <circle cx="270.00" cy="156.00" r="2.25" fill="white"/>
+      <circle cx="300.00" cy="156.00" r="2.38" fill="white"/>
+      <circle cx="330.00" cy="156.00" r="2.25" fill="white"/>
+      <circle cx="360.00" cy="156.00" r="1.86" fill="white"/>
+      <circle cx="390.00" cy="156.00" r="1.50" fill="white"/>
+      <circle cx="195.00" cy="184.00" r="2.22" fill="white"/>
+      <circle cx="225.00" cy="184.00" r="3.03" fill="white"/>
+      <circle cx="255.00" cy="184.00" r="3.61" fill="white"/>
+      <circle cx="285.00" cy="184.00" r="3.91" fill="white"/>
+      <circle cx="315.00" cy="184.00" r="3.91" fill="white"/>
+      <circle cx="345.00" cy="184.00" r="3.61" fill="white"/>
+      <circle cx="375.00" cy="184.00" r="3.03" fill="white"/>
+      <circle cx="405.00" cy="184.00" r="2.22" fill="white"/>
+      <circle cx="150.00" cy="212.00" r="1.80" fill="white"/>
+      <circle cx="180.00" cy="212.00" r="3.00" fill="white"/>
+      <circle cx="210.00" cy="212.00" r="4.03" fill="white"/>
+      <circle cx="240.00" cy="212.00" r="4.85" fill="white"/>
+      <circle cx="270.00" cy="212.00" r="5.37" fill="white"/>
+      <circle cx="300.00" cy="212.00" r="5.55" fill="white"/>
+      <circle cx="330.00" cy="212.00" r="5.37" fill="white"/>
+      <circle cx="360.00" cy="212.00" r="4.85" fill="white"/>
+      <circle cx="390.00" cy="212.00" r="4.03" fill="white"/>
+      <circle cx="420.00" cy="212.00" r="3.00" fill="white"/>
+      <circle cx="450.00" cy="212.00" r="1.80" fill="white"/>
+      <circle cx="135.00" cy="240.00" r="2.16" fill="white"/>
+      <circle cx="165.00" cy="240.00" r="3.55" fill="white"/>
+      <circle cx="195.00" cy="240.00" r="4.81" fill="white"/>
+      <circle cx="225.00" cy="240.00" r="5.89" fill="white"/>
+      <circle cx="255.00" cy="240.00" r="6.70" fill="white"/>
+      <circle cx="285.00" cy="240.00" r="7.14" fill="white"/>
+      <circle cx="315.00" cy="240.00" r="7.14" fill="white"/>
+      <circle cx="345.00" cy="240.00" r="6.70" fill="white"/>
+      <circle cx="375.00" cy="240.00" r="5.89" fill="white"/>
+      <circle cx="405.00" cy="240.00" r="4.81" fill="white"/>
+      <circle cx="435.00" cy="240.00" r="3.55" fill="white"/>
+      <circle cx="465.00" cy="240.00" r="2.16" fill="white"/>
+      <circle cx="120.00" cy="268.00" r="2.27" fill="white"/>
+      <circle cx="150.00" cy="268.00" r="3.82" fill="white"/>
+      <circle cx="180.00" cy="268.00" r="5.31" fill="white"/>
+      <circle cx="210.00" cy="268.00" r="6.67" fill="white"/>
+      <circle cx="240.00" cy="268.00" r="7.81" fill="white"/>
+      <circle cx="270.00" cy="268.00" r="8.60" fill="white"/>
+      <circle cx="300.00" cy="268.00" r="8.89" fill="white"/>
+      <circle cx="330.00" cy="268.00" r="8.60" fill="white"/>
+      <circle cx="360.00" cy="268.00" r="7.81" fill="white"/>
+      <circle cx="390.00" cy="268.00" r="6.67" fill="white"/>
+      <circle cx="420.00" cy="268.00" r="5.31" fill="white"/>
+      <circle cx="450.00" cy="268.00" r="3.82" fill="white"/>
+      <circle cx="480.00" cy="268.00" r="2.27" fill="white"/>
+      <circle cx="105.00" cy="296.00" r="2.12" fill="white"/>
+      <circle cx="135.00" cy="296.00" r="3.80" fill="white"/>
+      <circle cx="165.00" cy="296.00" r="5.46" fill="white"/>
+      <circle cx="195.00" cy="296.00" r="7.08" fill="white"/>
+      <circle cx="225.00" cy="296.00" r="8.57" fill="white"/>
+      <circle cx="255.00" cy="296.00" r="9.81" fill="white"/>
+      <circle cx="285.00" cy="296.00" r="10.55" fill="white"/>
+      <circle cx="315.00" cy="296.00" r="10.55" fill="white"/>
+      <circle cx="345.00" cy="296.00" r="9.81" fill="white"/>
+      <circle cx="375.00" cy="296.00" r="8.57" fill="white"/>
+      <circle cx="405.00" cy="296.00" r="7.08" fill="white"/>
+      <circle cx="435.00" cy="296.00" r="5.46" fill="white"/>
+      <circle cx="465.00" cy="296.00" r="3.80" fill="white"/>
+      <circle cx="495.00" cy="296.00" r="2.12" fill="white"/>
+      <circle cx="90.00" cy="324.00" r="1.73" fill="white"/>
+      <circle cx="120.00" cy="324.00" r="3.49" fill="white"/>
+      <circle cx="150.00" cy="324.00" r="5.27" fill="white"/>
+      <circle cx="180.00" cy="324.00" r="7.06" fill="white"/>
+      <circle cx="210.00" cy="324.00" r="8.83" fill="white"/>
+      <circle cx="240.00" cy="324.00" r="10.51" fill="white"/>
+      <circle cx="270.00" cy="324.00" r="11.90" fill="white"/>
+      <circle cx="300.00" cy="324.00" r="12.50" fill="white"/>
+      <circle cx="330.00" cy="324.00" r="11.90" fill="white"/>
+      <circle cx="360.00" cy="324.00" r="10.51" fill="white"/>
+      <circle cx="390.00" cy="324.00" r="8.83" fill="white"/>
+      <circle cx="420.00" cy="324.00" r="7.06" fill="white"/>
+      <circle cx="450.00" cy="324.00" r="5.27" fill="white"/>
+      <circle cx="480.00" cy="324.00" r="3.49" fill="white"/>
+      <circle cx="510.00" cy="324.00" r="1.73" fill="white"/>
+      <circle cx="105.00" cy="352.00" r="2.91" fill="white"/>
+      <circle cx="135.00" cy="352.00" r="4.74" fill="white"/>
+      <circle cx="165.00" cy="352.00" r="6.61" fill="white"/>
+      <circle cx="195.00" cy="352.00" r="8.53" fill="white"/>
+      <circle cx="225.00" cy="352.00" r="10.49" fill="white"/>
+      <circle cx="255.00" cy="352.00" r="12.47" fill="white"/>
+      <circle cx="285.00" cy="352.00" r="14.17" fill="white"/>
+      <circle cx="315.00" cy="352.00" r="14.17" fill="white"/>
+      <circle cx="345.00" cy="352.00" r="12.47" fill="white"/>
+      <circle cx="375.00" cy="352.00" r="10.49" fill="white"/>
+      <circle cx="405.00" cy="352.00" r="8.53" fill="white"/>
+      <circle cx="435.00" cy="352.00" r="6.61" fill="white"/>
+      <circle cx="465.00" cy="352.00" r="4.74" fill="white"/>
+      <circle cx="495.00" cy="352.00" r="2.91" fill="white"/>
+      <circle cx="90.00" cy="380.00" r="2.10" fill="white"/>
+      <circle cx="120.00" cy="380.00" r="3.93" fill="white"/>
+      <circle cx="150.00" cy="380.00" r="5.81" fill="white"/>
+      <circle cx="180.00" cy="380.00" r="7.74" fill="white"/>
+      <circle cx="210.00" cy="380.00" r="9.75" fill="white"/>
+      <circle cx="240.00" cy="380.00" r="11.86" fill="white"/>
+      <circle cx="270.00" cy="380.00" r="14.15" fill="white"/>
+      <circle cx="300.00" cy="380.00" r="17.00" fill="white"/>
+      <circle cx="330.00" cy="380.00" r="14.15" fill="white"/>
+      <circle cx="360.00" cy="380.00" r="11.86" fill="white"/>
+      <circle cx="390.00" cy="380.00" r="9.75" fill="white"/>
+      <circle cx="420.00" cy="380.00" r="7.74" fill="white"/>
+      <circle cx="450.00" cy="380.00" r="5.81" fill="white"/>
+      <circle cx="480.00" cy="380.00" r="3.93" fill="white"/>
+      <circle cx="510.00" cy="380.00" r="2.10" fill="white"/>
+      <circle cx="105.00" cy="408.00" r="2.91" fill="white"/>
+      <circle cx="135.00" cy="408.00" r="4.74" fill="white"/>
+      <circle cx="165.00" cy="408.00" r="6.61" fill="white"/>
+      <circle cx="195.00" cy="408.00" r="8.53" fill="white"/>
+      <circle cx="225.00" cy="408.00" r="10.49" fill="white"/>
+      <circle cx="255.00" cy="408.00" r="12.47" fill="white"/>
+      <circle cx="285.00" cy="408.00" r="14.17" fill="white"/>
+      <circle cx="315.00" cy="408.00" r="14.17" fill="white"/>
+      <circle cx="345.00" cy="408.00" r="12.47" fill="white"/>
+      <circle cx="375.00" cy="408.00" r="10.49" fill="white"/>
+      <circle cx="405.00" cy="408.00" r="8.53" fill="white"/>
+      <circle cx="435.00" cy="408.00" r="6.61" fill="white"/>
+      <circle cx="465.00" cy="408.00" r="4.74" fill="white"/>
+      <circle cx="495.00" cy="408.00" r="2.91" fill="white"/>
+      <circle cx="90.00" cy="436.00" r="1.73" fill="white"/>
+      <circle cx="120.00" cy="436.00" r="3.49" fill="white"/>
+      <circle cx="150.00" cy="436.00" r="5.27" fill="white"/>
+      <circle cx="180.00" cy="436.00" r="7.06" fill="white"/>
+      <circle cx="210.00" cy="436.00" r="8.83" fill="white"/>
+      <circle cx="240.00" cy="436.00" r="10.51" fill="white"/>
+      <circle cx="270.00" cy="436.00" r="11.90" fill="white"/>
+      <circle cx="300.00" cy="436.00" r="12.50" fill="white"/>
+      <circle cx="330.00" cy="436.00" r="11.90" fill="white"/>
+      <circle cx="360.00" cy="436.00" r="10.51" fill="white"/>
+      <circle cx="390.00" cy="436.00" r="8.83" fill="white"/>
+      <circle cx="420.00" cy="436.00" r="7.06" fill="white"/>
+      <circle cx="450.00" cy="436.00" r="5.27" fill="white"/>
+      <circle cx="480.00" cy="436.00" r="3.49" fill="white"/>
+      <circle cx="510.00" cy="436.00" r="1.73" fill="white"/>
+      <circle cx="105.00" cy="464.00" r="2.12" fill="white"/>
+      <circle cx="135.00" cy="464.00" r="3.80" fill="white"/>
+      <circle cx="165.00" cy="464.00" r="5.46" fill="white"/>
+      <circle cx="195.00" cy="464.00" r="7.08" fill="white"/>
+      <circle cx="225.00" cy="464.00" r="8.57" fill="white"/>
+      <circle cx="255.00" cy="464.00" r="9.81" fill="white"/>
+      <circle cx="285.00" cy="464.00" r="10.55" fill="white"/>
+      <circle cx="315.00" cy="464.00" r="10.55" fill="white"/>
+      <circle cx="345.00" cy="464.00" r="9.81" fill="white"/>
+      <circle cx="375.00" cy="464.00" r="8.57" fill="white"/>
+      <circle cx="405.00" cy="464.00" r="7.08" fill="white"/>
+      <circle cx="435.00" cy="464.00" r="5.46" fill="white"/>
+      <circle cx="465.00" cy="464.00" r="3.80" fill="white"/>
+      <circle cx="495.00" cy="464.00" r="2.12" fill="white"/>
+      <circle cx="120.00" cy="492.00" r="2.27" fill="white"/>
+      <circle cx="150.00" cy="492.00" r="3.82" fill="white"/>
+      <circle cx="180.00" cy="492.00" r="5.31" fill="white"/>
+      <circle cx="210.00" cy="492.00" r="6.67" fill="white"/>
+      <circle cx="240.00" cy="492.00" r="7.81" fill="white"/>
+      <circle cx="270.00" cy="492.00" r="8.60" fill="white"/>
+      <circle cx="300.00" cy="492.00" r="8.89" fill="white"/>
+      <circle cx="330.00" cy="492.00" r="8.60" fill="white"/>
+      <circle cx="360.00" cy="492.00" r="7.81" fill="white"/>
+      <circle cx="390.00" cy="492.00" r="6.67" fill="white"/>
+      <circle cx="420.00" cy="492.00" r="5.31" fill="white"/>
+      <circle cx="450.00" cy="492.00" r="3.82" fill="white"/>
+      <circle cx="480.00" cy="492.00" r="2.27" fill="white"/>
+      <circle cx="135.00" cy="520.00" r="2.16" fill="white"/>
+      <circle cx="165.00" cy="520.00" r="3.55" fill="white"/>
+      <circle cx="195.00" cy="520.00" r="4.81" fill="white"/>
+      <circle cx="225.00" cy="520.00" r="5.89" fill="white"/>
+      <circle cx="255.00" cy="520.00" r="6.70" fill="white"/>
+      <circle cx="285.00" cy="520.00" r="7.14" fill="white"/>
+      <circle cx="315.00" cy="520.00" r="7.14" fill="white"/>
+      <circle cx="345.00" cy="520.00" r="6.70" fill="white"/>
+      <circle cx="375.00" cy="520.00" r="5.89" fill="white"/>
+      <circle cx="405.00" cy="520.00" r="4.81" fill="white"/>
+      <circle cx="435.00" cy="520.00" r="3.55" fill="white"/>
+      <circle cx="465.00" cy="520.00" r="2.16" fill="white"/>
+      <circle cx="150.00" cy="548.00" r="1.80" fill="white"/>
+      <circle cx="180.00" cy="548.00" r="3.00" fill="white"/>
+      <circle cx="210.00" cy="548.00" r="4.03" fill="white"/>
+      <circle cx="240.00" cy="548.00" r="4.85" fill="white"/>
+      <circle cx="270.00" cy="548.00" r="5.37" fill="white"/>
+      <circle cx="300.00" cy="548.00" r="5.55" fill="white"/>
+      <circle cx="330.00" cy="548.00" r="5.37" fill="white"/>
+      <circle cx="360.00" cy="548.00" r="4.85" fill="white"/>
+      <circle cx="390.00" cy="548.00" r="4.03" fill="white"/>
+      <circle cx="420.00" cy="548.00" r="3.00" fill="white"/>
+      <circle cx="450.00" cy="548.00" r="1.80" fill="white"/>
+      <circle cx="195.00" cy="576.00" r="2.22" fill="white"/>
+      <circle cx="225.00" cy="576.00" r="3.03" fill="white"/>
+      <circle cx="255.00" cy="576.00" r="3.61" fill="white"/>
+      <circle cx="285.00" cy="576.00" r="3.91" fill="white"/>
+      <circle cx="315.00" cy="576.00" r="3.91" fill="white"/>
+      <circle cx="345.00" cy="576.00" r="3.61" fill="white"/>
+      <circle cx="375.00" cy="576.00" r="3.03" fill="white"/>
+      <circle cx="405.00" cy="576.00" r="2.22" fill="white"/>
+      <circle cx="210.00" cy="604.00" r="1.50" fill="white"/>
+      <circle cx="240.00" cy="604.00" r="1.86" fill="white"/>
+      <circle cx="270.00" cy="604.00" r="2.25" fill="white"/>
+      <circle cx="300.00" cy="604.00" r="2.38" fill="white"/>
+      <circle cx="330.00" cy="604.00" r="2.25" fill="white"/>
+      <circle cx="360.00" cy="604.00" r="1.86" fill="white"/>
+      <circle cx="390.00" cy="604.00" r="1.50" fill="white"/>
     </mask>
   </defs>
 
-  <!-- Crown of leaves (solid burgundy) -->
-  <g fill="#5a0817">
-    <path d="M 252 160 Q 240 95 268 132 Q 280 152 274 168 Z"/>
-    <path d="M 285 152 Q 280 85 302 128 Q 308 150 300 168 Z"/>
-    <path d="M 318 150 Q 326 82 338 130 Q 338 152 326 168 Z"/>
-    <path d="M 350 158 Q 372 102 366 142 Q 360 158 344 168 Z"/>
-    <path d="M 282 162 Q 300 138 318 162 L 314 174 L 286 174 Z"/>
+  <!-- Crown of leaves — 5 flame-shaped, in slightly varied burgundy
+       tones so they overlap with depth. -->
+  <g>
+    <!-- Outer left -->
+    <path d="M 248 178 Q 250 125 260 100 Q 282 130 278 180 Z" fill="#6e0a1c"/>
+    <!-- Inner left -->
+    <path d="M 270 178 Q 268 100 284 70 Q 302 100 298 180 Z" fill="#8a0f26"/>
+    <!-- Centre — tallest -->
+    <path d="M 292 178 Q 296 78 312 52 Q 326 78 328 180 Z" fill="#a01530"/>
+    <!-- Inner right -->
+    <path d="M 322 180 Q 320 100 340 70 Q 354 100 352 180 Z" fill="#8a0f26"/>
+    <!-- Outer right -->
+    <path d="M 344 180 Q 360 125 372 100 Q 374 130 372 180 Z" fill="#6e0a1c"/>
   </g>
 
-  <!-- Pomegranate body: gradient revealed only through the halftone dots -->
-  <rect x="60" y="140" width="480" height="460" fill="url(#pomGrad)" mask="url(#pomDots)"/>
+  <!-- Pomegranate body — gradient through halftone dots -->
+  <rect x="50" y="140" width="500" height="470" fill="url(#pomGrad)" mask="url(#pomDots)"/>
+
+  <!-- Subtle volumetric highlight in the upper-left -->
+  <rect x="50" y="140" width="500" height="470" fill="url(#innerGlow)" mask="url(#pomDots)"/>
 </svg>
