@@ -1,17 +1,15 @@
 ---
+import AnimatedMark from "./AnimatedMark.astro";
 ---
 
 <section class="relative overflow-hidden text-cream">
   <div class="hero-glow"></div>
 
   <div class="relative max-w-6xl mx-auto px-6 pt-20 pb-32 md:pt-28 md:pb-44 text-center">
-    <!-- Pomegranate mark — transparent, no card, sits directly on the page -->
-    <div class="flex justify-center mb-8">
-      <img
-        src="/images/anara-mark.png"
-        alt="Anara"
-        class="block w-48 md:w-72 lg:w-80 h-auto drop-shadow-[0_30px_50px_rgba(185,29,58,0.35)]"
-      />
+    <!-- Animated pomegranate — dots rest in fruit form, then disperse,
+         cluster around a one-word service punch, and reform. -->
+    <div class="mb-2">
+      <AnimatedMark />
     </div>
 
     <!-- Wordmark — rebuilt in code so it lives on any background -->

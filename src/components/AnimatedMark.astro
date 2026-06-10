@@ -1,0 +1,194 @@
+---
+// Generate dot home positions — the resting pomegranate.
+// During animation, JavaScript moves each dot to a new target;
+// at rest the positions trace the fruit silhouette.
+const cx = 300, cy = 380;
+const rx = 220, ry = 240;
+const colSpacing = 30;
+const rowSpacing = 28;
+const maxR = 16, minR = 1.6;
+
+const dots = [];
+for (let row = -10; row <= 11; row++) {
+  const y = cy + row * rowSpacing;
+  const xOff = (row % 2 === 0) ? 0 : colSpacing / 2;
+  for (let col = -9; col <= 9; col++) {
+    const x = cx + col * colSpacing + xOff;
+    const dx = (x - cx) / rx;
+    const dy = (y - cy) / ry;
+    const d = Math.sqrt(dx * dx + dy * dy);
+    if (d > 1.02) continue;
+    const t = Math.max(0, 1 - Math.pow(d, 0.85));
+    const r = minR + (maxR - minR) * t;
+    if (r < 1.2) continue;
+    dots.push({ x: +x.toFixed(2), y: +y.toFixed(2), r: +r.toFixed(2) });
+  }
+}
+---
+
+<div class="anara-anim relative w-full max-w-[26rem] md:max-w-[30rem] lg:max-w-[34rem] mx-auto">
+  <svg
+    viewBox="0 0 600 740"
+    class="w-full h-auto block drop-shadow-[0_30px_50px_rgba(185,29,58,0.30)]"
+    preserveAspectRatio="xMidYMid meet"
+    role="img"
+    aria-label="Anara pomegranate mark"
+  >
+    <defs>
+      <linearGradient id="aDotGrad" x1="20%" y1="0%" x2="80%" y2="100%">
+        <stop offset="0%"   stop-color="#ff8aa0"/>
+        <stop offset="28%"  stop-color="#ee4a68"/>
+        <stop offset="58%"  stop-color="#b91d3a"/>
+        <stop offset="100%" stop-color="#7a0a1f"/>
+      </linearGradient>
+    </defs>
+
+    <g data-leaves style="transition: opacity 700ms ease;">
+      <path d="M 248 178 Q 250 125 260 100 Q 282 130 278 180 Z" fill="#6e0a1c"/>
+      <path d="M 270 178 Q 268 100 284 70 Q 302 100 298 180 Z" fill="#8a0f26"/>
+      <path d="M 292 178 Q 296 78 312 52 Q 326 78 328 180 Z" fill="#a01530"/>
+      <path d="M 322 180 Q 320 100 340 70 Q 354 100 352 180 Z" fill="#8a0f26"/>
+      <path d="M 344 180 Q 360 125 372 100 Q 374 130 372 180 Z" fill="#6e0a1c"/>
+    </g>
+
+    <g data-dots>
+      {dots.map((d) => (
+        <circle
+          cx={d.x} cy={d.y} r={d.r}
+          fill="url(#aDotGrad)"
+          data-hx={d.x} data-hy={d.y} data-hr={d.r}
+        />
+      ))}
+    </g>
+
+    <text
+      data-word
+      x="300" y="690"
+      text-anchor="middle"
+      style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 64px; font-weight: 500; letter-spacing: -0.02em; fill: #f3ede0; opacity: 0; transition: opacity 700ms ease;"
+    >
+      Found.
+    </text>
+  </svg>
+</div>
+
+<script is:inline>
+(function () {
+  const wrap = document.querySelector(".anara-anim");
+  if (!wrap) return;
+
+  // Respect reduced-motion preference — leave the resting pomegranate visible
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  const svg = wrap.querySelector("svg");
+  const dotEls = Array.from(svg.querySelectorAll("[data-dots] circle"));
+  const wordEl = svg.querySelector("[data-word]");
+  const leavesEl = svg.querySelector("[data-leaves]");
+
+  const dots = dotEls.map((el) => ({
+    el,
+    hx: +el.dataset.hx, hy: +el.dataset.hy, hr: +el.dataset.hr,
+    x: +el.dataset.hx, y: +el.dataset.hy, r: +el.dataset.hr,
+    tx: +el.dataset.hx, ty: +el.dataset.hy, tr: +el.dataset.hr,
+    seed: Math.random(),
+    seed2: Math.random(),
+  }));
+  const N = dots.length;
+
+  function setHome() {
+    dots.forEach((d) => { d.tx = d.hx; d.ty = d.hy; d.tr = d.hr; });
+  }
+
+  function setScatter() {
+    dots.forEach((d) => {
+      const angle = d.seed * Math.PI * 2;
+      const dist = 110 + d.seed2 * 220;
+      d.tx = 300 + Math.cos(angle) * dist;
+      d.ty = 380 + Math.sin(angle) * dist;
+      d.tr = 2 + d.seed * 4;
+    });
+  }
+
+  // Three distinctive cluster shapes — rotation, density, popped dots
+  function setCluster(phase) {
+    const phaseOffset = phase * 0.7;
+    const breath = 1 + phase * 0.08;
+    dots.forEach((d, i) => {
+      const angle = ((i / N) + d.seed + phaseOffset) * Math.PI * 2;
+      const ring = 55 + d.seed2 * 140 * breath;
+      d.tx = 300 + Math.cos(angle) * ring;
+      d.ty = 380 + Math.sin(angle) * ring * 0.85;  // squashed vertically for ellipse
+      // ~7% of dots "pop" larger for emphasis — different ones each phase
+      const popOffset = phase * 4;
+      d.tr = ((i + popOffset) % 14 === 0) ? 10 + d.seed * 5 : 2.5 + d.seed * 3;
+    });
+  }
+
+  const sequence = [
+    { name: "rest",     duration: 3800, action: setHome,            word: null,      leaves: 1.0 },
+    { name: "disperse", duration: 1400, action: setScatter,         word: null,      leaves: 0.22 },
+    { name: "found",    duration: 2300, action: () => setCluster(0), word: "Found.",  leaves: 0.12 },
+    { name: "filled",   duration: 2300, action: () => setCluster(1), word: "Filled.", leaves: 0.12 },
+    { name: "kept",     duration: 2300, action: () => setCluster(2), word: "Kept.",   leaves: 0.12 },
+    { name: "reform",   duration: 1900, action: setHome,            word: null,      leaves: 1.0 },
+  ];
+
+  let idx = 0;
+  let phaseStart = performance.now();
+
+  function applyPhase(p) {
+    p.action();
+    if (p.word) {
+      wordEl.textContent = p.word;
+      wordEl.style.opacity = "1";
+    } else {
+      wordEl.style.opacity = "0";
+    }
+    if (leavesEl) leavesEl.style.opacity = String(p.leaves);
+  }
+  applyPhase(sequence[0]);
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+
+  let raf = 0;
+  let running = false;
+
+  function tick(now) {
+    if (!running) return;
+    if (now - phaseStart > sequence[idx].duration) {
+      idx = (idx + 1) % sequence.length;
+      phaseStart = now;
+      applyPhase(sequence[idx]);
+    }
+    const k = 0.07;
+    for (const d of dots) {
+      d.x = lerp(d.x, d.tx, k);
+      d.y = lerp(d.y, d.ty, k);
+      d.r = lerp(d.r, d.tr, k);
+      d.el.setAttribute("cx", d.x.toFixed(2));
+      d.el.setAttribute("cy", d.y.toFixed(2));
+      d.el.setAttribute("r", d.r.toFixed(2));
+    }
+    raf = requestAnimationFrame(tick);
+  }
+
+  function start() {
+    if (running) return;
+    running = true;
+    phaseStart = performance.now();
+    raf = requestAnimationFrame(tick);
+  }
+  function stop() {
+    if (!running) return;
+    running = false;
+    cancelAnimationFrame(raf);
+  }
+
+  // Don't burn CPU when the hero is off-screen
+  const io = new IntersectionObserver(
+    (entries) => entries.forEach((e) => (e.isIntersecting ? start() : stop())),
+    { threshold: 0.05 }
+  );
+  io.observe(wrap);
+})();
+</script>
