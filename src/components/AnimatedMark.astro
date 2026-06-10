@@ -1,7 +1,7 @@
 ---
-// Generate dot home positions — the resting pomegranate.
-// During animation, JavaScript moves each dot to a new target;
-// at rest the positions trace the fruit silhouette.
+// Resting-state dot positions — the pomegranate silhouette.
+// During animation, JavaScript moves each dot to a target;
+// at rest the positions trace the fruit.
 const cx = 300, cy = 380;
 const rx = 220, ry = 240;
 const colSpacing = 30;
@@ -43,14 +43,19 @@ for (let row = -10; row <= 11; row++) {
       </linearGradient>
     </defs>
 
-    <g data-leaves style="transition: opacity 700ms ease;">
-      <path d="M 248 178 Q 250 125 260 100 Q 282 130 278 180 Z" fill="#6e0a1c"/>
-      <path d="M 270 178 Q 268 100 284 70 Q 302 100 298 180 Z" fill="#8a0f26"/>
-      <path d="M 292 178 Q 296 78 312 52 Q 326 78 328 180 Z" fill="#a01530"/>
-      <path d="M 322 180 Q 320 100 340 70 Q 354 100 352 180 Z" fill="#8a0f26"/>
-      <path d="M 344 180 Q 360 125 372 100 Q 374 130 372 180 Z" fill="#6e0a1c"/>
+    {/* Clean teardrop leaves — cubic beziers that taper inward, not bulgy quadratics */}
+    <g data-leaves style="transition: opacity 800ms ease;">
+      <path d="M 253 178 C 254 152 254 130 258 110 C 266 132 270 152 273 178 Q 263 174 253 178 Z" fill="#6e0a1c"/>
+      <path d="M 273 178 C 275 142 280 102 284 80 C 290 102 296 142 295 178 Q 284 174 273 178 Z" fill="#8a0f26"/>
+      <path d="M 298 178 C 302 142 309 82 312 58 C 315 82 322 142 326 178 Q 312 174 298 178 Z" fill="#a01530"/>
+      <path d="M 329 178 C 328 142 334 102 340 80 C 344 102 349 142 351 178 Q 340 174 329 178 Z" fill="#8a0f26"/>
+      <path d="M 351 178 C 354 152 358 132 366 110 C 370 132 370 152 371 178 Q 361 174 351 178 Z" fill="#6e0a1c"/>
     </g>
 
+    {/* Edges of the knowledge graph — populated by JS during cluster phases */}
+    <g data-edges fill="none" stroke="rgba(243,237,224,0.32)" stroke-width="0.65" style="opacity: 0; transition: opacity 700ms ease;"/>
+
+    {/* The dot field — the body of the fruit at rest, the swarm during motion */}
     <g data-dots>
       {dots.map((d) => (
         <circle
@@ -61,11 +66,12 @@ for (let row = -10; row <= 11; row++) {
       ))}
     </g>
 
+    {/* Sarcastic one-word service punch */}
     <text
       data-word
       x="300" y="690"
       text-anchor="middle"
-      style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 64px; font-weight: 500; letter-spacing: -0.02em; fill: #f3ede0; opacity: 0; transition: opacity 700ms ease;"
+      style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 64px; font-weight: 500; letter-spacing: -0.01em; fill: #f3ede0; opacity: 0; transition: opacity 700ms ease;"
     >
       Found.
     </text>
@@ -76,61 +82,125 @@ for (let row = -10; row <= 11; row++) {
 (function () {
   const wrap = document.querySelector(".anara-anim");
   if (!wrap) return;
-
-  // Respect reduced-motion preference — leave the resting pomegranate visible
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+  const SVG_NS = "http://www.w3.org/2000/svg";
   const svg = wrap.querySelector("svg");
   const dotEls = Array.from(svg.querySelectorAll("[data-dots] circle"));
   const wordEl = svg.querySelector("[data-word]");
   const leavesEl = svg.querySelector("[data-leaves]");
+  const edgesG = svg.querySelector("[data-edges]");
 
-  const dots = dotEls.map((el) => ({
-    el,
+  // Spring-physics state per dot
+  const dots = dotEls.map((el, i) => ({
+    el, idx: i,
     hx: +el.dataset.hx, hy: +el.dataset.hy, hr: +el.dataset.hr,
     x: +el.dataset.hx, y: +el.dataset.hy, r: +el.dataset.hr,
+    vx: 0, vy: 0,
     tx: +el.dataset.hx, ty: +el.dataset.hy, tr: +el.dataset.hr,
     seed: Math.random(),
     seed2: Math.random(),
+    pulsePhase: Math.random() * Math.PI * 2,
+    isAnchor: false,
   }));
   const N = dots.length;
 
+  // The knowledge-graph skeleton: 6 anchor nodes in a hexagon around the centre.
+  const ANCHOR_COUNT = 6;
+  let anchorPositions = [];
+
+  function computeAnchors(phaseIndex) {
+    // Rotate the hexagon a little per phase so each cluster looks fresh.
+    const baseRot = phaseIndex * 0.18 * Math.PI * 2;
+    const radius = 145;
+    return Array.from({ length: ANCHOR_COUNT }, (_, i) => {
+      const a = (i / ANCHOR_COUNT) * Math.PI * 2 + baseRot;
+      return {
+        x: 300 + Math.cos(a) * radius,
+        y: 380 + Math.sin(a) * radius * 0.78, // slight squash so the cluster reads as elliptical
+      };
+    });
+  }
+
+  // --- Target generators ---
   function setHome() {
-    dots.forEach((d) => { d.tx = d.hx; d.ty = d.hy; d.tr = d.hr; });
+    dots.forEach((d) => { d.tx = d.hx; d.ty = d.hy; d.tr = d.hr; d.isAnchor = false; });
+    edgesG.style.opacity = "0";
   }
 
   function setScatter() {
     dots.forEach((d) => {
       const angle = d.seed * Math.PI * 2;
-      const dist = 110 + d.seed2 * 220;
+      const dist = 130 + d.seed2 * 200;
       d.tx = 300 + Math.cos(angle) * dist;
       d.ty = 380 + Math.sin(angle) * dist;
       d.tr = 2 + d.seed * 4;
+      d.isAnchor = false;
     });
+    edgesG.style.opacity = "0";
   }
 
-  // Three distinctive cluster shapes — rotation, density, popped dots
-  function setCluster(phase) {
-    const phaseOffset = phase * 0.7;
-    const breath = 1 + phase * 0.08;
+  function setKnowledgeCluster(phaseIndex) {
+    anchorPositions = computeAnchors(phaseIndex);
+    const groupSize = Math.floor(N / ANCHOR_COUNT);
+
     dots.forEach((d, i) => {
-      const angle = ((i / N) + d.seed + phaseOffset) * Math.PI * 2;
-      const ring = 55 + d.seed2 * 140 * breath;
-      d.tx = 300 + Math.cos(angle) * ring;
-      d.ty = 380 + Math.sin(angle) * ring * 0.85;  // squashed vertically for ellipse
-      // ~7% of dots "pop" larger for emphasis — different ones each phase
-      const popOffset = phase * 4;
-      d.tr = ((i + popOffset) % 14 === 0) ? 10 + d.seed * 5 : 2.5 + d.seed * 3;
+      const anchorIdx = Math.min(Math.floor(i / groupSize), ANCHOR_COUNT - 1);
+      const anchor = anchorPositions[anchorIdx];
+      const isFirstInGroup = (i % groupSize) === 0;
+
+      if (isFirstInGroup) {
+        // Anchor node — large, sits at the hex vertex
+        d.tx = anchor.x;
+        d.ty = anchor.y;
+        d.tr = 12 + d.seed * 3;
+        d.isAnchor = true;
+      } else {
+        // Satellite — orbits its anchor
+        const orbitAngle = d.seed * Math.PI * 2 + phaseIndex * 0.6;
+        const orbitR = 16 + d.seed2 * 32;
+        d.tx = anchor.x + Math.cos(orbitAngle) * orbitR;
+        d.ty = anchor.y + Math.sin(orbitAngle) * orbitR;
+        d.tr = 1.8 + d.seed * 3;
+        d.isAnchor = false;
+      }
     });
+
+    // Draw the edges: hexagon perimeter + every-other-vertex diagonals
+    edgesG.innerHTML = "";
+    for (let i = 0; i < anchorPositions.length; i++) {
+      const a = anchorPositions[i];
+      // Perimeter edge
+      const next = anchorPositions[(i + 1) % anchorPositions.length];
+      const e1 = document.createElementNS(SVG_NS, "line");
+      e1.setAttribute("x1", a.x.toFixed(2));
+      e1.setAttribute("y1", a.y.toFixed(2));
+      e1.setAttribute("x2", next.x.toFixed(2));
+      e1.setAttribute("y2", next.y.toFixed(2));
+      edgesG.appendChild(e1);
+      // Diagonal
+      const diag = anchorPositions[(i + 2) % anchorPositions.length];
+      const e2 = document.createElementNS(SVG_NS, "line");
+      e2.setAttribute("x1", a.x.toFixed(2));
+      e2.setAttribute("y1", a.y.toFixed(2));
+      e2.setAttribute("x2", diag.x.toFixed(2));
+      e2.setAttribute("y2", diag.y.toFixed(2));
+      e2.setAttribute("stroke-opacity", "0.5");
+      edgesG.appendChild(e2);
+    }
+    edgesG.style.opacity = "1";
   }
 
+  const setLeaves = (a) => { if (leavesEl) leavesEl.style.opacity = String(a); };
+
+  // The cycle
   const sequence = [
-    { name: "rest",     duration: 3800, action: setHome,            word: null,      leaves: 1.0 },
-    { name: "disperse", duration: 1400, action: setScatter,         word: null,      leaves: 0.22 },
-    { name: "found",    duration: 2300, action: () => setCluster(0), word: "Found.",  leaves: 0.12 },
-    { name: "filled",   duration: 2300, action: () => setCluster(1), word: "Filled.", leaves: 0.12 },
-    { name: "kept",     duration: 2300, action: () => setCluster(2), word: "Kept.",   leaves: 0.12 },
-    { name: "reform",   duration: 1900, action: setHome,            word: null,      leaves: 1.0 },
+    { name: "rest",     duration: 3800, action: setHome,                       word: null,      leaves: 1.0 },
+    { name: "disperse", duration: 1200, action: setScatter,                    word: null,      leaves: 0.18 },
+    { name: "found",    duration: 2500, action: () => setKnowledgeCluster(0),  word: "Found.",  leaves: 0.10 },
+    { name: "filled",   duration: 2500, action: () => setKnowledgeCluster(1),  word: "Filled.", leaves: 0.10 },
+    { name: "kept",     duration: 2500, action: () => setKnowledgeCluster(2),  word: "Kept.",   leaves: 0.10 },
+    { name: "reform",   duration: 1800, action: setHome,                       word: null,      leaves: 1.0 },
   ];
 
   let idx = 0;
@@ -144,14 +214,17 @@ for (let row = -10; row <= 11; row++) {
     } else {
       wordEl.style.opacity = "0";
     }
-    if (leavesEl) leavesEl.style.opacity = String(p.leaves);
+    setLeaves(p.leaves);
   }
   applyPhase(sequence[0]);
 
-  const lerp = (a, b, t) => a + (b - a) * t;
+  // Spring physics — gentle stiffness, healthy damping, so dots ease in
+  const STIFFNESS = 0.028;
+  const DAMPING = 0.83;
 
   let raf = 0;
   let running = false;
+  const startTime = performance.now();
 
   function tick(now) {
     if (!running) return;
@@ -160,15 +233,40 @@ for (let row = -10; row <= 11; row++) {
       phaseStart = now;
       applyPhase(sequence[idx]);
     }
-    const k = 0.07;
-    for (const d of dots) {
-      d.x = lerp(d.x, d.tx, k);
-      d.y = lerp(d.y, d.ty, k);
-      d.r = lerp(d.r, d.tr, k);
+
+    const isRest = sequence[idx].name === "rest";
+    const t = (now - startTime) * 0.001;
+
+    for (let i = 0; i < dots.length; i++) {
+      const d = dots[i];
+
+      // Breathing during rest — each dot wobbles ±0.6px on its own phase
+      let tx = d.tx, ty = d.ty;
+      if (isRest) {
+        tx += Math.sin(t * 1.2 + d.seed * 6) * 0.6;
+        ty += Math.cos(t * 1.5 + d.seed2 * 5) * 0.5;
+      }
+
+      // Spring step: force toward target, damped velocity
+      d.vx = (d.vx + (tx - d.x) * STIFFNESS) * DAMPING;
+      d.vy = (d.vy + (ty - d.y) * STIFFNESS) * DAMPING;
+      d.x += d.vx;
+      d.y += d.vy;
+
+      // Radius eases directly toward target (no spring on size)
+      d.r += (d.tr - d.r) * 0.09;
+
+      // Anchor pulse — gentle sine-wave size modulation
+      let displayR = d.r;
+      if (d.isAnchor) {
+        displayR = d.r * (1 + Math.sin(t * 3.2 + d.pulsePhase) * 0.14);
+      }
+
       d.el.setAttribute("cx", d.x.toFixed(2));
       d.el.setAttribute("cy", d.y.toFixed(2));
-      d.el.setAttribute("r", d.r.toFixed(2));
+      d.el.setAttribute("r", displayR.toFixed(2));
     }
+
     raf = requestAnimationFrame(tick);
   }
 
