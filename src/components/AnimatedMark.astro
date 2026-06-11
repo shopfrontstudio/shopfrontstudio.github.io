@@ -156,7 +156,7 @@ const crownLeaves = [
       text-anchor="middle"
       style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 64px; font-weight: 500; letter-spacing: -0.01em; fill: #f3ede0; opacity: 0; transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);"
     >
-      Found.
+      Discover.
     </text>
   </svg>
 </div>
@@ -348,7 +348,7 @@ const crownLeaves = [
     band.setAttribute("stroke-linecap", "round");
     edgesG.appendChild(band);
     edgesG.style.opacity = "1";
-    if (e > 0.45) wordEl.textContent = "Kept.";
+    if (e > 0.45) wordEl.textContent = "Unleash.";
   }
 
   // The two end-blobs slam together into one blob at the centre — same look as
@@ -389,10 +389,10 @@ const crownLeaves = [
   const sequence = [
     { name: "rest",     duration: 2500, action: setHome,                                  word: null,      leaves: 1.0 },
     { name: "disperse", duration: 1000, action: setScatter,                               word: null,      leaves: 0.18 },
-    { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),            word: "Found.",  leaves: 0.10 },
-    { name: "filled",   duration: 1700, action: () => setBoxCluster(SQUARE_HALF, SQUARE_HALF), word: "Filled.", leaves: 0.10 },
-    { name: "stretch",  duration: 1450, action: () => stretchTick(0), onTick: stretchTick, word: "Filled.", leaves: 0.08 },
-    { name: "slam",     duration: 430,  action: setMergeBlob, stiff: 0.085, damp: 0.80, word: null, leaves: 0.06 },
+    { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),            word: "Discover.", leaves: 0.10 },
+    { name: "filled",   duration: 1700, action: () => setBoxCluster(SQUARE_HALF, SQUARE_HALF), word: "Craft.",    leaves: 0.10 },
+    { name: "stretch",  duration: 1450, action: () => stretchTick(0), onTick: stretchTick, word: "Craft.",    leaves: 0.08 },
+    { name: "slam",     duration: 430,  action: setMergeBlob, stiff: 0.085, damp: 0.80, word: "Unleash.", leaves: 0.06 },
     { name: "compress", duration: 440,  action: setCorePoint, stiff: 0.060, damp: 0.82, word: null, leaves: 0.04 },
     { name: "reform",   duration: 1350, action: setHome,      stiff: 0.050, damp: 0.86, word: null, leaves: 1.0 },
   ];
