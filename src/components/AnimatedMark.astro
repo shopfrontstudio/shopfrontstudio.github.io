@@ -357,7 +357,7 @@ const crownLeaves = [
     { name: "disperse", duration: 1000, action: setScatter,                               word: null,      leaves: 0.18 },
     { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),            word: "Found.",  leaves: 0.10 },
     { name: "filled",   duration: 1700, action: () => setBoxCluster(SQUARE_HALF, SQUARE_HALF), word: "Filled.", leaves: 0.10 },
-    { name: "stretch",  duration: 2200, action: () => stretchTick(0), onTick: stretchTick, word: "Filled.", leaves: 0.08 },
+    { name: "stretch",  duration: 1500, action: () => stretchTick(0), onTick: stretchTick, word: "Filled.", leaves: 0.08 },
     { name: "collide",  duration: 750,  action: setDot,                                   word: null,      leaves: 0.05 },
     { name: "reform",   duration: 1400, action: setHome,                                  word: null,      leaves: 1.0 },
   ];
