@@ -264,18 +264,56 @@ const crownLeaves = [
     edgesG.style.opacity = "1";
   }
 
-  // Stretch every dot out along a single horizontal line through the centre.
-  function setLine() {
-    const halfW = 252;
+  // Box cluster: 4 anchor nodes at rectangle corners, with both diagonals.
+  // halfW === halfH gives a square; halfW > halfH gives a stretched rectangle.
+  function setBoxCluster(halfW, halfH) {
+    anchorPositions = [
+      { x: CX - halfW, y: CY - halfH },
+      { x: CX + halfW, y: CY - halfH },
+      { x: CX + halfW, y: CY + halfH },
+      { x: CX - halfW, y: CY + halfH },
+    ];
+    const groupSize = Math.floor(N / 4);
     dots.forEach((d, i) => {
-      const f = i / (N - 1) - 0.5;
-      d.tx = CX + f * 2 * halfW;
-      d.ty = CY + (d.seed2 - 0.5) * 6;
-      d.tr = 3 + d.seed * 2;
-      d.isAnchor = false;
+      const ai = Math.min(Math.floor(i / groupSize), 3);
+      const anchor = anchorPositions[ai];
+      if ((i % groupSize) === 0) {
+        d.tx = anchor.x; d.ty = anchor.y; d.tr = 12 + d.seed * 3; d.isAnchor = true;
+      } else {
+        const oa = d.seed * Math.PI * 2;
+        const orr = 16 + d.seed2 * 30;
+        d.tx = anchor.x + Math.cos(oa) * orr;
+        d.ty = anchor.y + Math.sin(oa) * orr;
+        d.tr = 1.8 + d.seed * 3; d.isAnchor = false;
+      }
     });
     edgesG.innerHTML = "";
-    SVG_LINE({ x: CX - halfW, y: CY }, { x: CX + halfW, y: CY }, "0.6");
+    for (let i = 0; i < 4; i++) SVG_LINE(anchorPositions[i], anchorPositions[(i + 1) % 4]);
+    SVG_LINE(anchorPositions[0], anchorPositions[2], "0.5"); // diagonal
+    SVG_LINE(anchorPositions[1], anchorPositions[3], "0.5"); // diagonal
+    edgesG.style.opacity = "1";
+  }
+
+  // String: two blob clusters at each end of a line, joined by a taut thread.
+  function setString(halfW) {
+    const ends = [{ x: CX - halfW, y: CY }, { x: CX + halfW, y: CY }];
+    const half = Math.floor(N / 2);
+    dots.forEach((d, i) => {
+      const g = i < half ? 0 : 1;
+      const anchor = ends[g];
+      const headOfGroup = (i === 0 || i === half);
+      if (headOfGroup) {
+        d.tx = anchor.x; d.ty = anchor.y; d.tr = 13 + d.seed * 3; d.isAnchor = true;
+      } else {
+        const oa = d.seed * Math.PI * 2;
+        const orr = 13 + d.seed2 * 28;
+        d.tx = anchor.x + Math.cos(oa) * orr;
+        d.ty = anchor.y + Math.sin(oa) * orr * 0.92;
+        d.tr = 2 + d.seed * 3; d.isAnchor = false;
+      }
+    });
+    edgesG.innerHTML = "";
+    SVG_LINE(ends[0], ends[1], "0.7"); // the string
     edgesG.style.opacity = "1";
   }
 
@@ -292,15 +330,16 @@ const crownLeaves = [
 
   const setLeaves = (a) => { if (leavesEl) leavesEl.style.opacity = String(a); };
 
-  // The cycle — logo, disperse, hexagon, triangle, line, collide to a dot, bloom back.
+  // The cycle — logo, disperse, hexagon, square, rectangle, string, snap, bloom.
   const sequence = [
-    { name: "rest",     duration: 2500, action: setHome,                     word: null,      leaves: 1.0 },
-    { name: "disperse", duration: 1000, action: setScatter,                  word: null,      leaves: 0.18 },
-    { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),     word: "Found.",  leaves: 0.10 },
-    { name: "filled",   duration: 2200, action: () => setPolygonCluster(3, 0.5),   word: "Filled.", leaves: 0.10 },
-    { name: "kept",     duration: 2200, action: setLine,                     word: "Kept.",   leaves: 0.08 },
-    { name: "collide",  duration: 800,  action: setDot,                      word: null,      leaves: 0.05 },
-    { name: "reform",   duration: 1400, action: setHome,                     word: null,      leaves: 1.0 },
+    { name: "rest",      duration: 2500, action: setHome,                       word: null,      leaves: 1.0 },
+    { name: "disperse",  duration: 1000, action: setScatter,                    word: null,      leaves: 0.18 },
+    { name: "found",     duration: 2200, action: () => setPolygonCluster(6, 0),  word: "Found.",  leaves: 0.10 },
+    { name: "filled",    duration: 2000, action: () => setBoxCluster(120, 120),  word: "Filled.", leaves: 0.10 },
+    { name: "rectangle", duration: 1100, action: () => setBoxCluster(210, 64),   word: "Filled.", leaves: 0.10 },
+    { name: "kept",      duration: 2000, action: () => setString(252),           word: "Kept.",   leaves: 0.08 },
+    { name: "collide",   duration: 750,  action: setDot,                         word: null,      leaves: 0.05 },
+    { name: "reform",    duration: 1400, action: setHome,                        word: null,      leaves: 1.0 },
   ];
 
   let idx = 0;
