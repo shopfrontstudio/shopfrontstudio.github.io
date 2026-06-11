@@ -152,7 +152,7 @@ const darken = (h, a) => { const [r, g, b] = _rgb(h); return _hex(r * (1 - a), g
     </g>
 
     {/* Edges of the knowledge graph — populated by JS during cluster phases */}
-    <g data-edges fill="none" stroke="rgba(243,237,224,0.32)" stroke-width="0.65" style="opacity: 0; transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);"></g>
+    <g data-edges fill="none" stroke="rgba(206,167,103,0.55)" stroke-width="0.6" style="opacity: 0; transition: opacity 600ms cubic-bezier(0.4, 0, 0.2, 1);"></g>
 
     {/* The dot field — the body of the fruit at rest, the swarm during motion */}
     <g data-dots>
@@ -349,20 +349,24 @@ const darken = (h, a) => { const [r, g, b] = _rgb(h); return _hex(r * (1 - a), g
     const amp = Math.sin(Math.PI * e) * 15;
     const osc = Math.cos(performance.now() * 0.0065);
     const segs = 30;
-    let bd = "";
-    for (let s = 0; s <= segs; s++) {
-      const u = s / segs;
-      const x = (CX - halfW) + u * 2 * halfW;
-      const y = CY + amp * Math.sin(3 * Math.PI * u) * osc; // standing wave, fixed at the blobs
-      bd += (s === 0 ? "M " : "L ") + x.toFixed(1) + " " + y.toFixed(1) + " ";
+    const strands = [-3.2, 0, 3.2]; // three gold hairlines bowed apart in the middle
+    for (const off of strands) {
+      let bd = "";
+      for (let s = 0; s <= segs; s++) {
+        const u = s / segs;
+        const x = (CX - halfW) + u * 2 * halfW;
+        const env = Math.sin(Math.PI * u); // 0 at the blobs, 1 mid-span
+        const y = CY + amp * Math.sin(3 * Math.PI * u) * osc + off * env;
+        bd += (s === 0 ? "M " : "L ") + x.toFixed(1) + " " + y.toFixed(1) + " ";
+      }
+      const strand = document.createElementNS(SVG_NS, "path");
+      strand.setAttribute("d", bd);
+      strand.setAttribute("fill", "none");
+      strand.setAttribute("stroke-width", (0.7 + e * 0.45).toFixed(2)); // hairline
+      strand.setAttribute("stroke-opacity", (0.4 + e * 0.45).toFixed(2));
+      strand.setAttribute("stroke-linecap", "round");
+      edgesG.appendChild(strand);
     }
-    const band = document.createElementNS(SVG_NS, "path");
-    band.setAttribute("d", bd);
-    band.setAttribute("fill", "none");
-    band.setAttribute("stroke-width", (2.4 + e * 2.6).toFixed(2)); // thicker as it tightens
-    band.setAttribute("stroke-opacity", (0.35 + e * 0.5).toFixed(2));
-    band.setAttribute("stroke-linecap", "round");
-    edgesG.appendChild(band);
     edgesG.style.opacity = "1";
     if (e > 0.45) wordEl.textContent = "Unleash.";
   }
