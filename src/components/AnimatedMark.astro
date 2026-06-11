@@ -191,21 +191,27 @@ const crownLeaves = [
   }));
   const N = dots.length;
 
-  // The knowledge-graph skeleton: 6 anchor nodes in a hexagon around the centre.
-  const ANCHOR_COUNT = 6;
+  // Knowledge-graph skeleton: N anchor nodes on a polygon around the centre.
   let anchorPositions = [];
 
-  function computeAnchors(phaseIndex) {
-    const baseRot = phaseIndex * 0.18 * Math.PI * 2;
-    const radius = 145;
-    return Array.from({ length: ANCHOR_COUNT }, (_, i) => {
-      const a = (i / ANCHOR_COUNT) * Math.PI * 2 + baseRot;
+  function computeAnchors(n, rot) {
+    const radius = 150;
+    return Array.from({ length: n }, (_, i) => {
+      const a = (i / n) * Math.PI * 2 + rot - Math.PI / 2; // first vertex at top
       return {
         x: CX + Math.cos(a) * radius,
-        y: CY + Math.sin(a) * radius * 0.78,
+        y: CY + Math.sin(a) * radius * 0.86,
       };
     });
   }
+
+  const SVG_LINE = (a, b, op) => {
+    const e = document.createElementNS(SVG_NS, "line");
+    e.setAttribute("x1", a.x.toFixed(2)); e.setAttribute("y1", a.y.toFixed(2));
+    e.setAttribute("x2", b.x.toFixed(2)); e.setAttribute("y2", b.y.toFixed(2));
+    if (op) e.setAttribute("stroke-opacity", op);
+    edgesG.appendChild(e);
+  };
 
   // --- Target generators ---
   function setHome() {
@@ -225,12 +231,13 @@ const crownLeaves = [
     edgesG.style.opacity = "0";
   }
 
-  function setKnowledgeCluster(phaseIndex) {
-    anchorPositions = computeAnchors(phaseIndex);
-    const groupSize = Math.floor(N / ANCHOR_COUNT);
+  // Polygon cluster: n anchors with orbiting satellites + connecting edges.
+  function setPolygonCluster(n, rot) {
+    anchorPositions = computeAnchors(n, rot);
+    const groupSize = Math.floor(N / n);
 
     dots.forEach((d, i) => {
-      const anchorIdx = Math.min(Math.floor(i / groupSize), ANCHOR_COUNT - 1);
+      const anchorIdx = Math.min(Math.floor(i / groupSize), n - 1);
       const anchor = anchorPositions[anchorIdx];
       const isFirstInGroup = (i % groupSize) === 0;
 
@@ -240,7 +247,7 @@ const crownLeaves = [
         d.tr = 12 + d.seed * 3;
         d.isAnchor = true;
       } else {
-        const orbitAngle = d.seed * Math.PI * 2 + phaseIndex * 0.6;
+        const orbitAngle = d.seed * Math.PI * 2 + rot * 0.6;
         const orbitR = 16 + d.seed2 * 32;
         d.tx = anchor.x + Math.cos(orbitAngle) * orbitR;
         d.ty = anchor.y + Math.sin(orbitAngle) * orbitR;
@@ -250,37 +257,50 @@ const crownLeaves = [
     });
 
     edgesG.innerHTML = "";
-    for (let i = 0; i < anchorPositions.length; i++) {
-      const a = anchorPositions[i];
-      const next = anchorPositions[(i + 1) % anchorPositions.length];
-      const e1 = document.createElementNS(SVG_NS, "line");
-      e1.setAttribute("x1", a.x.toFixed(2));
-      e1.setAttribute("y1", a.y.toFixed(2));
-      e1.setAttribute("x2", next.x.toFixed(2));
-      e1.setAttribute("y2", next.y.toFixed(2));
-      edgesG.appendChild(e1);
-      const diag = anchorPositions[(i + 2) % anchorPositions.length];
-      const e2 = document.createElementNS(SVG_NS, "line");
-      e2.setAttribute("x1", a.x.toFixed(2));
-      e2.setAttribute("y1", a.y.toFixed(2));
-      e2.setAttribute("x2", diag.x.toFixed(2));
-      e2.setAttribute("y2", diag.y.toFixed(2));
-      e2.setAttribute("stroke-opacity", "0.5");
-      edgesG.appendChild(e2);
+    for (let i = 0; i < n; i++) {
+      SVG_LINE(anchorPositions[i], anchorPositions[(i + 1) % n]); // perimeter
+      if (n >= 5) SVG_LINE(anchorPositions[i], anchorPositions[(i + 2) % n], "0.5"); // diagonals
     }
     edgesG.style.opacity = "1";
   }
 
+  // Stretch every dot out along a single horizontal line through the centre.
+  function setLine() {
+    const halfW = 252;
+    dots.forEach((d, i) => {
+      const f = i / (N - 1) - 0.5;
+      d.tx = CX + f * 2 * halfW;
+      d.ty = CY + (d.seed2 - 0.5) * 6;
+      d.tr = 3 + d.seed * 2;
+      d.isAnchor = false;
+    });
+    edgesG.innerHTML = "";
+    SVG_LINE({ x: CX - halfW, y: CY }, { x: CX + halfW, y: CY }, "0.6");
+    edgesG.style.opacity = "1";
+  }
+
+  // Collide the line inward into a single dense dot at the centre.
+  function setDot() {
+    dots.forEach((d) => {
+      d.tx = CX + (d.seed - 0.5) * 3;
+      d.ty = CY + (d.seed2 - 0.5) * 3;
+      d.tr = 3.2;
+      d.isAnchor = false;
+    });
+    edgesG.style.opacity = "0";
+  }
+
   const setLeaves = (a) => { if (leavesEl) leavesEl.style.opacity = String(a); };
 
-  // The cycle — pomegranate at rest, disperse, three clusters, reform.
+  // The cycle — logo, disperse, hexagon, triangle, line, collide to a dot, bloom back.
   const sequence = [
-    { name: "rest",     duration: 2500, action: setHome,                       word: null,      leaves: 1.0 },
-    { name: "disperse", duration: 1000, action: setScatter,                    word: null,      leaves: 0.18 },
-    { name: "found",    duration: 2200, action: () => setKnowledgeCluster(0),  word: "Found.",  leaves: 0.10 },
-    { name: "filled",   duration: 2200, action: () => setKnowledgeCluster(1),  word: "Filled.", leaves: 0.10 },
-    { name: "kept",     duration: 2200, action: () => setKnowledgeCluster(2),  word: "Kept.",   leaves: 0.10 },
-    { name: "reform",   duration: 1400, action: setHome,                       word: null,      leaves: 1.0 },
+    { name: "rest",     duration: 2500, action: setHome,                     word: null,      leaves: 1.0 },
+    { name: "disperse", duration: 1000, action: setScatter,                  word: null,      leaves: 0.18 },
+    { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),     word: "Found.",  leaves: 0.10 },
+    { name: "filled",   duration: 2200, action: () => setPolygonCluster(3, 0.5),   word: "Filled.", leaves: 0.10 },
+    { name: "kept",     duration: 2200, action: setLine,                     word: "Kept.",   leaves: 0.08 },
+    { name: "collide",  duration: 800,  action: setDot,                      word: null,      leaves: 0.05 },
+    { name: "reform",   duration: 1400, action: setHome,                     word: null,      leaves: 1.0 },
   ];
 
   let idx = 0;
