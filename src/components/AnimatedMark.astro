@@ -1,75 +1,123 @@
 ---
-// Resting-state dot positions — the pomegranate silhouette.
-// During animation, JavaScript moves each dot to a target;
-// at rest the positions trace the fruit.
-const cx = 300, cy = 380;
-const rx = 220, ry = 240;
-const colSpacing = 30;
-const rowSpacing = 28;
-const maxR = 16, minR = 1.6;
+// Resting-state dot positions — a radial halftone pomegranate.
+// Dots sit in concentric rings: large + deep-maroon at the core, small +
+// light-crimson at the rim. During animation JS moves each dot to a target;
+// at rest the positions trace the fruit beneath a fanned crown of sepals.
+const cx = 300, cy = 392;
+const R = 238;             // body radius
+const ringSpacing = 25;    // distance between rings
+const dotGap = 27;         // approx arc spacing between dots within a ring
+const maxR = 17, minR = 2.2;
+
+const lerp = (a, b, t) => a + (b - a) * t;
+const hexToRgb = (h) => {
+  const n = parseInt(h.slice(1), 16);
+  return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+};
+const rgbToHex = (r, g, b) =>
+  "#" + [r, g, b].map((v) => Math.max(0, Math.min(255, Math.round(v))).toString(16).padStart(2, "0")).join("");
+
+// Radial colour ramp: deep maroon core -> light crimson rim.
+const ramp = [
+  { t: 0.0, c: "#5a0617" },
+  { t: 0.45, c: "#9c142f" },
+  { t: 0.72, c: "#c5304c" },
+  { t: 0.9, c: "#dd5067" },
+  { t: 1.0, c: "#ec7d8f" },
+];
+function colorAt(t) {
+  t = Math.min(1, Math.max(0, t));
+  for (let i = 0; i < ramp.length - 1; i++) {
+    if (t <= ramp[i + 1].t) {
+      const seg = (t - ramp[i].t) / (ramp[i + 1].t - ramp[i].t);
+      const a = hexToRgb(ramp[i].c), b = hexToRgb(ramp[i + 1].c);
+      return rgbToHex(lerp(a[0], b[0], seg), lerp(a[1], b[1], seg), lerp(a[2], b[2], seg));
+    }
+  }
+  return ramp[ramp.length - 1].c;
+}
+// Deterministic 0..1 hash so the scatter looks organic but is stable per build.
+const hash = (a, b) => {
+  const v = Math.sin(a * 12.9898 + b * 78.233) * 43758.5453;
+  return v - Math.floor(v);
+};
 
 const dots = [];
-for (let row = -10; row <= 11; row++) {
-  const y = cy + row * rowSpacing;
-  const xOff = (row % 2 === 0) ? 0 : colSpacing / 2;
-  for (let col = -9; col <= 9; col++) {
-    const x = cx + col * colSpacing + xOff;
-    const dx = (x - cx) / rx;
-    const dy = (y - cy) / ry;
-    const d = Math.sqrt(dx * dx + dy * dy);
-    if (d > 1.02) continue;
-    const t = Math.max(0, 1 - Math.pow(d, 0.85));
-    const r = minR + (maxR - minR) * t;
-    if (r < 1.2) continue;
-    dots.push({ x: +x.toFixed(2), y: +y.toFixed(2), r: +r.toFixed(2) });
+// Core dot
+dots.push({ x: cx, y: cy, r: maxR, fill: colorAt(0) });
+const rings = Math.floor(R / ringSpacing);
+for (let ring = 1; ring <= rings; ring++) {
+  const radius = ring * ringSpacing;
+  const count = Math.max(6, Math.round((2 * Math.PI * radius) / dotGap));
+  const rot = ring * 0.4; // swirl each ring slightly
+  for (let k = 0; k < count; k++) {
+    const a = (k / count) * Math.PI * 2 + rot;
+    const j = hash(ring, k);
+    const rad = radius + (j - 0.5) * 6;
+    const x = cx + Math.cos(a) * rad;
+    const y = cy + Math.sin(a) * rad * 0.99; // a touch of squash
+    const tNorm = radius / R; // 0 core .. 1 rim
+    const vert = (cy - y) / R; // dots above centre read a shade lighter
+    const tCol = tNorm - vert * 0.12 + (j - 0.5) * 0.06;
+    const dotR = minR + (maxR - minR) * Math.pow(1 - tNorm, 0.85);
+    const rr = Math.max(minR, dotR + (j - 0.5) * 2);
+    dots.push({ x: +x.toFixed(2), y: +y.toFixed(2), r: +rr.toFixed(2), fill: colorAt(tCol) });
   }
 }
+
+// The crown — a single pointed-sepal template, fanned out by transforms.
+const sepalPath = "M -20 0 C -14 -52 -6 -96 0 -130 C 6 -96 14 -52 20 0 Q 0 -10 -20 0 Z";
+const sepals = [
+  { rot: 0, s: 1.0, fill: "#6a0a1c" },
+  { rot: -22, s: 0.86, fill: "#84102a" },
+  { rot: 22, s: 0.86, fill: "#84102a" },
+  { rot: -42, s: 0.66, fill: "#a01734" },
+  { rot: 42, s: 0.66, fill: "#a01734" },
+  { rot: -60, s: 0.46, fill: "#bb2440" },
+  { rot: 60, s: 0.46, fill: "#bb2440" },
+];
+const crownPivotX = 300, crownPivotY = 178;
 ---
 
 <div class="anara-anim relative w-full max-w-[26rem] md:max-w-[30rem] lg:max-w-[34rem] mx-auto">
   <svg
-    viewBox="0 0 600 740"
+    viewBox="0 0 600 760"
     class="w-full h-auto block drop-shadow-[0_30px_50px_rgba(185,29,58,0.30)]"
     preserveAspectRatio="xMidYMid meet"
     role="img"
     aria-label="Anara pomegranate mark"
   >
-    <defs>
-      <linearGradient id="aDotGrad" x1="20%" y1="0%" x2="80%" y2="100%">
-        <stop offset="0%"   stop-color="#ff8aa0"/>
-        <stop offset="28%"  stop-color="#ee4a68"/>
-        <stop offset="58%"  stop-color="#b91d3a"/>
-        <stop offset="100%" stop-color="#7a0a1f"/>
-      </linearGradient>
-    </defs>
-
-    {/* Clean teardrop leaves — cubic beziers that taper inward, not bulgy quadratics */}
+    {/* The fanned crown of sepals */}
     <g data-leaves style="transition: opacity 800ms ease;">
-      <path d="M 253 178 C 254 152 254 130 258 110 C 266 132 270 152 273 178 Q 263 174 253 178 Z" fill="#6e0a1c"/>
-      <path d="M 273 178 C 275 142 280 102 284 80 C 290 102 296 142 295 178 Q 284 174 273 178 Z" fill="#8a0f26"/>
-      <path d="M 298 178 C 302 142 309 82 312 58 C 315 82 322 142 326 178 Q 312 174 298 178 Z" fill="#a01530"/>
-      <path d="M 329 178 C 328 142 334 102 340 80 C 344 102 349 142 351 178 Q 340 174 329 178 Z" fill="#8a0f26"/>
-      <path d="M 351 178 C 354 152 358 132 366 110 C 370 132 370 152 371 178 Q 361 174 351 178 Z" fill="#6e0a1c"/>
+      {
+        sepals.map((sp) => (
+          <path
+            d={sepalPath}
+            fill={sp.fill}
+            transform={`translate(${crownPivotX} ${crownPivotY}) rotate(${sp.rot}) scale(${sp.s})`}
+          />
+        ))
+      }
     </g>
 
     {/* Edges of the knowledge graph — populated by JS during cluster phases */}
-    <g data-edges fill="none" stroke="rgba(243,237,224,0.32)" stroke-width="0.65" style="opacity: 0; transition: opacity 700ms ease;"/>
+    <g data-edges fill="none" stroke="rgba(243,237,224,0.32)" stroke-width="0.65" style="opacity: 0; transition: opacity 700ms ease;"></g>
 
     {/* The dot field — the body of the fruit at rest, the swarm during motion */}
     <g data-dots>
       {dots.map((d) => (
         <circle
           cx={d.x} cy={d.y} r={d.r}
-          fill="url(#aDotGrad)"
+          fill={d.fill}
           data-hx={d.x} data-hy={d.y} data-hr={d.r}
         />
       ))}
     </g>
 
-    {/* Sarcastic one-word service punch */}
+    {/* One-word service punch shown during cluster phases */}
     <text
       data-word
-      x="300" y="690"
+      x="300" y="706"
       text-anchor="middle"
       style="font-family: 'Cormorant Garamond', Georgia, serif; font-size: 64px; font-weight: 500; letter-spacing: -0.01em; fill: #f3ede0; opacity: 0; transition: opacity 700ms ease;"
     >
@@ -91,6 +139,9 @@ for (let row = -10; row <= 11; row++) {
   const leavesEl = svg.querySelector("[data-leaves]");
   const edgesG = svg.querySelector("[data-edges]");
 
+  // Centre the motion on the fruit's core.
+  const CX = 300, CY = 392;
+
   // Spring-physics state per dot
   const dots = dotEls.map((el, i) => ({
     el, idx: i,
@@ -110,14 +161,13 @@ for (let row = -10; row <= 11; row++) {
   let anchorPositions = [];
 
   function computeAnchors(phaseIndex) {
-    // Rotate the hexagon a little per phase so each cluster looks fresh.
     const baseRot = phaseIndex * 0.18 * Math.PI * 2;
     const radius = 145;
     return Array.from({ length: ANCHOR_COUNT }, (_, i) => {
       const a = (i / ANCHOR_COUNT) * Math.PI * 2 + baseRot;
       return {
-        x: 300 + Math.cos(a) * radius,
-        y: 380 + Math.sin(a) * radius * 0.78, // slight squash so the cluster reads as elliptical
+        x: CX + Math.cos(a) * radius,
+        y: CY + Math.sin(a) * radius * 0.78,
       };
     });
   }
@@ -132,8 +182,8 @@ for (let row = -10; row <= 11; row++) {
     dots.forEach((d) => {
       const angle = d.seed * Math.PI * 2;
       const dist = 130 + d.seed2 * 200;
-      d.tx = 300 + Math.cos(angle) * dist;
-      d.ty = 380 + Math.sin(angle) * dist;
+      d.tx = CX + Math.cos(angle) * dist;
+      d.ty = CY + Math.sin(angle) * dist;
       d.tr = 2 + d.seed * 4;
       d.isAnchor = false;
     });
@@ -150,13 +200,11 @@ for (let row = -10; row <= 11; row++) {
       const isFirstInGroup = (i % groupSize) === 0;
 
       if (isFirstInGroup) {
-        // Anchor node — large, sits at the hex vertex
         d.tx = anchor.x;
         d.ty = anchor.y;
         d.tr = 12 + d.seed * 3;
         d.isAnchor = true;
       } else {
-        // Satellite — orbits its anchor
         const orbitAngle = d.seed * Math.PI * 2 + phaseIndex * 0.6;
         const orbitR = 16 + d.seed2 * 32;
         d.tx = anchor.x + Math.cos(orbitAngle) * orbitR;
@@ -166,11 +214,9 @@ for (let row = -10; row <= 11; row++) {
       }
     });
 
-    // Draw the edges: hexagon perimeter + every-other-vertex diagonals
     edgesG.innerHTML = "";
     for (let i = 0; i < anchorPositions.length; i++) {
       const a = anchorPositions[i];
-      // Perimeter edge
       const next = anchorPositions[(i + 1) % anchorPositions.length];
       const e1 = document.createElementNS(SVG_NS, "line");
       e1.setAttribute("x1", a.x.toFixed(2));
@@ -178,7 +224,6 @@ for (let row = -10; row <= 11; row++) {
       e1.setAttribute("x2", next.x.toFixed(2));
       e1.setAttribute("y2", next.y.toFixed(2));
       edgesG.appendChild(e1);
-      // Diagonal
       const diag = anchorPositions[(i + 2) % anchorPositions.length];
       const e2 = document.createElementNS(SVG_NS, "line");
       e2.setAttribute("x1", a.x.toFixed(2));
@@ -193,7 +238,7 @@ for (let row = -10; row <= 11; row++) {
 
   const setLeaves = (a) => { if (leavesEl) leavesEl.style.opacity = String(a); };
 
-  // The cycle
+  // The cycle — pomegranate at rest, disperse, three clusters, reform.
   const sequence = [
     { name: "rest",     duration: 3800, action: setHome,                       word: null,      leaves: 1.0 },
     { name: "disperse", duration: 1200, action: setScatter,                    word: null,      leaves: 0.18 },
@@ -218,7 +263,6 @@ for (let row = -10; row <= 11; row++) {
   }
   applyPhase(sequence[0]);
 
-  // Spring physics — gentle stiffness, healthy damping, so dots ease in
   const STIFFNESS = 0.028;
   const DAMPING = 0.83;
 
@@ -240,23 +284,19 @@ for (let row = -10; row <= 11; row++) {
     for (let i = 0; i < dots.length; i++) {
       const d = dots[i];
 
-      // Breathing during rest — each dot wobbles ±0.6px on its own phase
       let tx = d.tx, ty = d.ty;
       if (isRest) {
         tx += Math.sin(t * 1.2 + d.seed * 6) * 0.6;
         ty += Math.cos(t * 1.5 + d.seed2 * 5) * 0.5;
       }
 
-      // Spring step: force toward target, damped velocity
       d.vx = (d.vx + (tx - d.x) * STIFFNESS) * DAMPING;
       d.vy = (d.vy + (ty - d.y) * STIFFNESS) * DAMPING;
       d.x += d.vx;
       d.y += d.vy;
 
-      // Radius eases directly toward target (no spring on size)
       d.r += (d.tr - d.r) * 0.09;
 
-      // Anchor pulse — gentle sine-wave size modulation
       let displayR = d.r;
       if (d.isAnchor) {
         displayR = d.r * (1 + Math.sin(t * 3.2 + d.pulsePhase) * 0.14);
@@ -282,7 +322,6 @@ for (let row = -10; row <= 11; row++) {
     cancelAnimationFrame(raf);
   }
 
-  // Don't burn CPU when the hero is off-screen
   const io = new IntersectionObserver(
     (entries) => entries.forEach((e) => (e.isIntersecting ? start() : stop())),
     { threshold: 0.05 }
