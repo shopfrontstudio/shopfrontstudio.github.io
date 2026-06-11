@@ -294,27 +294,48 @@ const crownLeaves = [
     edgesG.style.opacity = "1";
   }
 
-  // String: two blob clusters at each end of a line, joined by a taut thread.
-  function setString(halfW) {
-    const ends = [{ x: CX - halfW, y: CY }, { x: CX + halfW, y: CY }];
-    const half = Math.floor(N / 2);
+  // Seamless square -> rectangle -> line morph, driven every frame by progress p.
+  // halfH shrinks to 0 (so the top/bottom corners merge into a blob at each end)
+  // while halfW grows, and a thick rubber-band thread runs down the centre.
+  const SQUARE_HALF = 92;
+  const LINE_HALF = 255;
+  function stretchTick(p) {
+    const e = p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; // easeInOut
+    const halfW = SQUARE_HALF + (LINE_HALF - SQUARE_HALF) * e;
+    const halfH = SQUARE_HALF * (1 - e);
+    const corners = [
+      { x: CX - halfW, y: CY - halfH },
+      { x: CX + halfW, y: CY - halfH },
+      { x: CX + halfW, y: CY + halfH },
+      { x: CX - halfW, y: CY + halfH },
+    ];
+    const groupSize = Math.floor(N / 4);
     dots.forEach((d, i) => {
-      const g = i < half ? 0 : 1;
-      const anchor = ends[g];
-      const headOfGroup = (i === 0 || i === half);
-      if (headOfGroup) {
-        d.tx = anchor.x; d.ty = anchor.y; d.tr = 13 + d.seed * 3; d.isAnchor = true;
+      const ai = Math.min(Math.floor(i / groupSize), 3);
+      const a = corners[ai];
+      if ((i % groupSize) === 0) {
+        d.tx = a.x; d.ty = a.y; d.tr = 12 + d.seed * 3; d.isAnchor = true;
       } else {
         const oa = d.seed * Math.PI * 2;
-        const orr = 13 + d.seed2 * 28;
-        d.tx = anchor.x + Math.cos(oa) * orr;
-        d.ty = anchor.y + Math.sin(oa) * orr * 0.92;
-        d.tr = 2 + d.seed * 3; d.isAnchor = false;
+        const orr = (15 + d.seed2 * 28) * (1 - 0.4 * e);
+        d.tx = a.x + Math.cos(oa) * orr;
+        d.ty = a.y + Math.sin(oa) * orr * (1 - 0.65 * e); // orbits flatten toward the line
+        d.tr = 1.8 + d.seed * 3; d.isAnchor = false;
       }
     });
     edgesG.innerHTML = "";
-    SVG_LINE(ends[0], ends[1], "0.7"); // the string
+    for (let i = 0; i < 4; i++) SVG_LINE(corners[i], corners[(i + 1) % 4]);
+    SVG_LINE(corners[0], corners[2], "0.5");
+    SVG_LINE(corners[1], corners[3], "0.5");
+    const band = document.createElementNS(SVG_NS, "line"); // thick rubber band
+    band.setAttribute("x1", (CX - halfW).toFixed(2)); band.setAttribute("y1", CY.toFixed(2));
+    band.setAttribute("x2", (CX + halfW).toFixed(2)); band.setAttribute("y2", CY.toFixed(2));
+    band.setAttribute("stroke-width", (1.2 + e * 3.6).toFixed(2));
+    band.setAttribute("stroke-opacity", (0.25 + e * 0.6).toFixed(2));
+    band.setAttribute("stroke-linecap", "round");
+    edgesG.appendChild(band);
     edgesG.style.opacity = "1";
+    if (e > 0.45) wordEl.textContent = "Kept.";
   }
 
   // Collide the line inward into a single dense dot at the centre.
@@ -330,16 +351,15 @@ const crownLeaves = [
 
   const setLeaves = (a) => { if (leavesEl) leavesEl.style.opacity = String(a); };
 
-  // The cycle — logo, disperse, hexagon, square, rectangle, string, snap, bloom.
+  // The cycle — logo, disperse, hexagon, square, seamless stretch to a string, snap, bloom.
   const sequence = [
-    { name: "rest",      duration: 2500, action: setHome,                       word: null,      leaves: 1.0 },
-    { name: "disperse",  duration: 1000, action: setScatter,                    word: null,      leaves: 0.18 },
-    { name: "found",     duration: 2200, action: () => setPolygonCluster(6, 0),  word: "Found.",  leaves: 0.10 },
-    { name: "filled",    duration: 2000, action: () => setBoxCluster(120, 120),  word: "Filled.", leaves: 0.10 },
-    { name: "rectangle", duration: 1100, action: () => setBoxCluster(210, 64),   word: "Filled.", leaves: 0.10 },
-    { name: "kept",      duration: 2000, action: () => setString(252),           word: "Kept.",   leaves: 0.08 },
-    { name: "collide",   duration: 750,  action: setDot,                         word: null,      leaves: 0.05 },
-    { name: "reform",    duration: 1400, action: setHome,                        word: null,      leaves: 1.0 },
+    { name: "rest",     duration: 2500, action: setHome,                                  word: null,      leaves: 1.0 },
+    { name: "disperse", duration: 1000, action: setScatter,                               word: null,      leaves: 0.18 },
+    { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),            word: "Found.",  leaves: 0.10 },
+    { name: "filled",   duration: 1700, action: () => setBoxCluster(SQUARE_HALF, SQUARE_HALF), word: "Filled.", leaves: 0.10 },
+    { name: "stretch",  duration: 2200, action: () => stretchTick(0), onTick: stretchTick, word: "Filled.", leaves: 0.08 },
+    { name: "collide",  duration: 750,  action: setDot,                                   word: null,      leaves: 0.05 },
+    { name: "reform",   duration: 1400, action: setHome,                                  word: null,      leaves: 1.0 },
   ];
 
   let idx = 0;
@@ -371,6 +391,10 @@ const crownLeaves = [
       phaseStart = now;
       applyPhase(sequence[idx]);
     }
+
+    // Per-frame morphs (e.g. the seamless square -> rectangle -> line stretch).
+    const ph = sequence[idx];
+    if (ph.onTick) ph.onTick(Math.min(1, (now - phaseStart) / ph.duration));
 
     const isRest = sequence[idx].name === "rest";
     const t = (now - startTime) * 0.001;
