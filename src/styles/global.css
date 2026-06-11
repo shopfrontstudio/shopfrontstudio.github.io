@@ -230,7 +230,7 @@ body {
     radial-gradient(70% 60% at 50% 100%, rgba(90, 8, 23, 0.28) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
-/* Brighter, more saturated logo so the pomegranate reads vivid, not dull */
+/* Deep, restrained colour grade so the pomegranate reads premium, not garish */
 .anara-anim {
-  filter: brightness(1.12) saturate(1.16);
+  filter: saturate(0.86) brightness(0.93) contrast(1.08);
 }
