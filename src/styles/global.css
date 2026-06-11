@@ -11,12 +11,13 @@
   --color-graphite-soft: #1c1c22;
   --color-graphite-line: #26262d;
 
-  /* Pomegranate reds — pulled from the logo */
-  --color-crimson: #b91d3a;       /* bright pomegranate dot */
-  --color-crimson-bright: #d23a5a;
-  --color-crimson-deep: #8a0e25;  /* mid-tone */
+  /* Pomegranate reds — brand guide palette */
+  --color-crimson: #c02a4b;       /* Berry — bright pomegranate */
+  --color-crimson-bright: #d8495f;
+  --color-crimson-deep: #8f1531;  /* Garnet — mid-tone */
   --color-burgundy: #5a0817;      /* deepest seed */
   --color-wine: #2e0712;          /* near-black wine, for surfaces */
+  --color-blush: #f3b6bf;         /* Blush — soft pink accent */
 
   /* Cream — the logo's paper ground, used as primary text */
   --color-cream: #f3ede0;
@@ -24,10 +25,10 @@
   --color-cream-mute: #b5a890;
   --color-ash: #847564;
 
-  /* Antique gold — the thin rule on "MARKETING SOLUTIONS" */
-  --color-gold: #b8915a;
-  --color-gold-bright: #d4ad75;
-  --color-gold-deep: #8a6735;
+  /* Muted gold — brand guide palette */
+  --color-gold: #c8a15a;          /* Muted Gold */
+  --color-gold-bright: #ddb877;
+  --color-gold-deep: #9a7a40;
 
   /* Lines */
   --color-line: #26262d;
