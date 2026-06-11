@@ -230,7 +230,7 @@ body {
     radial-gradient(70% 60% at 50% 100%, rgba(90, 8, 23, 0.28) 0%, rgba(0, 0, 0, 0) 60%);
 }
 
-/* Deep, restrained colour grade so the pomegranate reads premium, not garish */
+/* Balanced colour grade — lively but still matte/restrained, not garish */
 .anara-anim {
-  filter: saturate(0.86) brightness(0.93) contrast(1.08);
+  filter: saturate(0.96) brightness(1.05) contrast(1.04);
 }
