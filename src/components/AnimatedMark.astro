@@ -120,7 +120,7 @@ const lighten = (h, a) => { const [r, g, b] = _rgb(h); return _hex(r + (255 - r)
 const darken = (h, a) => { const [r, g, b] = _rgb(h); return _hex(r * (1 - a), g * (1 - a), b * (1 - a)); };
 ---
 
-<div class="anara-anim relative w-full max-w-[26rem] md:max-w-[30rem] lg:max-w-[34rem] mx-auto">
+<div class="anara-anim relative w-full max-w-[min(19rem,40vh)] md:max-w-[min(22rem,44vh)] mx-auto">
   <svg
     viewBox="0 0 600 760"
     class="w-full h-auto block drop-shadow-[0_30px_50px_rgba(185,29,58,0.30)]"
