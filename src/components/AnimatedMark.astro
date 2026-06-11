@@ -5,9 +5,9 @@
 // at rest the positions trace the fruit beneath a fanned crown of sepals.
 const cx = 300, cy = 392;
 const R = 238;             // body radius
-const ringSpacing = 25;    // distance between rings
-const dotGap = 27;         // approx arc spacing between dots within a ring
-const maxR = 17, minR = 2.2;
+const ringSpacing = 23;    // distance between rings (denser halftone)
+const dotGap = 24;         // approx arc spacing between dots within a ring
+const maxR = 12.5, minR = 4.2; // more even dot sizes across the disk
 
 const lerp = (a, b, t) => a + (b - a) * t;
 const hexToRgb = (h) => {
@@ -59,7 +59,7 @@ for (let ring = 1; ring <= rings; ring++) {
     const tNorm = radius / R; // 0 core .. 1 rim
     const vert = (cy - y) / R; // dots above centre read a shade lighter
     const tCol = tNorm - vert * 0.12 + (j - 0.5) * 0.06;
-    const dotR = minR + (maxR - minR) * Math.pow(1 - tNorm, 0.85);
+    const dotR = minR + (maxR - minR) * Math.pow(1 - tNorm, 0.55);
     const rr = Math.max(minR, dotR + (j - 0.5) * 2);
     dots.push({ x: +x.toFixed(2), y: +y.toFixed(2), r: +rr.toFixed(2), fill: colorAt(tCol) });
   }
@@ -68,15 +68,13 @@ for (let ring = 1; ring <= rings; ring++) {
 // The crown — a single pointed-sepal template, fanned out by transforms.
 const sepalPath = "M -20 0 C -14 -52 -6 -96 0 -130 C 6 -96 14 -52 20 0 Q 0 -10 -20 0 Z";
 const sepals = [
-  { rot: 0, s: 1.0, fill: "#6a0a1c" },
-  { rot: -22, s: 0.86, fill: "#84102a" },
-  { rot: 22, s: 0.86, fill: "#84102a" },
-  { rot: -42, s: 0.66, fill: "#a01734" },
-  { rot: 42, s: 0.66, fill: "#a01734" },
-  { rot: -60, s: 0.46, fill: "#bb2440" },
-  { rot: 60, s: 0.46, fill: "#bb2440" },
+  { rot: 0, s: 0.6, fill: "#7a0f24" },
+  { rot: -20, s: 0.48, fill: "#8e1430" },
+  { rot: 20, s: 0.48, fill: "#8e1430" },
+  { rot: -40, s: 0.34, fill: "#a81a38" },
+  { rot: 40, s: 0.34, fill: "#a81a38" },
 ];
-const crownPivotX = 300, crownPivotY = 178;
+const crownPivotX = 300, crownPivotY = 170;
 ---
 
 <div class="anara-anim relative w-full max-w-[26rem] md:max-w-[30rem] lg:max-w-[34rem] mx-auto">
