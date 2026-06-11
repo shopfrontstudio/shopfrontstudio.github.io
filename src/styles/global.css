@@ -5,8 +5,8 @@
 
   /* Dark foundation — neutral near-black so the red pomegranate is the
      only warm element and truly stands out. No wine tint in the base. */
-  --color-night: #08080a;
-  --color-onyx: #0d0d10;
+  --color-night: #0c0c10;
+  --color-onyx: #121217;
   --color-graphite: #14141a;
   --color-graphite-soft: #1c1c22;
   --color-graphite-line: #26262d;
@@ -204,8 +204,8 @@ body {
   background-repeat: no-repeat;
   background-position: center 42%;
   background-size: auto 130%;
-  filter: blur(72px) saturate(160%) brightness(0.55);
-  opacity: 0.45;
+  filter: blur(72px) saturate(180%) brightness(0.68);
+  opacity: 0.55;
 }
 
 /* Subtle ambient warmth — no wine tint over the whole page,
@@ -215,8 +215,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(8, 8, 12, 0.30) 0%, rgba(4, 4, 6, 0.70) 100%),
-    radial-gradient(60% 45% at 50% 40%, rgba(185, 29, 58, 0.10) 0%, transparent 65%);
+    linear-gradient(180deg, rgba(8, 8, 12, 0.18) 0%, rgba(4, 4, 6, 0.55) 100%),
+    radial-gradient(60% 45% at 50% 40%, rgba(185, 29, 58, 0.18) 0%, transparent 65%);
 }
 
 /* Hero glow */
@@ -225,7 +225,12 @@ body {
   inset: 0;
   pointer-events: none;
   background:
-    radial-gradient(60% 50% at 20% 10%, rgba(184, 145, 90, 0.10) 0%, rgba(0, 0, 0, 0) 60%),
-    radial-gradient(50% 50% at 80% 20%, rgba(185, 29, 58, 0.14) 0%, rgba(0, 0, 0, 0) 60%),
-    radial-gradient(70% 60% at 50% 100%, rgba(90, 8, 23, 0.20) 0%, rgba(0, 0, 0, 0) 60%);
+    radial-gradient(60% 50% at 20% 10%, rgba(184, 145, 90, 0.15) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(50% 50% at 80% 20%, rgba(185, 29, 58, 0.20) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(70% 60% at 50% 100%, rgba(90, 8, 23, 0.28) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+/* Brighter, more saturated logo so the pomegranate reads vivid, not dull */
+.anara-anim {
+  filter: brightness(1.12) saturate(1.16);
 }
