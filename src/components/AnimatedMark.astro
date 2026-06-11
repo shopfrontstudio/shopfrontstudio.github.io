@@ -317,7 +317,7 @@ const crownLeaves = [
         d.tx = a.x; d.ty = a.y; d.tr = 12 + d.seed * 3; d.isAnchor = true;
       } else {
         const oa = d.seed * Math.PI * 2;
-        const orr = (15 + d.seed2 * 28) * (1 - 0.4 * e);
+        const orr = (15 + d.seed2 * 28) * (1 - 0.55 * e);
         d.tx = a.x + Math.cos(oa) * orr;
         d.ty = a.y + Math.sin(oa) * orr * (1 - 0.65 * e); // orbits flatten toward the line
         d.tr = 1.8 + d.seed * 3; d.isAnchor = false;
@@ -351,12 +351,33 @@ const crownLeaves = [
     if (e > 0.45) wordEl.textContent = "Kept.";
   }
 
-  // Collide the line inward into a single dense dot at the centre.
-  function setDot() {
+  // The two end-blobs slam together into one blob at the centre — same look as
+  // on the string ends: a few thick cores with small satellites around them.
+  function setMergeBlob() {
+    dots.forEach((d, i) => {
+      if (i % 22 === 0) {
+        d.tx = CX + (d.seed - 0.5) * 12;
+        d.ty = CY + (d.seed2 - 0.5) * 12;
+        d.tr = 13 + d.seed * 4;
+        d.isAnchor = true;
+      } else {
+        const oa = d.seed * Math.PI * 2;
+        const orr = 7 + d.seed2 * 22;
+        d.tx = CX + Math.cos(oa) * orr;
+        d.ty = CY + Math.sin(oa) * orr;
+        d.tr = 2 + d.seed * 3;
+        d.isAnchor = false;
+      }
+    });
+    edgesG.style.opacity = "0";
+  }
+
+  // Compress that blob into a dense, charged core (the nuclear squeeze).
+  function setCorePoint() {
     dots.forEach((d) => {
       d.tx = CX + (d.seed - 0.5) * 3;
       d.ty = CY + (d.seed2 - 0.5) * 3;
-      d.tr = 3.2;
+      d.tr = 2.6;
       d.isAnchor = false;
     });
     edgesG.style.opacity = "0";
@@ -371,8 +392,9 @@ const crownLeaves = [
     { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),            word: "Found.",  leaves: 0.10 },
     { name: "filled",   duration: 1700, action: () => setBoxCluster(SQUARE_HALF, SQUARE_HALF), word: "Filled.", leaves: 0.10 },
     { name: "stretch",  duration: 1450, action: () => stretchTick(0), onTick: stretchTick, word: "Filled.", leaves: 0.08 },
-    { name: "collide",  duration: 600,  action: setDot,                                   word: null,      leaves: 0.05 },
-    { name: "reform",   duration: 1400, action: setHome,                                  word: null,      leaves: 1.0 },
+    { name: "slam",     duration: 430,  action: setMergeBlob, stiff: 0.085, damp: 0.80, word: null, leaves: 0.06 },
+    { name: "compress", duration: 440,  action: setCorePoint, stiff: 0.060, damp: 0.82, word: null, leaves: 0.04 },
+    { name: "reform",   duration: 1350, action: setHome,      stiff: 0.050, damp: 0.86, word: null, leaves: 1.0 },
   ];
 
   let idx = 0;
@@ -408,6 +430,8 @@ const crownLeaves = [
     // Per-frame morphs (e.g. the seamless square -> rectangle -> line stretch).
     const ph = sequence[idx];
     if (ph.onTick) ph.onTick(Math.min(1, (now - phaseStart) / ph.duration));
+    const stiff = ph.stiff ?? STIFFNESS; // phases can override the spring for slam/boom
+    const damp = ph.damp ?? DAMPING;
 
     const isRest = sequence[idx].name === "rest";
     const t = (now - startTime) * 0.001;
@@ -421,8 +445,8 @@ const crownLeaves = [
         ty += Math.cos(t * 1.5 + d.seed2 * 5) * 0.5;
       }
 
-      d.vx = (d.vx + (tx - d.x) * STIFFNESS) * DAMPING;
-      d.vy = (d.vy + (ty - d.y) * STIFFNESS) * DAMPING;
+      d.vx = (d.vx + (tx - d.x) * stiff) * damp;
+      d.vy = (d.vy + (ty - d.y) * stiff) * damp;
       d.x += d.vx;
       d.y += d.vy;
 
