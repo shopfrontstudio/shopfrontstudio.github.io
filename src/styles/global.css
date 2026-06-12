@@ -246,8 +246,7 @@ body {
   pointer-events: none;
   background:
     radial-gradient(60% 50% at 20% 10%, rgba(184, 145, 90, 0.15) 0%, rgba(0, 0, 0, 0) 60%),
-    radial-gradient(50% 50% at 80% 20%, rgba(185, 29, 58, 0.20) 0%, rgba(0, 0, 0, 0) 60%),
-    radial-gradient(70% 60% at 50% 100%, rgba(90, 8, 23, 0.28) 0%, rgba(0, 0, 0, 0) 60%);
+    radial-gradient(55% 55% at 80% 18%, rgba(185, 29, 58, 0.20) 0%, rgba(0, 0, 0, 0) 62%);
 }
 
 /* Balanced colour grade — lively but still matte/restrained, not garish */
