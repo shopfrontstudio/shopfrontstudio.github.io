@@ -130,6 +130,26 @@ body {
 }
 
 /* ===== Sticky-stack scroll effect on services ===== */
+/* Service slide background illustration (phone / laptop / catalogue) */
+.service-illo {
+  background-image: var(--illo);
+  background-repeat: no-repeat;
+  background-position: 104% center;
+  background-size: auto 92%;
+  opacity: 0.4;
+  mix-blend-mode: lighten;
+}
+
+/* On phones, size the figure to the screen width and centre it so it
+   never overflows / gets cut off, and keep it faint behind the text. */
+@media (max-width: 767px) {
+  .service-illo {
+    background-position: center 88%;
+    background-size: 80% auto;
+    opacity: 0.18;
+  }
+}
+
 .stack-card {
   position: sticky;
   top: 0;

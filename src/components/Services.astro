@@ -54,16 +54,9 @@ const services = [
         <article class="stack-card" data-service={s.slug}>
           {/* Background illustration */}
           <div
-            class="absolute inset-0 pointer-events-none"
+            class="service-illo absolute inset-0 pointer-events-none"
             aria-hidden="true"
-            style={`
-              background-image: url('/illustrations/${s.slug}.svg');
-              background-repeat: no-repeat;
-              background-position: 104% center;
-              background-size: auto 92%;
-              opacity: 0.4;
-              mix-blend-mode: lighten;
-            `}
+            style={`--illo: url('/illustrations/${s.slug}.svg');`}
           />
           {/* Left-to-right fade */}
           <div
