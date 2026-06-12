@@ -157,9 +157,12 @@ body {
   display: flex;
   align-items: center;
   overflow: hidden;
-  background: rgba(9, 8, 12, 0.55);
-  -webkit-backdrop-filter: blur(34px) saturate(135%);
-  backdrop-filter: blur(34px) saturate(135%);
+  /* Opaque, but painted to match the page (base + warm glow) so it hides the
+     card underneath without looking blacked-out or out of place. */
+  background-color: #0c0c10;
+  background-image:
+    radial-gradient(62% 46% at 50% 40%, rgba(185, 29, 58, 0.2) 0%, rgba(0, 0, 0, 0) 66%),
+    linear-gradient(180deg, rgba(10, 10, 14, 0.1) 0%, rgba(5, 5, 8, 0.5) 100%);
 }
 
 .stack-card::before {
@@ -198,8 +201,7 @@ body {
   @keyframes card-recede {
     to {
       transform: scale(0.96);
-      opacity: 0.2;
-      filter: blur(2px);
+      filter: blur(2px) brightness(0.82);
     }
   }
 }
