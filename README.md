@@ -1,4 +1,4 @@
-# Shopfront Studio
+# Anara Marketing
 
 A small Ballarat studio building websites, running social media, and producing catalogues for local businesses.
 
