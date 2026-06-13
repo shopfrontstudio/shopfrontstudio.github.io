@@ -22,6 +22,12 @@ const {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#0a0608" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script is:inline>
+      // Gate motion (reveal/intro) so content hides only when JS+motion are on.
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("has-motion");
+      }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -36,11 +42,56 @@ const {
     <title>{title}</title>
   </head>
   <body class="min-h-screen flex flex-col">
+    <div class="intro-veil" aria-hidden="true"></div>
     <Header />
     <main class="flex-1 relative">
-      <div class="page-bg-photo" aria-hidden="true"></div>
+      <div class="page-bg-photo" data-parallax="0.05" aria-hidden="true"></div>
       <slot />
     </main>
     <Footer />
+
+    <script>
+      import Lenis from "lenis";
+
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // 2 + 3 — reveal-on-scroll
+      const revealEls = document.querySelectorAll("[data-reveal]");
+      if (!reduce && "IntersectionObserver" in window) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((e) => {
+              if (e.isIntersecting) {
+                e.target.classList.add("is-in");
+                io.unobserve(e.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        );
+        revealEls.forEach((el) => io.observe(el));
+      } else {
+        revealEls.forEach((el) => el.classList.add("is-in"));
+      }
+
+      // 1 — smooth inertia scroll (desktop/wheel; native touch on mobile)
+      // 3 — parallax driven by the scroll position
+      if (!reduce) {
+        const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+        const parallaxEls = Array.from(document.querySelectorAll("[data-parallax]"));
+        const onScroll = ({ scroll }) => {
+          for (const el of parallaxEls) {
+            const speed = parseFloat(el.dataset.parallax) || 0.1;
+            el.style.transform = `translate3d(0, ${(scroll * speed).toFixed(1)}px, 0)`;
+          }
+        };
+        lenis.on("scroll", onScroll);
+        const raf = (t) => {
+          lenis.raf(t);
+          requestAnimationFrame(raf);
+        };
+        requestAnimationFrame(raf);
+      }
+    </script>
   </body>
 </html>
