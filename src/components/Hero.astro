@@ -8,12 +8,12 @@ import AnimatedMark from "./AnimatedMark.astro";
   <div class="relative max-w-6xl mx-auto px-6 pt-6 pb-24 md:pt-10 md:pb-32 text-center">
     <!-- Animated pomegranate — dots rest in fruit form, then disperse,
          cluster around a one-word service punch, and reform. -->
-    <div class="mb-2">
+    <div class="mb-2 hero-rise">
       <AnimatedMark />
     </div>
 
     <!-- Wordmark — rebuilt in code so it lives on any background -->
-    <div class="flex flex-col items-center mb-10">
+    <div class="flex flex-col items-center mb-10 hero-rise" style="--rise-delay: 90ms">
       <div class="font-display text-5xl md:text-7xl tracking-[0.22em] text-cream font-medium">
         ANARA
       </div>
@@ -26,24 +26,24 @@ import AnimatedMark from "./AnimatedMark.astro";
       </div>
     </div>
 
-    <div class="inline-flex items-center gap-2 text-[11px] lg:text-[18px] font-medium uppercase tracking-[0.32em] text-cream-mute mb-8">
+    <div class="inline-flex items-center gap-2 text-[11px] lg:text-[18px] font-medium uppercase tracking-[0.32em] text-cream-mute mb-8 hero-rise" style="--rise-delay: 160ms">
       <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-pulse"></span>
       Made in Ballarat
     </div>
 
-    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl">
+    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl hero-rise" style="--rise-delay: 230ms">
       <span class="gradient-cream">Your shopfront,</span>
       <br />
       <span class="gradient-crimson italic">considered online.</span>
     </h1>
 
-    <p class="mt-10 mx-auto max-w-2xl text-lg md:text-xl lg:text-[26px] text-cream-soft leading-relaxed font-normal">
+    <p class="mt-10 mx-auto max-w-2xl text-lg md:text-xl lg:text-[26px] text-cream-soft leading-relaxed font-normal hero-rise" style="--rise-delay: 300ms">
       A small studio in Ballarat. Websites built with care. Social that
       brings people through the door. Print and digital catalogues that
       keep working long after they leave your hand.
     </p>
 
-    <div class="mt-12 flex flex-wrap gap-3 justify-center">
+    <div class="mt-12 flex flex-wrap gap-3 justify-center hero-rise" style="--rise-delay: 370ms">
       <a
         href="#contact"
         class="inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-semibold transition-colors tracking-wide"
@@ -63,7 +63,7 @@ import AnimatedMark from "./AnimatedMark.astro";
 
     <div class="hairline-gold mt-24 max-w-3xl mx-auto"></div>
 
-    <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto text-left">
+    <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto text-left" data-reveal>
       <div>
         <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream">Two to three<span class="italic-gold"> weeks</span></div>
         <div class="mt-2 text-[10.5px] lg:text-[16px] uppercase tracking-[0.28em] text-cream-mute">Site launch</div>
