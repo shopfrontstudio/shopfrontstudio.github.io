@@ -15,8 +15,9 @@ const socials = [
 ];
 ---
 
-<footer class="relative bg-night/40 text-cream-mute border-t border-line/40">
-  <div class="max-w-6xl mx-auto px-6 py-14 md:py-16">
+<footer class="relative bg-night/40 text-cream-mute border-t border-line/40 overflow-hidden">
+  <div class="pom-rain" aria-hidden="true"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-6 pt-14 pb-24 md:pt-16 md:pb-28">
     <div class="grid gap-10 md:gap-8 md:grid-cols-12" data-reveal>
       {/* Brand + social */}
       <div class="md:col-span-5">
@@ -99,4 +100,55 @@ const socials = [
       <span class="text-cream-mute">Made in Ballarat</span>
     </div>
   </div>
+
+  <script>
+    // Mini pomegranates rain from the top of the footer and settle into a
+    // single covering layer along its base — triggered once when it scrolls in.
+    const footer = document.querySelector("footer");
+    const rain = footer && footer.querySelector(".pom-rain");
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (footer && rain && !reduce) {
+      let built = false;
+      const build = () => {
+        if (built) return;
+        built = true;
+        const W = footer.clientWidth;
+        const H = footer.clientHeight;
+        const base = W < 640 ? 24 : 34;
+        const step = base * 0.8;
+        const count = Math.min(96, Math.ceil(W / step) + 1);
+        // shuffle the reveal order so they don't fall left-to-right
+        const order = Array.from({ length: count }, (_, i) => i).sort(() => Math.random() - 0.5);
+        order.forEach((i, rank) => {
+          const size = base + (Math.random() * 8 - 4);
+          const img = document.createElement("img");
+          img.src = "/images/anara-mark.png";
+          img.alt = "";
+          img.decoding = "async";
+          img.style.width = img.style.height = size.toFixed(1) + "px";
+          img.style.left = (i * step - size * 0.12).toFixed(1) + "px";
+          img.style.bottom = (Math.random() * 6).toFixed(1) + "px";
+          rain.appendChild(img);
+          const dx = Math.random() * 200 - 100;          // fall from varied directions
+          const dy = -(H * (0.85 + Math.random() * 0.4)); // start near/above the top border
+          const startRot = Math.random() * 120 - 60;
+          const endRot = Math.random() * 22 - 11;
+          img.animate(
+            [
+              { transform: `translate(${dx.toFixed(0)}px, ${dy.toFixed(0)}px) rotate(${startRot.toFixed(0)}deg) scale(0.5)`, opacity: 0, offset: 0 },
+              { opacity: 1, offset: 0.22 },
+              { transform: `translate(${(dx * 0.06).toFixed(0)}px, 7px) rotate(${(endRot * 1.4).toFixed(0)}deg) scale(1)`, opacity: 1, offset: 0.86 },
+              { transform: `translate(0px,0px) rotate(${endRot.toFixed(0)}deg) scale(1)`, opacity: 1, offset: 1 },
+            ],
+            { duration: 900 + Math.random() * 500, delay: rank * 28 + Math.random() * 140, easing: "cubic-bezier(0.45,0,0.30,1)", fill: "both" }
+          );
+        });
+      };
+      const io = new IntersectionObserver(
+        (entries) => entries.forEach((e) => { if (e.isIntersecting) build(); }),
+        { threshold: 0.25 }
+      );
+      io.observe(footer);
+    }
+  </script>
 </footer>
