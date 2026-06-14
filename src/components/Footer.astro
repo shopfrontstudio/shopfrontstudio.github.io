@@ -114,26 +114,32 @@ const socials = [
         built = true;
         const W = footer.clientWidth;
         const H = footer.clientHeight;
-        const base = W < 640 ? 24 : 34;
+        const base = W < 640 ? 28 : 40;
         const step = base * 0.8;
         const count = Math.min(96, Math.ceil(W / step) + 1);
+        const reds = ["#c0233f", "#b51d39", "#cb2c4a"];
+        const pomSVG = (body) => `<svg viewBox="0 0 64 64" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M22 18 L25 7 L29 15 L32 4 L35 15 L39 7 L42 18 Z" fill="#7d1228"/>
+          <path d="M32 14 C 47 14 54 27 54 39 C 54 52 45 61 32 61 C 19 61 10 52 10 39 C 10 27 17 14 32 14 Z" fill="${body}"/>
+          <path d="M32 61 C 45 61 54 52 54 39 C 54 45 49 57 32 59 C 15 57 10 45 10 39 C 10 52 19 61 32 61 Z" fill="#7d1228" opacity="0.5"/>
+          <ellipse cx="24.5" cy="30" rx="6" ry="8" fill="#ff7b8e" opacity="0.5"/>
+        </svg>`;
         // shuffle the reveal order so they don't fall left-to-right
         const order = Array.from({ length: count }, (_, i) => i).sort(() => Math.random() - 0.5);
         order.forEach((i, rank) => {
           const size = base + (Math.random() * 8 - 4);
-          const img = document.createElement("img");
-          img.src = "/images/anara-mark.png";
-          img.alt = "";
-          img.decoding = "async";
-          img.style.width = img.style.height = size.toFixed(1) + "px";
-          img.style.left = (i * step - size * 0.12).toFixed(1) + "px";
-          img.style.bottom = (Math.random() * 6).toFixed(1) + "px";
-          rain.appendChild(img);
+          const el = document.createElement("div");
+          el.className = "pom";
+          el.innerHTML = pomSVG(reds[(Math.random() * reds.length) | 0]);
+          el.style.width = el.style.height = size.toFixed(1) + "px";
+          el.style.left = (i * step - size * 0.12).toFixed(1) + "px";
+          el.style.bottom = (Math.random() * 6).toFixed(1) + "px";
+          rain.appendChild(el);
           const dx = Math.random() * 200 - 100;          // fall from varied directions
           const dy = -(H * (0.85 + Math.random() * 0.4)); // start near/above the top border
           const startRot = Math.random() * 120 - 60;
           const endRot = Math.random() * 22 - 11;
-          img.animate(
+          el.animate(
             [
               { transform: `translate(${dx.toFixed(0)}px, ${dy.toFixed(0)}px) rotate(${startRot.toFixed(0)}deg) scale(0.5)`, opacity: 0, offset: 0 },
               { opacity: 1, offset: 0.22 },
