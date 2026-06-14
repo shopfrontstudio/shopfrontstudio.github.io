@@ -45,7 +45,7 @@ const {
     <div class="intro-veil" aria-hidden="true"></div>
     <Header />
     <main class="flex-1 relative">
-      <div class="page-bg-photo" data-parallax="0.05" aria-hidden="true"></div>
+      <div class="page-bg-photo" aria-hidden="true"></div>
       <slot />
     </main>
     <Footer />
@@ -75,17 +75,8 @@ const {
       }
 
       // 1 — smooth inertia scroll (desktop/wheel; native touch on mobile)
-      // 3 — parallax driven by the scroll position
       if (!reduce) {
         const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-        const parallaxEls = Array.from(document.querySelectorAll("[data-parallax]"));
-        const onScroll = ({ scroll }) => {
-          for (const el of parallaxEls) {
-            const speed = parseFloat(el.dataset.parallax) || 0.1;
-            el.style.transform = `translate3d(0, ${(scroll * speed).toFixed(1)}px, 0)`;
-          }
-        };
-        lenis.on("scroll", onScroll);
         const raf = (t) => {
           lenis.raf(t);
           requestAnimationFrame(raf);
