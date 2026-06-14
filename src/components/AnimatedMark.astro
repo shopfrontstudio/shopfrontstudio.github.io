@@ -407,14 +407,14 @@ const darken = (h, a) => { const [r, g, b] = _rgb(h); return _hex(r * (1 - a), g
 
   // The cycle — logo, disperse, hexagon, square, seamless stretch to a string, snap, bloom.
   const sequence = [
-    { name: "rest",     duration: 2500, action: setHome,                                  word: null,      leaves: 1.0 },
-    { name: "disperse", duration: 1000, action: setScatter,                               word: null,      leaves: 0.18 },
-    { name: "found",    duration: 2200, action: () => setPolygonCluster(6, 0),            word: "Discover.", leaves: 0.10 },
-    { name: "filled",   duration: 1700, action: () => setBoxCluster(SQUARE_HALF, SQUARE_HALF), word: "Craft.",    leaves: 0.10 },
-    { name: "stretch",  duration: 1450, action: () => stretchTick(0), onTick: stretchTick, word: "Craft.",    leaves: 0.08 },
-    { name: "slam",     duration: 430,  action: setMergeBlob, stiff: 0.085, damp: 0.80, word: "Unleash.", leaves: 0.06 },
-    { name: "compress", duration: 440,  action: setCorePoint, stiff: 0.060, damp: 0.82, word: null, leaves: 0.04 },
-    { name: "reform",   duration: 1350, action: setHome,      stiff: 0.050, damp: 0.86, word: null, leaves: 1.0 },
+    { name: "rest",     duration: 1750, action: setHome,                                  word: null,      leaves: 1.0 },
+    { name: "disperse", duration: 700, action: setScatter,                               word: null,      leaves: 0.18 },
+    { name: "found",    duration: 1540, action: () => setPolygonCluster(6, 0),            word: "Discover.", leaves: 0.10 },
+    { name: "filled",   duration: 1190, action: () => setBoxCluster(SQUARE_HALF, SQUARE_HALF), word: "Craft.",    leaves: 0.10 },
+    { name: "stretch",  duration: 1015, action: () => stretchTick(0), onTick: stretchTick, word: "Craft.",    leaves: 0.08 },
+    { name: "slam",     duration: 300,  action: setMergeBlob, stiff: 0.085, damp: 0.80, word: "Unleash.", leaves: 0.06 },
+    { name: "compress", duration: 310,  action: setCorePoint, stiff: 0.060, damp: 0.82, word: null, leaves: 0.04 },
+    { name: "reform",   duration: 945, action: setHome,      stiff: 0.050, damp: 0.86, word: null, leaves: 1.0 },
   ];
 
   let idx = 0;
