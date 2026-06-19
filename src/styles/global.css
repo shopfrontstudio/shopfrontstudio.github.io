@@ -346,3 +346,58 @@ html.lenis body {
     display: none !important;
   }
 }
+
+/* ===== Visual polish: micro-interactions ===== */
+/* Animated gold underline for text links */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 1px;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Soft lift + crimson glow for primary buttons */
+.btn-primary {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+}
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -10px rgba(192, 42, 75, 0.65);
+}
+.btn-ghost {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.btn-ghost:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -14px rgba(200, 161, 90, 0.4);
+}
+/* Arrow nudge inside a .group button */
+.group:hover .btn-arrow {
+  transform: translateX(4px);
+}
+.btn-arrow {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover,
+  .btn-ghost:hover,
+  .group:hover .btn-arrow {
+    transform: none;
+  }
+  .link-underline::after {
+    transition: none;
+  }
+}

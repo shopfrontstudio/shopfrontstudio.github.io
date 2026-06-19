@@ -18,7 +18,7 @@ const nav = [
     <nav class="hidden md:flex items-center gap-9 text-[13px] lg:text-[18px] tracking-wide text-cream-soft">
       {
         nav.map((item) => (
-          <a href={item.href} class="hover:text-cream transition-colors">
+          <a href={item.href} class="link-underline hover:text-cream transition-colors">
             {item.label}
           </a>
         ))
@@ -27,7 +27,7 @@ const nav = [
 
     <a
       href="#contact"
-      class="hidden md:inline-flex items-center bg-crimson-deep text-cream px-4 py-1.5 lg:px-5 lg:py-2 rounded-full text-[12.5px] lg:text-[17px] font-medium hover:bg-crimson transition-colors tracking-wide"
+      class="btn-primary hidden md:inline-flex items-center bg-crimson-deep text-cream px-4 py-1.5 lg:px-5 lg:py-2 rounded-full text-[12.5px] lg:text-[17px] font-medium hover:bg-crimson tracking-wide"
       >Enquire</a
     >
 
