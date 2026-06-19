@@ -200,8 +200,7 @@ body {
   }
   @keyframes card-recede {
     to {
-      transform: scale(0.96);
-      filter: blur(2px) brightness(0.82);
+      transform: scale(0.955);
     }
   }
 }
@@ -213,6 +212,10 @@ body {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  /* Promote to its own composited layer so the heavy blur is rasterised once
+     and not recomputed while scrolling. */
+  transform: translateZ(0);
+  will-change: transform;
 }
 
 /* The pomegranate mark blurred into ambient red glow on the neutral
