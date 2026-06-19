@@ -43,6 +43,27 @@ const {
     <meta property="og:url" content={Astro.site} />
     <meta property="og:image" content="/images/anara-logo.jpg" />
     <title>{title}</title>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "Anara Marketing Solutions",
+        description:
+          "A small Ballarat studio building websites, running social media, and producing print and digital catalogues for local businesses.",
+        url: "https://anaramarketing.com.au",
+        email: "info@anaramarketing.com.au",
+        telephone: "+61473533053",
+        image: "https://anaramarketing.com.au/apple-touch-icon.png",
+        areaServed: "Ballarat, Victoria, Australia",
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Ballarat",
+          addressRegion: "VIC",
+          addressCountry: "AU",
+        },
+      })}
+    />
   </head>
   <body class="min-h-screen flex flex-col">
     <div class="intro-veil" aria-hidden="true"></div>
