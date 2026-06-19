@@ -251,9 +251,21 @@ body {
     radial-gradient(55% 55% at 80% 18%, rgba(185, 29, 58, 0.20) 0%, rgba(0, 0, 0, 0) 62%);
 }
 
-/* Balanced colour grade — lively but still matte/restrained, not garish */
+/* Static crimson glow behind the mark — replaces a per-frame drop-shadow/
+   colour-grade filter (those re-rasterised the whole animating logo every
+   frame and caused lag). The grade is now baked into the dot colours. */
 .anara-anim {
-  filter: saturate(0.96) brightness(1.05) contrast(1.04);
+  position: relative;
+  isolation: isolate;
+}
+.anara-anim::before {
+  content: "";
+  position: absolute;
+  inset: 12% 14% 6%;
+  z-index: -1;
+  background: radial-gradient(50% 50% at 50% 46%, rgba(185, 29, 58, 0.32) 0%, rgba(185, 29, 58, 0) 70%);
+  filter: blur(34px);
+  pointer-events: none;
 }
 
 /* ===== Motion: smooth scroll, reveal-on-scroll, parallax, intro ===== */
