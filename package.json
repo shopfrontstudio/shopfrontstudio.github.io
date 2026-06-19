@@ -15,5 +15,8 @@
     "astro": "^5.7.0",
     "lenis": "^1.3.23",
     "tailwindcss": "^4.0.0"
+  },
+  "devDependencies": {
+    "shadcn": "^4.11.0"
   }
 }
