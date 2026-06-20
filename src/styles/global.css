@@ -641,18 +641,24 @@ html[data-theme="light"] {
   padding: 0;
   border: 0;
   background: none;
-  cursor: pointer;
+  cursor: grab;
   /* pivot at the cord's attachment point (top-centre) so it swings like a real
      pendulum */
   transform-origin: top center;
+  /* let us drag the lamp without the page scrolling under the gesture */
+  touch-action: none;
   animation: lamp-drop 1.05s cubic-bezier(0.34, 1.42, 0.5, 1) 0.5s both;
   -webkit-tap-highlight-color: transparent;
 }
+.lamp:active { cursor: grabbing; }
 .lamp__hang {
   display: block;
   transform-origin: top center;
   animation: lamp-sway 6s ease-in-out 2s infinite;
 }
+/* while JS drives the swing physics, suspend the idle CSS sway so the inline
+   transform shows through */
+.lamp__hang.lamp--free { animation: none; }
 .lamp__art {
   display: block;
   width: 162px; /* wider canvas (vb 230) — keeps the lamp itself the same size */
@@ -680,10 +686,6 @@ html[data-theme="light"] {
 html[data-theme="light"] .lamp-txt-light { display: none; }
 html[data-theme="light"] .lamp-txt-dark { display: inline; }
 
-/* jolt-on-click — a damped pendulum swing. ease-in-out between the peaks keeps
-   it slow at the extremes and quick through the middle, like real momentum. */
-.lamp--shaking { animation: lamp-swing 2.1s ease-in-out both; }
-
 @keyframes lamp-drop {
   0%   { transform: translateY(-240px); opacity: 0; }
   45%  { opacity: 1; }
@@ -698,19 +700,8 @@ html[data-theme="light"] .lamp-txt-dark { display: inline; }
   0%, 100% { opacity: 0.88; }
   50%      { opacity: 1; }
 }
-@keyframes lamp-swing {
-  0%   { transform: rotate(0deg); }
-  9%   { transform: rotate(8deg); }
-  26%  { transform: rotate(-5.6deg); }
-  43%  { transform: rotate(3.6deg); }
-  60%  { transform: rotate(-2.2deg); }
-  76%  { transform: rotate(1.3deg); }
-  90%  { transform: rotate(-0.6deg); }
-  100% { transform: rotate(0deg); }
-}
 @media (prefers-reduced-motion: reduce) {
   .lamp { animation: none; opacity: 1; }
   .lamp__hang { animation: none; }
   .lamp__glow { animation: none; }
-  .lamp--shaking { animation: none; }
 }
