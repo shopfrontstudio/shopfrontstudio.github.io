@@ -100,14 +100,16 @@ const {
     <script>
       import Lenis from "lenis";
 
-      // Theme toggle — the hanging pendant lamp. Clicking flips the theme and
-      // jolts the lamp so it swings as if knocked.
-      const themeBtn = document.getElementById("theme-toggle");
-      const lampHang = themeBtn?.querySelector(".lamp__hang");
-      lampHang?.addEventListener("animationend", (e) => {
-        if (e.animationName === "lamp-swing") lampHang.classList.remove("lamp--shaking");
-      });
-      themeBtn?.addEventListener("click", () => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      // ── Theme toggle: the hanging pendant lamp ──────────────────────────
+      // A tap flips the theme. You can also grab & flick the lamp — the harder
+      // / faster the flick, the more vigorously it swings (a tiny spring-
+      // pendulum simulation seeded by your pointer velocity).
+      const lamp = document.getElementById("theme-toggle");
+      const hang = lamp?.querySelector(".lamp__hang") as HTMLElement | null;
+
+      const flipTheme = () => {
         const next =
           document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
         document.documentElement.setAttribute("data-theme", next);
@@ -116,14 +118,85 @@ const {
         } catch (e) {}
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute("content", next === "light" ? "#f4efe4" : "#0a0608");
-        if (lampHang) {
-          lampHang.classList.remove("lamp--shaking");
-          void lampHang.offsetWidth; // reflow so the animation restarts
-          lampHang.classList.add("lamp--shaking");
-        }
-      });
+      };
 
-      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (lamp && hang) {
+        const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+
+        // pendulum state (degrees, deg/s)
+        const SPRING = 85;   // stiffness → swing speed
+        const DAMP = 4.0;    // how quickly it settles
+        const MAXA = 34;     // clamp extreme angles
+        let angle = 0, vel = 0, raf = 0, last = 0;
+
+        let dragging = false, startX = 0, startT = 0, lastX = 0, lastT = 0, vX = 0, moved = 0;
+
+        const startLoop = () => {
+          if (raf || reduce) return;
+          hang.classList.add("lamp--free"); // suspend the idle CSS sway
+          last = performance.now();
+          raf = requestAnimationFrame(step);
+        };
+        const step = (now: number) => {
+          let dt = (now - last) / 1000;
+          last = now;
+          if (dt > 0.05) dt = 0.05;
+          if (!dragging) {
+            const acc = -SPRING * angle - DAMP * vel; // spring toward rest + damping
+            vel += acc * dt;
+            angle += vel * dt;
+            if (angle > MAXA) { angle = MAXA; vel *= -0.25; }
+            if (angle < -MAXA) { angle = -MAXA; vel *= -0.25; }
+          }
+          hang.style.transform = "rotate(" + angle.toFixed(3) + "deg)";
+          if (!dragging && Math.abs(angle) < 0.05 && Math.abs(vel) < 0.6) {
+            hang.style.transform = "";
+            hang.classList.remove("lamp--free"); // hand back to the idle sway
+            cancelAnimationFrame(raf); raf = 0;
+            return;
+          }
+          raf = requestAnimationFrame(step);
+        };
+
+        lamp.addEventListener("pointerdown", (e) => {
+          if (reduce) return;
+          dragging = true; moved = 0; vX = 0;
+          startX = lastX = e.clientX; startT = lastT = performance.now();
+          lamp.setPointerCapture?.(e.pointerId);
+          startLoop();
+        });
+        lamp.addEventListener("pointermove", (e) => {
+          if (!dragging) return;
+          const now = performance.now();
+          const dx = e.clientX - lastX;
+          vX = (dx / Math.max(now - lastT, 1)) * 1000; // px/s
+          lastX = e.clientX; lastT = now;
+          moved += Math.abs(dx);
+          angle = clamp((e.clientX - startX) * 0.18, -MAXA, MAXA); // follow the finger
+          vel = 0;
+        });
+        const release = () => {
+          if (!dragging) return;
+          dragging = false;
+          const dur = performance.now() - startT;
+          if (moved < 10 && dur < 350) {
+            flipTheme();                        // a tap toggles the theme…
+            vel = (Math.random() < 0.5 ? -1 : 1) * 130; // …with a gentle knock
+          } else {
+            vel = clamp(vX * 0.22, -900, 900);  // a flick: speed → swing force
+          }
+          startLoop();
+        };
+        lamp.addEventListener("pointerup", release);
+        lamp.addEventListener("pointercancel", release);
+        lamp.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            flipTheme();
+            if (!reduce) { vel = 160; startLoop(); }
+          }
+        });
+      }
 
       // 2 + 3 — reveal-on-scroll
       const revealEls = document.querySelectorAll("[data-reveal]");
