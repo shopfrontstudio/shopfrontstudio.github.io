@@ -31,8 +31,10 @@ const nav = [
       >Enquire</a
     >
 
-    {/* Hanging pendant lamp — drops from the header on load; the placard flips
-        LIGHT/DARK and the bulb glows warm-white (dark) / pomegranate (light). */}
+    {/* Hanging pendant lamp — drops from the header on a plain black cord; the
+        lit underside glows warm-white (dark) / pomegranate (light) and casts a
+        soft pool of light below. Click jolts it into a natural pendulum swing
+        and flips the theme. */}
     <button
       id="theme-toggle"
       type="button"
@@ -41,70 +43,67 @@ const nav = [
       class="lamp"
     >
       <span class="lamp__hang">
-        <svg class="lamp__art" width="130" height="270" viewBox="0 0 130 270" fill="none" aria-hidden="true">
+        <svg class="lamp__art" width="170" height="320" viewBox="0 0 170 320" fill="none" aria-hidden="true">
           <defs>
-            <linearGradient id="lampBrass" x1="0" y1="0" x2="1" y2="0.4">
-              <stop offset="0" stop-color="#f0d79b" /><stop offset="0.35" stop-color="#b88f47" />
-              <stop offset="0.6" stop-color="#8a6a30" /><stop offset="1" stop-color="#d8b16a" />
+            <linearGradient id="lampWood" x1="0" y1="0" x2="1" y2="0.6">
+              <stop offset="0" stop-color="#9a6a3c" /><stop offset="0.5" stop-color="#6e4824" />
+              <stop offset="1" stop-color="#3f2813" />
             </linearGradient>
-            <linearGradient id="lampShade" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0" stop-color="#15151b" /><stop offset="0.32" stop-color="#4b4b57" />
-              <stop offset="0.5" stop-color="#33333d" /><stop offset="0.72" stop-color="#191920" />
-              <stop offset="1" stop-color="#0c0c10" />
+            {/* matte metal dome — light catches the upper-left, falls off right */}
+            <linearGradient id="lampShade" x1="0.08" y1="0.1" x2="0.92" y2="0.9">
+              <stop offset="0" stop-color="#3c3c44" /><stop offset="0.32" stop-color="#28282e" />
+              <stop offset="0.62" stop-color="#1a1a1e" /><stop offset="1" stop-color="#0d0d10" />
             </linearGradient>
-            <linearGradient id="lampShadeTop" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stop-color="#5a5a66" /><stop offset="1" stop-color="#5a5a66" stop-opacity="0" />
-            </linearGradient>
-            <radialGradient id="lampGlass" cx="50%" cy="42%" r="60%">
-              <stop class="lamp-glass-a" offset="0" /><stop class="lamp-glass-b" offset="0.55" /><stop class="lamp-glass-c" offset="1" />
+            <radialGradient id="lampShadeHi" cx="34%" cy="26%" r="46%">
+              <stop offset="0" stop-color="#6a6a76" stop-opacity="0.55" />
+              <stop offset="1" stop-color="#6a6a76" stop-opacity="0" />
             </radialGradient>
-            <radialGradient id="lampGlow" cx="50%" cy="50%" r="50%">
-              <stop class="lamp-glow-a" offset="0" /><stop class="lamp-glow-b" offset="0.45" /><stop class="lamp-glow-c" offset="1" />
+            {/* lit underside / mouth of the shade */}
+            <radialGradient id="lampMouth" cx="50%" cy="44%" r="62%">
+              <stop class="lamp-mouth-a" offset="0" /><stop class="lamp-mouth-b" offset="0.5" />
+              <stop class="lamp-mouth-c" offset="1" />
             </radialGradient>
-            <filter id="lampSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="1.1" /></filter>
+            {/* warm beam falling from the mouth */}
+            <linearGradient id="lampCone" x1="0" y1="0" x2="0" y2="1">
+              <stop class="lamp-cone-a" offset="0" /><stop class="lamp-cone-b" offset="1" />
+            </linearGradient>
+            {/* pool of light cast below */}
+            <radialGradient id="lampPool" cx="50%" cy="50%" r="50%">
+              <stop class="lamp-pool-a" offset="0" /><stop class="lamp-pool-b" offset="1" />
+            </radialGradient>
+            <filter id="lampBlur" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="6" /></filter>
           </defs>
 
-          <circle class="lamp__glow" cx="65" cy="205" r="54" fill="url(#lampGlow)" />
-
-          {/* gold chain */}
-          <g stroke="url(#lampBrass)" stroke-width="3.4" fill="none" filter="url(#lampSoft)">
-            <ellipse cx="65" cy="9" rx="4.2" ry="8" /><ellipse cx="65" cy="20" rx="8" ry="4.2" />
-            <ellipse cx="65" cy="31" rx="4.2" ry="8" /><ellipse cx="65" cy="42" rx="8" ry="4.2" />
-            <ellipse cx="65" cy="53" rx="4.2" ry="8" /><ellipse cx="65" cy="64" rx="8" ry="4.2" />
-            <ellipse cx="65" cy="75" rx="4.2" ry="8" /><ellipse cx="65" cy="86" rx="8" ry="4.2" />
+          {/* light cast below the lamp (soft, themeable) */}
+          <g class="lamp__glow">
+            <ellipse cx="85" cy="300" rx="78" ry="20" fill="url(#lampPool)" filter="url(#lampBlur)" />
+            <path d="M42 196 L128 196 L158 304 L12 304 Z" fill="url(#lampCone)" filter="url(#lampBlur)" opacity="0.9" />
           </g>
 
-          {/* placard */}
-          <g transform="rotate(-8 26 30)">
-            <line x1="57" y1="20" x2="40" y2="30" stroke="url(#lampBrass)" stroke-width="1.6" />
-            <rect x="5" y="28" width="44" height="20" rx="4" fill="#241619" stroke="url(#lampBrass)" stroke-width="1.4" />
-            <text class="lamp-txt lamp-txt-light" x="27" y="42" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="12.5" font-weight="700" letter-spacing="0.6" fill="#ecdcb2">LIGHT</text>
-            <text class="lamp-txt lamp-txt-dark" x="27" y="42" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="12.5" font-weight="700" letter-spacing="0.6" fill="#ecdcb2">DARK</text>
+          {/* plain black cord */}
+          <line x1="85" y1="0" x2="85" y2="98" stroke="#161616" stroke-width="2.4" />
+
+          {/* small LIGHT/DARK tag on a thin thread */}
+          <g>
+            <line x1="85" y1="46" x2="108" y2="58" stroke="#161616" stroke-width="1.2" />
+            <rect x="100" y="56" width="44" height="19" rx="3.5" fill="#241619" stroke="#7a5f2b" stroke-width="1.1" />
+            <text class="lamp-txt lamp-txt-light" x="122" y="69.5" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="0.5" fill="#ecdcb2">LIGHT</text>
+            <text class="lamp-txt lamp-txt-dark" x="122" y="69.5" text-anchor="middle" font-family="Montserrat, Arial, sans-serif" font-size="11" font-weight="700" letter-spacing="0.5" fill="#ecdcb2">DARK</text>
           </g>
 
-          {/* canopy / socket */}
-          <path d="M56 90 L74 90 L70 102 L60 102 Z" fill="url(#lampBrass)" />
-          <rect x="58" y="100" width="14" height="6" rx="2" fill="#7a5f2b" />
+          {/* wooden top fitting + neck */}
+          <path d="M78 98 L92 98 L90 113 L80 113 Z" fill="url(#lampWood)" />
+          <ellipse cx="85" cy="116" rx="14" ry="4" fill="#1c1c20" />
 
-          {/* shade */}
-          <path d="M52 106 L78 106 L112 168 Q65 186 18 168 Z" fill="url(#lampShade)" stroke="#0a0a0e" stroke-width="1" />
-          <path d="M52 106 L78 106 L98 150 Q65 158 32 150 Z" fill="url(#lampShadeTop)" opacity="0.5" />
-          <ellipse cx="65" cy="169" rx="47" ry="10" fill="#0c0c10" />
-          <path d="M20 168 Q65 185 110 168" fill="none" stroke="#7d7d88" stroke-width="1.6" opacity="0.8" />
+          {/* dome shade */}
+          <path d="M30 191 C30 150 47 117 85 117 C123 117 140 150 140 191 Q85 208 30 191 Z" fill="url(#lampShade)" stroke="#0a0a0d" stroke-width="1" />
+          <path d="M30 191 C30 150 47 117 85 117 C123 117 140 150 140 191 Q85 208 30 191 Z" fill="url(#lampShadeHi)" />
+          {/* subtle groove near the crown */}
+          <path d="M58 126 Q85 119 112 126" fill="none" stroke="#000" stroke-width="1" opacity="0.35" />
 
-          {/* edison screw base */}
-          <rect x="56" y="160" width="18" height="16" rx="2" fill="url(#lampBrass)" />
-          <line x1="56" y1="164" x2="74" y2="165" stroke="#6e5526" stroke-width="1.2" />
-          <line x1="56" y1="168" x2="74" y2="169" stroke="#6e5526" stroke-width="1.2" />
-          <line x1="56" y1="172" x2="74" y2="173" stroke="#6e5526" stroke-width="1.2" />
-
-          {/* bulb */}
-          <path class="lamp__glass" d="M58 176 Q49 184 49 200 a16 16 0 1 0 32 0 Q81 184 72 176 Z" fill="url(#lampGlass)" stroke-opacity="0.5" stroke-width="0.8" />
-          <g class="lamp__filament" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.95">
-            <line x1="60" y1="178" x2="60" y2="192" /><line x1="70" y1="178" x2="70" y2="192" />
-            <path d="M60 192 q5 9 10 0" />
-          </g>
-          <ellipse cx="59" cy="196" rx="5" ry="7" fill="#ffffff" opacity="0.18" />
+          {/* lit mouth (no visible bulb) */}
+          <ellipse cx="85" cy="193" rx="50" ry="12" fill="url(#lampMouth)" />
+          <path class="lamp__rim" d="M36 191 Q85 211 134 191" fill="none" stroke-width="2.4" opacity="0.85" stroke-linecap="round" />
         </svg>
       </span>
     </button>

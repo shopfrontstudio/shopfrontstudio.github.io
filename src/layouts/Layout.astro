@@ -95,7 +95,7 @@ const {
       const themeBtn = document.getElementById("theme-toggle");
       const lampHang = themeBtn?.querySelector(".lamp__hang");
       lampHang?.addEventListener("animationend", (e) => {
-        if (e.animationName === "lamp-shake") lampHang.classList.remove("lamp--shaking");
+        if (e.animationName === "lamp-swing") lampHang.classList.remove("lamp--shaking");
       });
       themeBtn?.addEventListener("click", () => {
         const next =
