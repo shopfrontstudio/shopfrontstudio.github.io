@@ -83,6 +83,16 @@ const {
     <Header />
     <main class="flex-1 relative">
       <div class="page-bg-photo" aria-hidden="true"></div>
+      {/* Framer-style ambient layer — soft colour orbs + frosted glass-clay
+          tiles that drift slowly. Mainly for light mode's open space. */}
+      <div class="ambient" aria-hidden="true">
+        <span class="orb orb--gold"></span>
+        <span class="orb orb--berry"></span>
+        <span class="orb orb--blush"></span>
+        <span class="glass-tile glass-tile--1"></span>
+        <span class="glass-tile glass-tile--2"></span>
+        <span class="glass-tile glass-tile--3"></span>
+      </div>
       <slot />
     </main>
     <Footer />
