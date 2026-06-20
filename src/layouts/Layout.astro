@@ -90,8 +90,13 @@ const {
     <script>
       import Lenis from "lenis";
 
-      // Temporary theme toggle (Stage 2 replaces this with the hanging switch)
+      // Theme toggle — the hanging pendant lamp. Clicking flips the theme and
+      // jolts the lamp so it swings as if knocked.
       const themeBtn = document.getElementById("theme-toggle");
+      const lampHang = themeBtn?.querySelector(".lamp__hang");
+      lampHang?.addEventListener("animationend", (e) => {
+        if (e.animationName === "lamp-shake") lampHang.classList.remove("lamp--shaking");
+      });
       themeBtn?.addEventListener("click", () => {
         const next =
           document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
@@ -101,6 +106,11 @@ const {
         } catch (e) {}
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute("content", next === "light" ? "#f4efe4" : "#0a0608");
+        if (lampHang) {
+          lampHang.classList.remove("lamp--shaking");
+          void lampHang.offsetWidth; // reflow so the animation restarts
+          lampHang.classList.add("lamp--shaking");
+        }
       });
 
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
