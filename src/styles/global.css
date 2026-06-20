@@ -448,7 +448,15 @@ html[data-theme="light"] .page-bg-photo::before {
   filter: blur(80px) saturate(150%) brightness(1.05);
 }
 html[data-theme="light"] .page-bg-photo::after {
-  background: radial-gradient(60% 45% at 50% 38%, rgba(192, 42, 75, 0.1) 0%, transparent 65%);
+  background:
+    radial-gradient(52% 40% at 12% 8%, rgba(154, 120, 54, 0.13) 0%, transparent 60%),
+    radial-gradient(50% 42% at 90% 14%, rgba(187, 37, 66, 0.11) 0%, transparent 62%),
+    radial-gradient(62% 46% at 50% 102%, rgba(243, 182, 191, 0.16) 0%, transparent 72%);
+}
+/* faint halftone-dot texture (nods to the logo) so blank areas aren't flat */
+html[data-theme="light"] body {
+  background-image: radial-gradient(circle, rgba(150, 28, 52, 0.05) 1px, transparent 1.6px);
+  background-size: 21px 21px;
 }
 html[data-theme="light"] .hero-glow {
   background:
@@ -459,7 +467,10 @@ html[data-theme="light"] .hero-glow {
 /* service slides → soft off-white clay panels */
 html[data-theme="light"] .stack-card {
   background-color: var(--color-night);
-  background-image: radial-gradient(70% 55% at 50% 40%, rgba(192, 42, 75, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+  background-image:
+    radial-gradient(circle, rgba(150, 28, 52, 0.05) 1px, transparent 1.6px),
+    radial-gradient(70% 55% at 50% 40%, rgba(192, 42, 75, 0.06) 0%, rgba(0, 0, 0, 0) 70%);
+  background-size: 21px 21px, auto;
 }
 html[data-theme="light"] .stack-card::after {
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(70, 45, 35, 0.06) 100%);
