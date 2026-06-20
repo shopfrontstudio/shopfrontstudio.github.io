@@ -77,11 +77,11 @@ const nav = [
           {/* light cast below the lamp (soft, themeable) */}
           <g class="lamp__glow">
             <ellipse cx="85" cy="300" rx="78" ry="20" fill="url(#lampPool)" filter="url(#lampBlur)" />
-            <path d="M42 196 L128 196 L158 304 L12 304 Z" fill="url(#lampCone)" filter="url(#lampBlur)" opacity="0.9" />
+            <path d="M40 187 L130 187 L158 304 L12 304 Z" fill="url(#lampCone)" filter="url(#lampBlur)" opacity="0.9" />
           </g>
 
           {/* plain black cord */}
-          <line x1="85" y1="0" x2="85" y2="98" stroke="#161616" stroke-width="2.4" />
+          <line x1="85" y1="0" x2="85" y2="128" stroke="#161616" stroke-width="2.4" />
 
           {/* small LIGHT/DARK tag on a thin thread */}
           <g>
@@ -92,18 +92,18 @@ const nav = [
           </g>
 
           {/* wooden top fitting + neck */}
-          <path d="M78 98 L92 98 L90 113 L80 113 Z" fill="url(#lampWood)" />
-          <ellipse cx="85" cy="116" rx="14" ry="4" fill="#1c1c20" />
+          <path d="M78 128 L92 128 L90 145 L80 145 Z" fill="url(#lampWood)" />
+          <ellipse cx="85" cy="148" rx="14" ry="4" fill="#1c1c20" />
 
-          {/* dome shade */}
-          <path d="M30 191 C30 150 47 117 85 117 C123 117 140 150 140 191 Q85 208 30 191 Z" fill="url(#lampShade)" stroke="#0a0a0d" stroke-width="1" />
-          <path d="M30 191 C30 150 47 117 85 117 C123 117 140 150 140 191 Q85 208 30 191 Z" fill="url(#lampShadeHi)" />
+          {/* dome shade — shallow, wide bowl (~quarter circle) */}
+          <path d="M28 184 C28 166 50 147 85 147 C120 147 142 166 142 184 Q85 200 28 184 Z" fill="url(#lampShade)" stroke="#0a0a0d" stroke-width="1" />
+          <path d="M28 184 C28 166 50 147 85 147 C120 147 142 166 142 184 Q85 200 28 184 Z" fill="url(#lampShadeHi)" />
           {/* subtle groove near the crown */}
-          <path d="M58 126 Q85 119 112 126" fill="none" stroke="#000" stroke-width="1" opacity="0.35" />
+          <path d="M58 155 Q85 149 112 155" fill="none" stroke="#000" stroke-width="1" opacity="0.35" />
 
           {/* lit mouth (no visible bulb) */}
-          <ellipse cx="85" cy="193" rx="50" ry="12" fill="url(#lampMouth)" />
-          <path class="lamp__rim" d="M36 191 Q85 211 134 191" fill="none" stroke-width="2.4" opacity="0.85" stroke-linecap="round" />
+          <ellipse cx="85" cy="186" rx="52" ry="11" fill="url(#lampMouth)" />
+          <path class="lamp__rim" d="M34 184 Q85 203 136 184" fill="none" stroke-width="2.4" opacity="0.85" stroke-linecap="round" />
         </svg>
       </span>
     </button>
