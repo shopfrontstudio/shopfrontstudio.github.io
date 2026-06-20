@@ -471,15 +471,15 @@ html[data-theme="light"] .hero-glow {
 }
 
 /* ---- service panels as faux-frosted glass + clay (light) ----
-   No backdrop-filter on purpose: blurring the whole viewport behind a
-   full-screen panel that scrolls AND scales is the main scroll-lag source.
-   A translucent frosted fill over the ambient orbs gives the glass look for
-   free (composited, no per-frame repaint). */
+   Opaque on purpose: the panels are sticky and slide over one another, so any
+   translucency lets the card underneath bleed through. The "glass" read comes
+   from the highlight gradient, sheen, soft edges and clay shadow — not from
+   see-through, and with no backdrop-filter so scrolling stays smooth. */
 html[data-theme="light"] .stack-card {
-  background-color: rgba(249, 245, 237, 0.86);
+  background-color: #f7f3ea;
   background-image:
     radial-gradient(circle, rgba(150, 28, 52, 0.05) 1px, transparent 1.6px),
-    radial-gradient(120% 90% at 18% 6%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 55%),
+    radial-gradient(120% 90% at 18% 6%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 55%),
     radial-gradient(80% 60% at 50% 40%, rgba(192, 42, 75, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
   background-size: 21px 21px, auto, auto;
   border-top: 1px solid rgba(255, 255, 255, 0.65);
