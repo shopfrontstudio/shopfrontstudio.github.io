@@ -401,3 +401,103 @@ html.lenis body {
     transition: none;
   }
 }
+
+/* ===================================================================
+   LIGHT MODE — off-white + subtle claymorphism
+   (dark stays default; everything here only applies under data-theme=light)
+   =================================================================== */
+html[data-theme="light"] {
+  /* surfaces / background */
+  --color-night: #f4efe4;
+  --color-onyx: #efe7d8;
+  --color-graphite: #ece2d0;
+  --color-graphite-soft: #e7dcc8;
+  --color-graphite-line: #d8ccb3;
+  /* text (cream tokens now carry DARK text) */
+  --color-cream: #2a1c20;
+  --color-cream-soft: #4d3c3c;
+  --color-cream-mute: #7d6a64;
+  --color-ash: #9a8a82;
+  /* pomegranate reds (kept rich for clay tabs) */
+  --color-crimson: #bb2542;
+  --color-crimson-bright: #c93b56;
+  --color-crimson-deep: #9c1a34;
+  --color-burgundy: #6a0f22;
+  /* gold deepened so it reads on cream */
+  --color-gold: #9a7836;
+  --color-gold-bright: #b08f4d;
+  --color-gold-deep: #7a5d29;
+  /* lines */
+  --color-line: #ddd2bd;
+  --color-line-soft: #e7dcc8;
+  --color-line-bright: rgba(42, 28, 32, 0.13);
+  /* animation accents */
+  --edge-stroke: rgba(150, 28, 52, 0.5);
+  --word-fill: #3a2428;
+  color-scheme: light;
+}
+
+/* translucent header/menu glass → warm off-white in light */
+html[data-theme="light"] .glass-dark {
+  background: rgba(244, 239, 228, 0.82);
+}
+
+/* background glow: drop the dark wash, keep a soft warm halo */
+html[data-theme="light"] .page-bg-photo::before {
+  opacity: 0.1;
+  filter: blur(80px) saturate(150%) brightness(1.05);
+}
+html[data-theme="light"] .page-bg-photo::after {
+  background: radial-gradient(60% 45% at 50% 38%, rgba(192, 42, 75, 0.1) 0%, transparent 65%);
+}
+html[data-theme="light"] .hero-glow {
+  background:
+    radial-gradient(60% 50% at 20% 10%, rgba(154, 120, 54, 0.12) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(55% 55% at 80% 18%, rgba(187, 37, 66, 0.12) 0%, rgba(0, 0, 0, 0) 62%);
+}
+
+/* service slides → soft off-white clay panels */
+html[data-theme="light"] .stack-card {
+  background-color: var(--color-night);
+  background-image: radial-gradient(70% 55% at 50% 40%, rgba(192, 42, 75, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+}
+html[data-theme="light"] .stack-card::after {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(70, 45, 35, 0.06) 100%);
+}
+
+/* ---- subtle claymorphism on interactive surfaces (light only) ---- */
+html[data-theme="light"] .btn-primary {
+  color: #fbf4ea; /* keep light text on the red clay tab */
+  box-shadow:
+    6px 8px 16px rgba(122, 20, 40, 0.26),
+    -5px -5px 12px rgba(255, 255, 255, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+html[data-theme="light"] .btn-primary:hover {
+  box-shadow:
+    8px 12px 22px rgba(122, 20, 40, 0.32),
+    -5px -5px 12px rgba(255, 255, 255, 0.62);
+}
+html[data-theme="light"] .btn-ghost {
+  box-shadow:
+    5px 7px 15px rgba(70, 45, 35, 0.1),
+    -5px -5px 11px rgba(255, 255, 255, 0.65);
+}
+/* the contact form card + inputs as clay */
+html[data-theme="light"] form.grid {
+  box-shadow:
+    12px 14px 32px rgba(70, 45, 35, 0.1),
+    -10px -10px 26px rgba(255, 255, 255, 0.7);
+}
+html[data-theme="light"] form.grid input,
+html[data-theme="light"] form.grid textarea {
+  box-shadow:
+    inset 3px 3px 7px rgba(70, 45, 35, 0.1),
+    inset -3px -3px 7px rgba(255, 255, 255, 0.75);
+}
+/* price chip as a small clay pill */
+html[data-theme="light"] .stack-card .bg-graphite-soft\/80 {
+  box-shadow:
+    4px 5px 12px rgba(70, 45, 35, 0.1),
+    -4px -4px 10px rgba(255, 255, 255, 0.7);
+}

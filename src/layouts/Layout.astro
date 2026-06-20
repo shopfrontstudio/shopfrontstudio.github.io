@@ -20,6 +20,19 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <script is:inline>
+      // Set the theme before paint (no flash). Default = visitor's device setting.
+      (function () {
+        try {
+          var t =
+            localStorage.getItem("theme") ||
+            (window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+          document.documentElement.setAttribute("data-theme", t);
+        } catch (e) {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      })();
+    </script>
     <meta name="theme-color" content="#0a0608" />
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
@@ -76,6 +89,19 @@ const {
 
     <script>
       import Lenis from "lenis";
+
+      // Temporary theme toggle (Stage 2 replaces this with the hanging switch)
+      const themeBtn = document.getElementById("theme-toggle");
+      themeBtn?.addEventListener("click", () => {
+        const next =
+          document.documentElement.getAttribute("data-theme") === "light" ? "dark" : "light";
+        document.documentElement.setAttribute("data-theme", next);
+        try {
+          localStorage.setItem("theme", next);
+        } catch (e) {}
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute("content", next === "light" ? "#f4efe4" : "#0a0608");
+      });
 
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
