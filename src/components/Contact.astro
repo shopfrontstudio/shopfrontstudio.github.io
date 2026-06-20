@@ -20,12 +20,19 @@
     </div>
 
     <form
-      action="https://formspree.io/f/your-form-id"
+      id="contact-form"
+      action="https://api.web3forms.com/submit"
       method="POST"
       class="grid gap-5 bg-graphite border border-line rounded-3xl p-8 md:p-12"
       data-reveal
       style="--reveal-delay: 120ms"
     >
+      {/* Web3Forms config */}
+      <input type="hidden" name="access_key" value="c90c681f-8abc-4eb1-b07c-ab82aec3e435" />
+      <input type="hidden" name="subject" value="New enquiry from anaramarketing.com.au" />
+      <input type="hidden" name="from_name" value="Anara Marketing website" />
+      {/* Honeypot — bots fill this, humans never see it */}
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
       <div class="grid sm:grid-cols-2 gap-5">
         <label class="block">
           <span class="text-[13px] lg:text-[18px] font-medium text-cream-soft">Your name</span>
@@ -88,9 +95,58 @@
         </svg>
       </button>
 
+      <p id="form-status" role="status" aria-live="polite" class="hidden text-[14px] lg:text-[17px]"></p>
+
       <p class="text-xs lg:text-[16px] text-cream-mute pt-2">
         Or by mail — <a href="mailto:info@anaramarketing.com.au" class="text-gold hover:underline">info@anaramarketing.com.au</a>
       </p>
     </form>
   </div>
 </section>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const status = document.getElementById("form-status");
+
+  if (form && status) {
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement | null;
+    const defaultLabel = submitBtn?.innerHTML ?? "";
+
+    const show = (msg: string, ok: boolean) => {
+      status.textContent = msg;
+      status.classList.remove("hidden");
+      status.style.color = ok ? "var(--color-gold-bright)" : "#e7728a";
+    };
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending…";
+      }
+
+      try {
+        const res = await fetch(form.action, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(form),
+        });
+        const data = await res.json();
+
+        if (res.ok) {
+          show("Thanks — your note's on its way. We'll reply within one working day.", true);
+          form.reset();
+        } else {
+          show(data?.message || "Something went wrong. Please email us directly at info@anaramarketing.com.au.", false);
+        }
+      } catch {
+        show("Couldn't send just now. Please email us directly at info@anaramarketing.com.au.", false);
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = defaultLabel;
+        }
+      }
+    });
+  }
+</script>
