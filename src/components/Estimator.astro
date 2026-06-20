@@ -1,0 +1,24 @@
+---
+import Estimator from "./react/Estimator.tsx";
+---
+
+<section id="estimate" class="relative text-cream py-28 md:py-36">
+  <div class="max-w-5xl mx-auto px-6">
+    <div class="hairline-gold mx-auto mb-16 md:mb-20 opacity-50"></div>
+    <div class="text-center mb-12" data-reveal>
+      <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+        Plan &amp; price
+      </div>
+      <h2 class="font-display display-tight text-5xl md:text-7xl lg:text-[5.4rem]">
+        <span class="gradient-cream">Shape your</span>
+        <span class="italic-gold italic">project.</span>
+      </h2>
+      <p class="mt-6 max-w-2xl mx-auto text-lg lg:text-[26px] text-cream-soft">
+        Pick what you need for a rough idea — then send it through and we'll firm it up together.
+      </p>
+    </div>
+    <div data-reveal style="--reveal-delay: 120ms">
+      <Estimator client:visible />
+    </div>
+  </div>
+</section>
