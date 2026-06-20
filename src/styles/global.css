@@ -536,12 +536,12 @@ html[data-theme="light"] {
 }
 .lamp__art {
   display: block;
-  width: 120px;
+  width: 162px; /* wider canvas (vb 230) — keeps the lamp itself the same size */
   height: auto;
 }
 @media (max-width: 640px) {
   .lamp { right: 4px; }
-  .lamp__art { width: 92px; }
+  .lamp__art { width: 124px; }
 }
 
 /* themeable light: lit mouth, falling beam, and pool below (var() so it
