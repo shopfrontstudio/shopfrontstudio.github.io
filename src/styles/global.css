@@ -566,17 +566,17 @@ html[data-theme="light"] .ambient {
 }
 .orb--gold {
   width: 42vw; height: 42vw; left: -8vw; top: 4vh;
-  background: radial-gradient(circle at 30% 30%, rgba(200, 161, 90, 0.5), rgba(200, 161, 90, 0) 70%);
+  background: radial-gradient(circle, rgba(200, 161, 90, 0.42) 0%, rgba(200, 161, 90, 0.16) 40%, rgba(200, 161, 90, 0) 70%);
   animation: orb-a 26s ease-in-out infinite;
 }
 .orb--berry {
   width: 38vw; height: 38vw; right: -6vw; top: 26vh;
-  background: radial-gradient(circle at 40% 40%, rgba(192, 42, 75, 0.32), rgba(192, 42, 75, 0) 70%);
+  background: radial-gradient(circle, rgba(192, 42, 75, 0.26) 0%, rgba(192, 42, 75, 0.1) 42%, rgba(192, 42, 75, 0) 70%);
   animation: orb-b 32s ease-in-out infinite;
 }
 .orb--blush {
   width: 46vw; height: 46vw; left: 18vw; bottom: -14vh;
-  background: radial-gradient(circle at 50% 50%, rgba(243, 182, 191, 0.5), rgba(243, 182, 191, 0) 70%);
+  background: radial-gradient(circle, rgba(243, 182, 191, 0.42) 0%, rgba(243, 182, 191, 0.16) 42%, rgba(243, 182, 191, 0) 70%);
   animation: orb-c 30s ease-in-out infinite;
 }
 
@@ -603,10 +603,19 @@ html[data-theme="light"] .ambient {
 @keyframes tile-b { 0%, 100% { transform: translate3d(0,0,0) rotate(7deg); } 50% { transform: translate3d(2vw, 3vh, 0) rotate(2deg); } }
 @keyframes tile-c { 0%, 100% { transform: translate3d(0,0,0) rotate(8deg); } 50% { transform: translate3d(-2vw, -2vh, 0) rotate(12deg); } }
 
-/* lighter weight on phones: drop the floating tiles + the largest orb */
+/* lighter weight on phones: drop the floating tiles, and oversize the orbs so
+   they bleed off-screen as a soft wash instead of a visible disc */
 @media (max-width: 767px) {
   .glass-tile { display: none; }
   .orb--blush { display: none; }
+  .orb--gold {
+    width: 150vw; height: 150vw; left: -78vw; top: -24vh;
+    background: radial-gradient(circle, rgba(200, 161, 90, 0.32) 0%, rgba(200, 161, 90, 0.12) 48%, rgba(200, 161, 90, 0) 70%);
+  }
+  .orb--berry {
+    width: 150vw; height: 150vw; right: -85vw; top: 2vh;
+    background: radial-gradient(circle, rgba(192, 42, 75, 0.18) 0%, rgba(192, 42, 75, 0.07) 48%, rgba(192, 42, 75, 0) 70%);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .orb, .glass-tile { animation: none; }
