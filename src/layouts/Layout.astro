@@ -121,7 +121,8 @@ const {
       };
 
       if (lamp && hang) {
-        const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+        try {
+          const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
         // pendulum state (degrees, deg/s)
         const SPRING = 85;   // stiffness → swing speed
@@ -196,6 +197,9 @@ const {
             if (!reduce) { vel = 160; startLoop(); }
           }
         });
+        } catch (err) {
+          /* never let the lamp break the rest of the page scripts */
+        }
       }
 
       // 2 + 3 — reveal-on-scroll
