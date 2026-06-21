@@ -622,6 +622,133 @@ html[data-theme="light"] .ambient {
 }
 
 /* ===================================================================
+   Hero stat micro-visuals (stopwatch / gauge / price tag / lock)
+   =================================================================== */
+.stat-viz { width: 44px; height: 50px; margin-bottom: 12px; }
+.stat-viz svg { width: 100%; height: 100%; overflow: visible; display: block; }
+.stat-label {
+  margin-top: 0.55rem;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-cream-mute);
+  line-height: 1.45;
+}
+@media (min-width: 1024px) {
+  .stat-label { font-size: 12.5px; }
+  .stat-viz { width: 52px; height: 58px; }
+}
+
+.sw-pin { fill: var(--color-gold); }
+
+/* stopwatch */
+.sw-metal { fill: var(--color-gold); }
+.sw-face { fill: none; }
+.sw-ring { fill: none; stroke: var(--color-gold); stroke-width: 3; opacity: 0.75; }
+.sw-prog {
+  fill: none; stroke: var(--color-crimson); stroke-width: 3.6; stroke-linecap: round;
+  transform: rotate(-90deg); transform-origin: 32px 42px;
+  stroke-dasharray: 157; stroke-dashoffset: 157;
+}
+.stats-in .sw-prog { animation: sw-prog 1.4s cubic-bezier(0.4, 0, 0.1, 1) 0.15s forwards; }
+@keyframes sw-prog { to { stroke-dashoffset: 112; } }
+.sw-hand { stroke: var(--color-crimson); stroke-width: 2.4; stroke-linecap: round; transform-origin: 32px 42px; }
+.stats-in .sw-hand { animation: sw-sweep 2.6s linear 0.2s infinite; }
+@keyframes sw-sweep { to { transform: rotate(360deg); } }
+
+/* speed gauge */
+.g-track { fill: none; stroke: var(--color-gold); stroke-width: 3; opacity: 0.35; stroke-linecap: round; }
+.g-fill {
+  fill: none; stroke: var(--color-crimson); stroke-width: 3.6; stroke-linecap: round;
+  stroke-dasharray: 120; stroke-dashoffset: 120;
+}
+.stats-in .g-fill { animation: g-fill 1.4s ease 0.15s forwards; }
+@keyframes g-fill { to { stroke-dashoffset: 40; } }
+.g-needle { stroke: var(--color-cream); stroke-width: 2.6; stroke-linecap: round; transform-origin: 32px 42px; transform: rotate(-42deg); }
+.stats-in .g-needle { animation: g-needle 1.4s cubic-bezier(0.34, 1.4, 0.5, 1) 0.15s forwards; }
+@keyframes g-needle { from { transform: rotate(-42deg); } to { transform: rotate(66deg); } }
+
+/* price tag */
+.tag { transform-origin: 18px 38px; }
+.tag-body { fill: none; stroke: var(--color-gold); stroke-width: 3; stroke-linejoin: round; }
+.tag-hole { fill: var(--color-crimson); }
+.tag-line { stroke: var(--color-gold); stroke-width: 2.2; stroke-linecap: round; opacity: 0.7; }
+.stats-in .tag { animation: tag-swing 3s ease-in-out 0.4s infinite; }
+@keyframes tag-swing { 0%, 100% { transform: rotate(0); } 10% { transform: rotate(-8deg); } 20% { transform: rotate(5deg); } 30% { transform: rotate(0); } }
+
+/* open padlock */
+.lk-shackle { fill: none; stroke: var(--color-gold); stroke-width: 3.2; stroke-linecap: round; transform-origin: 41px 24px; }
+.lk-body { fill: none; stroke: var(--color-gold); stroke-width: 3; }
+.stats-in .lk-shackle { animation: lk-open 3.2s ease-in-out 0.5s infinite; }
+@keyframes lk-open { 0%, 100% { transform: rotate(0); } 30%, 70% { transform: rotate(-20deg); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .stats-in .sw-prog { animation: none; stroke-dashoffset: 112; }
+  .stats-in .g-fill { animation: none; stroke-dashoffset: 40; }
+  .stats-in .g-needle { animation: none; transform: rotate(66deg); }
+  .stats-in .sw-hand, .stats-in .tag, .stats-in .lk-shackle { animation: none; }
+}
+
+/* ===================================================================
+   Service slide devices (laptop scroll / phone IG / book page-turn)
+   Animations only run while the slide is in view (.in-view) and use 2D
+   transforms/opacity only — composited, no scroll lag.
+   =================================================================== */
+.dev { width: 100%; max-width: 350px; height: auto; display: block; margin: 0 auto; }
+.dev-phone { max-width: 210px; }
+.dev-book { max-width: 380px; }
+@media (max-width: 767px) {
+  .dev { max-width: 270px; }
+  .dev-phone { max-width: 165px; }
+}
+
+/* laptop — the page scrolls inside the screen */
+.in-view .lap-scroll { animation: lap-scroll 9s ease-in-out 0.3s infinite alternate; }
+@keyframes lap-scroll { from { transform: translateY(0); } to { transform: translateY(-120px); } }
+
+/* phone — likes pulse, hearts float up, a comment slides in */
+.fl-heart, .fl-cmt { opacity: 0; }
+.in-view .fl-heart { animation: fl-rise 3.2s ease-in-out infinite; }
+.in-view .fl1 { animation-delay: 0.4s; }
+.in-view .fl2 { animation-delay: 1.5s; }
+.in-view .fl3 { animation-delay: 2.5s; }
+@keyframes fl-rise {
+  0% { opacity: 0; transform: translateY(6px) scale(0.6); }
+  18% { opacity: 1; transform: translateY(-6px) scale(1); }
+  100% { opacity: 0; transform: translateY(-48px) scale(0.9); }
+}
+.in-view .fl-cmt { animation: cmt-in 4.6s ease-in-out 1s infinite; }
+@keyframes cmt-in {
+  0% { opacity: 0; transform: translateY(10px); }
+  12% { opacity: 1; transform: translateY(0); }
+  42% { opacity: 1; transform: translateY(0); }
+  56% { opacity: 0; transform: translateY(-6px); }
+  100% { opacity: 0; }
+}
+.ig-like, .ig-toplike { transform-box: fill-box; transform-origin: center; }
+.in-view .ig-like { animation: like-pulse 2.6s ease-in-out infinite; }
+.in-view .ig-toplike { animation: like-pulse 2.6s ease-in-out 0.4s infinite; }
+@keyframes like-pulse { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.3); } 26% { transform: scale(1); } }
+
+/* book — pages turn at the spine */
+.bk-leaf { transform-box: fill-box; transform-origin: left center; }
+.in-view .lf1 { animation: pageflip 2.1s ease-in-out 0s infinite; }
+.in-view .lf2 { animation: pageflip 2.1s ease-in-out 0.7s infinite; }
+.in-view .lf3 { animation: pageflip 2.1s ease-in-out 1.4s infinite; }
+@keyframes pageflip {
+  0% { transform: scaleX(1); }
+  42% { transform: scaleX(0.04); }
+  50% { transform: scaleX(0.04); }
+  92%, 100% { transform: scaleX(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .in-view .lap-scroll, .in-view .fl-heart, .in-view .fl-cmt,
+  .in-view .ig-like, .in-view .ig-toplike, .in-view .bk-leaf { animation: none; }
+  .fl-heart, .fl-cmt { opacity: 1; }
+}
+
+/* ===================================================================
    Hanging pendant lamp (theme toggle)
    =================================================================== */
 :root {

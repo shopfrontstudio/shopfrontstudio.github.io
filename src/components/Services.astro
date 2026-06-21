@@ -1,4 +1,6 @@
 ---
+import ServiceDevice from "./ServiceDevice.astro";
+
 const services = [
   {
     slug: "websites",
@@ -53,20 +55,14 @@ const services = [
     {
       services.map((s, i) => (
         <article class="stack-card" data-service={s.slug}>
-          {/* Background illustration */}
-          <div
-            class="service-illo absolute inset-0 pointer-events-none"
-            aria-hidden="true"
-            style={`--illo: url('/illustrations/${s.slug}.svg');`}
-          />
-          {/* Left-to-right fade */}
+          {/* Left-to-right fade for depth */}
           <div class="card-fade absolute inset-0 pointer-events-none" aria-hidden="true"></div>
-
           {/* glass-clay sheen (light mode) */}
           <div class="card-sheen absolute inset-0 pointer-events-none" aria-hidden="true"></div>
 
-          <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 w-full">
-            <div class="md:col-span-5" data-reveal>
+          <div class="relative z-10 max-w-6xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-12 gap-10 md:gap-12 items-center w-full">
+            {/* text */}
+            <div class="md:col-span-7" data-reveal>
               <div class="flex items-center gap-3 mb-6">
                 <span class="font-display text-[64px] md:text-[88px] lg:text-[106px] leading-none gradient-crimson italic">
                   {s.index}
@@ -76,20 +72,15 @@ const services = [
                   <span class="font-display text-lg lg:text-[26px] text-cream font-medium">{s.eyebrow}</span>
                 </div>
               </div>
-              <h3 class="font-display display-tight text-3xl md:text-5xl lg:text-[3.6rem] text-cream mt-6">
+              <h3 class="font-display display-tight text-3xl md:text-5xl lg:text-[3.6rem] text-cream">
                 {s.title}
               </h3>
-              <div class="mt-8 inline-flex items-center gap-2 text-sm lg:text-[18px] font-medium px-4 py-2 rounded-full bg-graphite-soft border border-line-bright text-cream">
-                {s.price}
-              </div>
-            </div>
-            <div class="md:col-span-7 md:pt-2" data-reveal style="--reveal-delay: 120ms">
-              <p class="text-lg md:text-xl lg:text-[28px] leading-relaxed text-cream-soft">
+              <p class="mt-6 text-lg md:text-xl lg:text-[26px] leading-relaxed text-cream-soft max-w-xl">
                 {s.body}
               </p>
-              <ul class="mt-10 grid grid-cols-2 gap-y-4 gap-x-6">
+              <ul class="mt-8 grid grid-cols-2 gap-y-4 gap-x-6 max-w-xl">
                 {s.bullets.map((b) => (
-                  <li class="flex items-center gap-3 text-[15px] lg:text-[20px] text-cream">
+                  <li class="flex items-center gap-3 text-[15px] lg:text-[19px] text-cream">
                     <span class="w-5 h-5 lg:w-7 lg:h-7 rounded-full flex items-center justify-center text-[10px] lg:text-[13px] font-bold shrink-0 bg-crimson-deep text-cream">
                       ✓
                     </span>
@@ -97,12 +88,21 @@ const services = [
                   </li>
                 ))}
               </ul>
-
-              <div class="mt-10 flex items-center gap-4 text-[11px] lg:text-[16px] uppercase tracking-[0.28em] text-cream-mute">
-                <span>0{i + 1}</span>
-                <span class="flex-1 h-px bg-line-bright"></span>
-                <span>0{services.length}</span>
+              <div class="mt-8 flex items-center gap-5">
+                <span class="inline-flex items-center gap-2 text-sm lg:text-[18px] font-medium px-4 py-2 rounded-full bg-graphite-soft border border-line-bright text-cream">
+                  {s.price}
+                </span>
+                <span class="flex items-center gap-4 flex-1 text-[11px] lg:text-[15px] uppercase tracking-[0.28em] text-cream-mute">
+                  <span>0{i + 1}</span>
+                  <span class="flex-1 h-px bg-line-bright"></span>
+                  <span>0{services.length}</span>
+                </span>
               </div>
+            </div>
+
+            {/* animated device */}
+            <div class="md:col-span-5 flex items-center justify-center" data-reveal style="--reveal-delay: 140ms">
+              <ServiceDevice type={s.slug} />
             </div>
           </div>
         </article>
@@ -110,3 +110,37 @@ const services = [
     }
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    var cards = document.querySelectorAll(".stack-card");
+    if (!cards.length) return;
+
+    function bumpLikes(card) {
+      var el = card.querySelector(".like-count");
+      if (!el || el.dataset.run) return;
+      el.dataset.run = "1";
+      var n = 1284;
+      var t = setInterval(function () {
+        n += Math.floor(Math.random() * 6) + 1;
+        el.textContent = n.toLocaleString("en-US");
+      }, 650);
+      setTimeout(function () { clearInterval(t); }, 7000);
+    }
+
+    if (!("IntersectionObserver" in window)) {
+      cards.forEach(function (c) { c.classList.add("in-view"); });
+      return;
+    }
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("in-view"); bumpLikes(e.target); }
+          else { e.target.classList.remove("in-view"); }
+        });
+      },
+      { threshold: 0.3 }
+    );
+    cards.forEach(function (c) { io.observe(c); });
+  })();
+</script>
