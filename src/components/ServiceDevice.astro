@@ -7,6 +7,7 @@ const { type } = Astro.props;
 
 {type === "websites" && (
   <div class="dev dev-laptop" aria-hidden="true">
+    <div class="dev-inner">
     <div class="lap-lid">
       <div class="lap-screen">
         <span class="lap-cam"></span>
@@ -23,11 +24,13 @@ const { type } = Astro.props;
       </div>
     </div>
     <div class="lap-deck"></div>
+    </div>
   </div>
 )}
 
 {type === "social" && (
   <div class="dev dev-phone" aria-hidden="true">
+    <div class="dev-inner">
     <div class="ph-frame">
       <span class="ph-island"></span>
       <div class="ph-screen">
@@ -45,11 +48,13 @@ const { type } = Astro.props;
         </div>
       </div>
     </div>
+    </div>
   </div>
 )}
 
 {type === "catalogues" && (
   <div class="dev dev-book" aria-hidden="true">
+    <div class="dev-inner">
     <div class="book">
       <div class="bk-page bk-l">
         <span class="pimg p2" style="height:96px"></span>
@@ -75,6 +80,7 @@ const { type } = Astro.props;
           <div class="pg pb"><div class="pgrid"><span class="pimg p1"></span><span class="pimg p4"></span></div><i class="pline"></i></div>
         </div>
       </div>
+    </div>
     </div>
   </div>
 )}
