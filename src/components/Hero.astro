@@ -2,8 +2,13 @@
 import AnimatedMark from "./AnimatedMark.astro";
 ---
 
-<section class="relative overflow-hidden text-cream">
+<section class="relative overflow-hidden text-cream" data-hero>
   <div class="hero-glow"></div>
+  <span class="seed" style="left:8%;top:18%;width:10px;height:10px;--sd:15s"></span>
+  <span class="seed" style="left:88%;top:24%;width:7px;height:7px;--sd:19s"></span>
+  <span class="seed" style="left:15%;top:64%;width:6px;height:6px;--sd:17s"></span>
+  <span class="seed" style="left:80%;top:72%;width:9px;height:9px;--sd:22s"></span>
+  <span class="seed" style="left:50%;top:10%;width:5px;height:5px;--sd:24s"></span>
 
   <div class="relative max-w-6xl mx-auto px-6 pt-6 pb-24 md:pt-10 md:pb-32 text-center">
     <!-- Animated pomegranate — dots rest in fruit form, then disperse,
@@ -26,10 +31,12 @@ import AnimatedMark from "./AnimatedMark.astro";
       </div>
     </div>
 
-    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl hero-rise mt-2" style="--rise-delay: 230ms">
-      <span class="gradient-cream">Your shopfront,</span>
+    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl word-reveal mt-2">
+      <span class="w gradient-cream" style="--wd: 240ms">Your</span>
+      <span class="w gradient-cream" style="--wd: 330ms">shopfront,</span>
       <br />
-      <span class="gradient-crimson italic">considered online.</span>
+      <span class="w gradient-crimson italic" style="--wd: 450ms">considered</span>
+      <span class="w gradient-crimson italic" style="--wd: 560ms">online.</span>
     </h1>
 
     <p class="mt-10 mx-auto max-w-2xl text-lg md:text-xl lg:text-[26px] text-cream-soft leading-relaxed font-normal hero-rise" style="--rise-delay: 300ms">
@@ -41,9 +48,10 @@ import AnimatedMark from "./AnimatedMark.astro";
     <div class="mt-12 flex flex-wrap gap-3 justify-center hero-rise" style="--rise-delay: 370ms">
       <a
         href="#contact"
+        data-magnetic
         class="group btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-semibold tracking-wide"
       >
-        Begin a project
+        Get a free quote
         <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
           <path d="M5 12h14M13 5l7 7-7 7" />
         </svg>
@@ -52,11 +60,19 @@ import AnimatedMark from "./AnimatedMark.astro";
         href="#services"
         class="btn-ghost inline-flex items-center px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide"
       >
-        What we do
+        View services
       </a>
     </div>
 
-    <div class="hairline-gold mt-24 max-w-3xl mx-auto"></div>
+    {/* live ticker */}
+    <div class="ticker mt-14 max-w-3xl mx-auto hero-rise" style="--rise-delay: 460ms">
+      <div class="ticker__row text-[12px] lg:text-[15px] font-medium uppercase tracking-[0.2em]">
+        <span><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Ballarat-born</b><i>·</i></span>
+        <span aria-hidden="true"><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Ballarat-born</b><i>·</i></span>
+      </div>
+    </div>
+
+    <div class="hairline-gold mt-20 max-w-3xl mx-auto"></div>
 
     <div id="hero-stats" class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 max-w-3xl mx-auto text-left" data-reveal>
       {/* 1 — launch time: a stopwatch racing in well short of the industry bar */}
@@ -117,6 +133,10 @@ import AnimatedMark from "./AnimatedMark.astro";
         <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">No annual<span class="italic-gold"> lock-in</span></div>
         <div class="stat-label">Month to month · cancel anytime</div>
       </div>
+    </div>
+
+    <div class="flex justify-center mt-16 hero-rise" style="--rise-delay: 620ms">
+      <span class="scroll-cue" aria-hidden="true"></span>
     </div>
   </div>
 </section>

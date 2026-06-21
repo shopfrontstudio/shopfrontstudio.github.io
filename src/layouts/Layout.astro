@@ -80,6 +80,8 @@ const {
   </head>
   <body class="min-h-screen flex flex-col">
     <div class="intro-veil" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <div class="cursor-glow" aria-hidden="true"></div>
     <Header />
     <main class="flex-1 relative">
       <div class="page-bg-photo" aria-hidden="true"></div>
@@ -203,13 +205,91 @@ const {
       }
 
       // 1 — smooth inertia scroll (desktop/wheel; native touch on mobile)
+      let lenis = null;
       if (!reduce) {
-        const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
+        lenis = new Lenis({ duration: 1.1, smoothWheel: true });
         const raf = (t) => {
           lenis.raf(t);
           requestAnimationFrame(raf);
         };
         requestAnimationFrame(raf);
+      }
+
+      const isDesktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
+
+      // ── Scroll progress bar ─────────────────────────────────────────────
+      const bar = document.querySelector(".scroll-progress") as HTMLElement | null;
+      if (bar) {
+        let ticking = false;
+        const update = () => {
+          const h = document.documentElement;
+          const max = h.scrollHeight - h.clientHeight;
+          const p = max > 0 ? h.scrollTop / max : 0;
+          bar.style.transform = "scaleX(" + p.toFixed(4) + ")";
+          ticking = false;
+        };
+        const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+        window.addEventListener("scroll", onScroll, { passive: true });
+        update();
+      }
+
+      // ── Navbar: solid-glass state once scrolled ─────────────────────────
+      const header = document.querySelector("header");
+      if (header) {
+        const onScrollHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 24);
+        window.addEventListener("scroll", onScrollHeader, { passive: true });
+        onScrollHeader();
+      }
+
+      // ── Smooth anchor scrolling (routes through Lenis when active) ───────
+      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const id = a.getAttribute("href");
+          if (!id || id === "#") return;
+          const target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          if (lenis) lenis.scrollTo(target, { offset: -64, duration: 1.2 });
+          else target.scrollIntoView({ behavior: "smooth" });
+        });
+      });
+
+      // ── Magnetic buttons (desktop, fine pointer) ────────────────────────
+      if (isDesktop && !reduce) {
+        document.querySelectorAll("[data-magnetic]").forEach((el) => {
+          const strength = 0.3;
+          el.addEventListener("pointermove", (e) => {
+            const r = el.getBoundingClientRect();
+            const x = e.clientX - (r.left + r.width / 2);
+            const y = e.clientY - (r.top + r.height / 2);
+            el.style.transform = "translate(" + x * strength + "px," + y * strength + "px)";
+          });
+          el.addEventListener("pointerleave", () => { el.style.transform = ""; });
+        });
+
+        // ── Cursor-following glow, hero only ──────────────────────────────
+        const glow = document.querySelector(".cursor-glow") as HTMLElement | null;
+        const hero = document.querySelector("[data-hero]") as HTMLElement | null;
+        if (glow && hero) {
+          hero.addEventListener("pointermove", (e) => {
+            glow.style.opacity = "1";
+            glow.style.transform = "translate(" + (e.clientX - 250) + "px," + (e.clientY - 250) + "px)";
+          });
+          hero.addEventListener("pointerleave", () => { glow.style.opacity = "0"; });
+        }
+
+        // ── Subtle 3D tilt on service devices ─────────────────────────────
+        document.querySelectorAll("[data-tilt]").forEach((card) => {
+          const inner = card.querySelector(".dev-inner") as HTMLElement | null;
+          if (!inner) return;
+          card.addEventListener("pointermove", (e) => {
+            const r = card.getBoundingClientRect();
+            const px = (e.clientX - r.left) / r.width - 0.5;
+            const py = (e.clientY - r.top) / r.height - 0.5;
+            inner.style.transform = "perspective(900px) rotateY(" + px * 8 + "deg) rotateX(" + -py * 8 + "deg)";
+          });
+          card.addEventListener("pointerleave", () => { inner.style.transform = ""; });
+        });
       }
     </script>
 
