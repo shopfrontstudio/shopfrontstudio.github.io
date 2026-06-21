@@ -690,74 +690,147 @@ html[data-theme="light"] .ambient {
 }
 
 /* ===================================================================
-   Service slide devices (laptop scroll / phone IG / book page-turn)
-   Animations only run while the slide is in view (.in-view) and use 2D
-   transforms/opacity only — composited, no scroll lag.
+   Service slide devices — built in HTML/CSS so overflow clips reliably and
+   the book turns in real 3D. Animations only run when the slide is in view.
    =================================================================== */
-.dev { width: 100%; max-width: 350px; height: auto; display: block; margin: 0 auto; }
-.dev-phone { max-width: 210px; }
-.dev-book { max-width: 380px; }
+.dev { width: 100%; margin: 0 auto; }
+.dev-laptop { max-width: 360px; }
+.dev-phone { max-width: 208px; }
+.dev-book { max-width: 400px; }
 @media (max-width: 767px) {
-  .dev { max-width: 270px; }
-  .dev-phone { max-width: 165px; }
+  .dev-laptop { max-width: 300px; }
+  .dev-phone { max-width: 172px; }
+  .dev-book { max-width: 330px; }
 }
 
-/* laptop — the page scrolls inside the screen (quick) */
-.in-view .lap-scroll { animation: lap-scroll 5.5s ease-in-out 0.3s infinite alternate; }
-@keyframes lap-scroll { from { transform: translateY(0); } to { transform: translateY(-165px); } }
+/* ---------- LAPTOP ---------- */
+.lap-lid { background: linear-gradient(150deg, #3c4046, #15171b); border-radius: 16px; padding: 3px 3px 0; }
+.lap-screen { position: relative; background: #000; border-radius: 13px; padding: 7px; box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.55); }
+.lap-cam { position: absolute; top: 3px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: #16181d; }
+.lap-vp { aspect-ratio: 16 / 10; overflow: hidden; border-radius: 4px; background: #fbfaf7; position: relative; }
+.lap-page { position: absolute; left: 0; right: 0; top: 0; display: flex; flex-direction: column; }
+.in-view .lap-page { animation: lapscroll 5.5s ease-in-out 0.3s infinite alternate; }
+@keyframes lapscroll { from { transform: translateY(0); } to { transform: translateY(-56%); } }
+.lp-nav { display: flex; align-items: center; justify-content: space-between; padding: 7px 9px; background: #fff; }
+.lp-logo { font-family: var(--font-display); font-size: 9px; letter-spacing: 2px; color: #1d1d1f; }
+.lp-menu { display: flex; gap: 5px; }
+.lp-menu i { width: 14px; height: 3px; border-radius: 2px; background: #cdbfa6; }
+.lp-hero { padding: 16px 10px 20px; background: linear-gradient(135deg, #c02a4b, #7a0f24); text-align: center; }
+.lp-h1 { font-family: var(--font-display); font-size: 13px; color: #f3ede0; }
+.lp-h2 { font-family: var(--font-display); font-style: italic; font-size: 11px; color: #f3b6bf; }
+.lp-btn { display: inline-block; margin-top: 8px; width: 48px; height: 9px; border-radius: 5px; background: #f3ede0; }
+.lp-cards { display: flex; gap: 6px; padding: 10px; }
+.lp-cards div { flex: 1; height: 34px; border-radius: 4px; background: #efe9df; }
+.lp-feat { display: flex; gap: 8px; padding: 0 10px 12px; align-items: center; }
+.lp-fimg { width: 84px; height: 50px; border-radius: 5px; background: linear-gradient(135deg, #c02a4b, #7a0f24); flex: none; }
+.lp-flines { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.lp-flines i { height: 5px; border-radius: 3px; background: #e3dac8; }
+.lp-flines i:first-child { background: #d3c9b6; width: 70%; }
+.lp-foot { height: 34px; background: #1b1416; }
+.lap-deck { height: 13px; margin: 0 -7%; background: linear-gradient(#e9edf2, #aeb4bd); clip-path: polygon(3% 0, 97% 0, 100% 100%, 0 100%); position: relative; border-radius: 0 0 9px 9px; }
+.lap-deck::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 22%; height: 4px; background: #9097a1; border-radius: 0 0 6px 6px; }
 
-/* phone — likes pulse, hearts float up, a comment slides in */
-.fl-heart, .fl-cmt { opacity: 0; }
-.in-view .fl-heart { animation: fl-rise 3.2s ease-in-out infinite; }
-.in-view .fl1 { animation-delay: 0.4s; }
-.in-view .fl2 { animation-delay: 1.5s; }
-.in-view .fl3 { animation-delay: 2.5s; }
-@keyframes fl-rise {
-  0% { opacity: 0; transform: translateY(6px) scale(0.6); }
-  18% { opacity: 1; transform: translateY(-6px) scale(1); }
-  100% { opacity: 0; transform: translateY(-48px) scale(0.9); }
+/* ---------- PHONE ---------- */
+.ph-frame { position: relative; background: linear-gradient(120deg, #9aa0a8, #3c4047 45%, #7d828b); border-radius: 34px; padding: 5px; box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.5); }
+.ph-frame::before { content: ""; position: absolute; left: -2px; top: 26%; width: 3px; height: 8%; background: #34383f; border-radius: 2px; box-shadow: 0 22px 0 #34383f, 0 40px 0 #34383f; }
+.ph-frame::after { content: ""; position: absolute; right: -2px; top: 34%; width: 3px; height: 12%; background: #34383f; border-radius: 2px; }
+.ph-screen { position: relative; overflow: hidden; border-radius: 30px; background: #fbfaf7; aspect-ratio: 1 / 2.05; padding: 4px 9px 8px; }
+.ph-island { position: absolute; top: 9px; left: 50%; transform: translateX(-50%); width: 34%; height: 13px; background: #000; border-radius: 8px; z-index: 6; }
+.ph-status { display: flex; justify-content: space-between; align-items: center; height: 18px; padding: 0 3px; }
+.ph-status span { font-family: var(--font-body); font-size: 8px; font-weight: 700; color: #1d1d1f; }
+.ph-bars { width: 14px; height: 8px; border: 1px solid #1d1d1f; border-radius: 2px; position: relative; }
+.ph-bars::after { content: ""; position: absolute; inset: 1.5px; width: 65%; background: #1d1d1f; border-radius: 1px; }
+.ig-top { display: flex; align-items: center; justify-content: space-between; padding: 4px 2px 6px; }
+.ig-logo { font-family: var(--font-display); font-style: italic; font-size: 14px; color: #1d1d1f; }
+.ig-ti { width: 12px; height: 11px; clip-path: path("M6 11 C6 11 0 7 0 3 C0 1 2 0 3 1 C4 0 6 0 6 2 C6 0 8 0 9 1 C10 0 12 1 12 3 C12 7 6 11 6 11 Z"); background: #c02a4b; }
+.ig-stories { display: flex; gap: 7px; padding: 2px 2px 5px; }
+.ig-stories i { width: 16px; height: 16px; border-radius: 50%; background: #e8dfce; box-shadow: 0 0 0 1.5px #fbfaf7, 0 0 0 3px #c02a4b; }
+.ig-stories i:nth-child(3) { box-shadow: 0 0 0 1.5px #fbfaf7, 0 0 0 3px #d3c9b6; }
+.ig-phead { display: flex; align-items: center; gap: 6px; padding: 3px 2px; }
+.ig-av { width: 15px; height: 15px; border-radius: 50%; background: linear-gradient(135deg, #f4c06a, #c02a4b); }
+.ig-name { height: 5px; width: 54px; border-radius: 2px; background: #cfc6b4; }
+.ig-photo { width: 100%; aspect-ratio: 1 / 1; border-radius: 2px; background: linear-gradient(135deg, #f4c06a, #c02a4b 55%, #6e0f22); }
+.ig-acts { display: flex; align-items: center; gap: 10px; padding: 7px 2px 3px; }
+.ig-heart { color: #c02a4b; font-size: 14px; line-height: 1; display: inline-block; transform-origin: center; }
+.in-view .ig-heart { animation: likepulse 2.6s ease-in-out infinite; }
+.ig-o { width: 12px; height: 12px; border: 1.6px solid #1d1d1f; border-radius: 50%; }
+.ig-s { width: 0; height: 0; border-left: 10px solid #1d1d1f; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+.ig-likes { font-family: var(--font-body); font-size: 8px; font-weight: 700; color: #1d1d1f; padding: 2px; }
+.ig-cap { display: flex; flex-direction: column; gap: 4px; padding: 2px; }
+.ig-cap i { height: 5px; border-radius: 2px; background: #e7e0d2; }
+.ig-cap i:first-child { width: 80%; background: #cfc6b4; }
+.ig-fx { position: absolute; left: 0; right: 0; bottom: 70px; top: 40%; pointer-events: none; }
+.heart { position: absolute; bottom: 0; color: #c02a4b; font-size: 14px; opacity: 0; }
+.h1 { left: 60%; } .h2 { left: 46%; } .h3 { left: 72%; }
+.in-view .heart { animation: hrise 3.2s ease-in-out infinite; }
+.in-view .h1 { animation-delay: 0.4s; } .in-view .h2 { animation-delay: 1.5s; } .in-view .h3 { animation-delay: 2.6s; }
+@keyframes hrise {
+  0% { opacity: 0; transform: translateY(8px) scale(0.6); }
+  18% { opacity: 1; transform: translateY(-2px) scale(1); }
+  100% { opacity: 0; transform: translateY(-70px) scale(0.9); }
 }
-.in-view .fl-cmt { animation: cmt-in 4.6s ease-in-out 1s infinite; }
-@keyframes cmt-in {
+.ig-cmt { position: absolute; left: 4%; bottom: 6px; display: flex; flex-direction: column; gap: 3px; padding: 5px 9px; background: #fff; border: 1px solid #e7e0d2; border-radius: 9px; opacity: 0; }
+.ig-cmt i { height: 3px; border-radius: 2px; }
+.ig-cmt i:first-child { width: 24px; background: #c8a15a; }
+.ig-cmt i:last-child { width: 44px; background: #ddd5c6; }
+.in-view .ig-cmt { animation: cmtin 4.6s ease-in-out 1s infinite; }
+@keyframes likepulse { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.35); } 26% { transform: scale(1); } }
+@keyframes cmtin {
   0% { opacity: 0; transform: translateY(10px); }
   12% { opacity: 1; transform: translateY(0); }
   42% { opacity: 1; transform: translateY(0); }
   56% { opacity: 0; transform: translateY(-6px); }
   100% { opacity: 0; }
 }
-.ig-like, .ig-toplike { transform-box: fill-box; transform-origin: center; }
-.in-view .ig-like { animation: like-pulse 2.6s ease-in-out infinite; }
-.in-view .ig-toplike { animation: like-pulse 2.6s ease-in-out 0.4s infinite; }
-@keyframes like-pulse { 0%, 100% { transform: scale(1); } 12% { transform: scale(1.3); } 26% { transform: scale(1); } }
 
-/* book — pages turn at the spine, with a shadow sweep for a natural feel */
-.bk-leaf { transform-box: fill-box; transform-origin: left center; }
-.leaf-shade { opacity: 0; }
-.in-view .lf1 { animation: pageflip 2.4s ease-in-out 0s infinite; }
-.in-view .lf2 { animation: pageflip 2.4s ease-in-out 0.8s infinite; }
-.in-view .lf3 { animation: pageflip 2.4s ease-in-out 1.6s infinite; }
-.in-view .lf1 .leaf-shade { animation: pageshade 2.4s ease-in-out 0s infinite; }
-.in-view .lf2 .leaf-shade { animation: pageshade 2.4s ease-in-out 0.8s infinite; }
-.in-view .lf3 .leaf-shade { animation: pageshade 2.4s ease-in-out 1.6s infinite; }
-@keyframes pageflip {
-  0% { transform: scaleX(1); }
-  44% { transform: scaleX(0.05); }
-  52% { transform: scaleX(0.05); }
-  94%, 100% { transform: scaleX(1); }
+/* ---------- BOOK (real 3D page turn) ---------- */
+.book { display: flex; perspective: 1700px; background: linear-gradient(160deg, #a81934, #640d20); border-radius: 8px; padding: 9px; box-shadow: 0 26px 46px -22px rgba(0, 0, 0, 0.5); }
+.bk-page { aspect-ratio: 0.8 / 1; background: #f6efe0; position: relative; overflow: hidden; padding: 11px; box-sizing: border-box; }
+.bk-l { flex: 1; border-radius: 3px 0 0 3px; box-shadow: inset -10px 0 16px -10px rgba(0, 0, 0, 0.25); }
+.bk-r { flex: 1; position: relative; transform-style: preserve-3d; aspect-ratio: 0.8 / 1; }
+.bk-rbase { position: absolute; inset: 0; border-radius: 0 3px 3px 0; }
+.leaf { position: absolute; inset: 0; transform-origin: left center; transform-style: preserve-3d; z-index: 1; }
+.pg { position: absolute; inset: 0; backface-visibility: hidden; background: #f9f3e7; overflow: hidden; padding: 11px; box-sizing: border-box; border-radius: 0 3px 3px 0; box-shadow: inset 9px 0 14px -10px rgba(0, 0, 0, 0.22); }
+.pg.pb { transform: rotateY(180deg); background: #f4edde; }
+.leaf::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0) 45%); opacity: 0; pointer-events: none; border-radius: 0 3px 3px 0; }
+.in-view .lf1 { animation: leafturn 6s ease-in-out 0s infinite; }
+.in-view .lf2 { animation: leafturn 6s ease-in-out 2s infinite; }
+.in-view .lf3 { animation: leafturn 6s ease-in-out 4s infinite; }
+.in-view .lf1::after { animation: leafshade 6s ease-in-out 0s infinite; }
+.in-view .lf2::after { animation: leafshade 6s ease-in-out 2s infinite; }
+.in-view .lf3::after { animation: leafshade 6s ease-in-out 4s infinite; }
+@keyframes leafturn {
+  0% { transform: rotateY(0deg); z-index: 9; }
+  30% { transform: rotateY(-168deg); z-index: 9; }
+  31% { z-index: 1; }
+  60% { transform: rotateY(-168deg); z-index: 1; }
+  90%, 100% { transform: rotateY(0deg); z-index: 1; }
 }
-@keyframes pageshade {
-  0% { opacity: 0; }
-  26% { opacity: 0.55; }
-  52% { opacity: 0.18; }
-  72% { opacity: 0.5; }
-  94%, 100% { opacity: 0; }
+@keyframes leafshade {
+  0% { opacity: 0; } 15% { opacity: 0.5; } 30% { opacity: 0.1; }
+  60% { opacity: 0.1; } 78% { opacity: 0.5; } 90%, 100% { opacity: 0; }
 }
+
+/* page content */
+.ptitle { font-family: var(--font-display); font-size: 14px; color: #3a2329; }
+.ptitle.sm { font-size: 11px; }
+.psub { font-family: var(--font-body); font-size: 6px; letter-spacing: 2px; color: #9a8a7a; margin-top: 3px; }
+.pline { height: 4px; border-radius: 2px; background: #e3dac8; margin-top: 5px; }
+.pline.sh { width: 65%; background: #d7cdb9; }
+.pimg { display: block; width: 100%; height: 48px; border-radius: 3px; margin-bottom: 6px; }
+.pimg.wide { height: 56px; }
+.p1 { background: linear-gradient(135deg, #e0a96a, #b06a3a); }
+.p2 { background: linear-gradient(135deg, #c64a5e, #7a1f34); }
+.p3 { background: linear-gradient(135deg, #7d8a6a, #4d5740); }
+.p4 { background: linear-gradient(135deg, #c8a15a, #8a6a30); }
+.pgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 6px; }
+.pgrid .pimg { height: 40px; margin: 0; }
+.pprice { font-family: var(--font-body); font-size: 7px; color: #a8987f; margin-top: 5px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .in-view .lap-scroll, .in-view .fl-heart, .in-view .fl-cmt,
-  .in-view .ig-like, .in-view .ig-toplike, .in-view .bk-leaf,
-  .in-view .leaf-shade { animation: none; }
-  .fl-heart, .fl-cmt { opacity: 1; }
+  .in-view .lap-page, .in-view .ig-heart, .in-view .heart, .in-view .ig-cmt,
+  .in-view .leaf, .in-view .leaf::after { animation: none; }
+  .heart, .ig-cmt { opacity: 1; }
 }
 
 /* ===================================================================
