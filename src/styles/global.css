@@ -55,6 +55,32 @@ body {
   letter-spacing: -0.005em;
 }
 
+/* premium layered shadow system (ambient + depth + contact) */
+:root {
+  --shadow-soft:
+    0 1px 2px rgba(40, 22, 16, 0.04),
+    0 10px 22px -10px rgba(40, 22, 16, 0.12),
+    0 34px 64px -32px rgba(40, 22, 16, 0.20);
+  --shadow-float:
+    0 2px 6px rgba(40, 22, 16, 0.06),
+    0 18px 34px -14px rgba(40, 22, 16, 0.16),
+    0 50px 90px -40px rgba(40, 22, 16, 0.26);
+}
+
+/* whisper-fine film grain over the whole page for a hand-crafted texture */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.055;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
+}
+@media (prefers-reduced-motion: reduce) { body::after { opacity: 0.04; } }
+
 .font-display {
   font-family: var(--font-display);
   letter-spacing: -0.015em;
@@ -62,9 +88,10 @@ body {
 }
 
 .display-tight {
-  letter-spacing: -0.025em;
-  line-height: 0.98;
+  letter-spacing: -0.028em;
+  line-height: 0.96;
   font-weight: 500;
+  text-wrap: balance;
 }
 
 /* Cream → crimson gradient for accent words (matches the logo's gradient on the pomegranate) */
@@ -374,20 +401,35 @@ html.lenis body {
   transform: scaleX(1);
 }
 
-/* Soft lift + crimson glow for primary buttons */
+/* Tactile, layered primary button — soft inner light + depth, lifts on hover */
 .btn-primary {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, background-color 0.25s ease;
+  position: relative;
+  background-image: linear-gradient(180deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0) 45%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -2px 6px rgba(90, 8, 23, 0.35),
+    0 2px 4px rgba(90, 8, 23, 0.18),
+    0 12px 26px -12px rgba(122, 15, 36, 0.5);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background-color 0.25s ease;
 }
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -10px rgba(192, 42, 75, 0.65);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -2px 6px rgba(90, 8, 23, 0.3),
+    0 4px 8px rgba(90, 8, 23, 0.2),
+    0 20px 40px -14px rgba(192, 42, 75, 0.6);
 }
+.btn-primary:active { transform: translateY(0); }
 .btn-ghost {
-  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, box-shadow 0.3s ease, background-color 0.25s ease;
 }
 .btn-ghost:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 30px -14px rgba(200, 161, 90, 0.4);
+  background-color: rgba(200, 161, 90, 0.06);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 16px 34px -16px rgba(200, 161, 90, 0.4);
 }
 /* Arrow nudge inside a .group button */
 .group:hover .btn-arrow {
@@ -459,10 +501,10 @@ html[data-theme="light"] .page-bg-photo::after {
     radial-gradient(50% 42% at 90% 14%, rgba(187, 37, 66, 0.11) 0%, transparent 62%),
     radial-gradient(62% 46% at 50% 102%, rgba(243, 182, 191, 0.16) 0%, transparent 72%);
 }
-/* faint halftone-dot texture (nods to the logo) so blank areas aren't flat */
+/* calm, premium warm wash instead of a dotted pattern */
 html[data-theme="light"] body {
-  background-image: radial-gradient(circle, rgba(150, 28, 52, 0.05) 1px, transparent 1.6px);
-  background-size: 21px 21px;
+  background-image: radial-gradient(135% 85% at 50% -8%, #f9f4ec 0%, #f4eee2 48%, #efe7d8 100%);
+  background-attachment: fixed;
 }
 html[data-theme="light"] .hero-glow {
   background:
@@ -478,10 +520,8 @@ html[data-theme="light"] .hero-glow {
 html[data-theme="light"] .stack-card {
   background-color: #f7f3ea;
   background-image:
-    radial-gradient(circle, rgba(150, 28, 52, 0.05) 1px, transparent 1.6px),
     radial-gradient(120% 90% at 18% 6%, rgba(255, 255, 255, 0.65) 0%, rgba(255, 255, 255, 0) 55%),
-    radial-gradient(80% 60% at 50% 40%, rgba(192, 42, 75, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
-  background-size: 21px 21px, auto, auto;
+    radial-gradient(80% 60% at 50% 40%, rgba(192, 42, 75, 0.04) 0%, rgba(0, 0, 0, 0) 70%);
   border-top: 1px solid rgba(255, 255, 255, 0.65);
   border-bottom: 1px solid rgba(140, 90, 70, 0.08);
   /* clay depth */
@@ -565,20 +605,23 @@ html[data-theme="light"] .ambient {
   will-change: transform;
 }
 .orb--gold {
-  width: 42vw; height: 42vw; left: -8vw; top: 4vh;
-  background: radial-gradient(circle, rgba(200, 161, 90, 0.42) 0%, rgba(200, 161, 90, 0.16) 40%, rgba(200, 161, 90, 0) 70%);
-  animation: orb-a 26s ease-in-out infinite;
+  width: 48vw; height: 48vw; left: -12vw; top: 0vh;
+  background: radial-gradient(circle, rgba(200, 161, 90, 0.24) 0%, rgba(200, 161, 90, 0.09) 42%, rgba(200, 161, 90, 0) 70%);
+  animation: orb-a 30s ease-in-out infinite;
 }
 .orb--berry {
-  width: 38vw; height: 38vw; right: -6vw; top: 26vh;
-  background: radial-gradient(circle, rgba(192, 42, 75, 0.26) 0%, rgba(192, 42, 75, 0.1) 42%, rgba(192, 42, 75, 0) 70%);
-  animation: orb-b 32s ease-in-out infinite;
+  width: 44vw; height: 44vw; right: -10vw; top: 24vh;
+  background: radial-gradient(circle, rgba(192, 42, 75, 0.15) 0%, rgba(192, 42, 75, 0.06) 44%, rgba(192, 42, 75, 0) 70%);
+  animation: orb-b 36s ease-in-out infinite;
 }
 .orb--blush {
-  width: 46vw; height: 46vw; left: 18vw; bottom: -14vh;
-  background: radial-gradient(circle, rgba(243, 182, 191, 0.42) 0%, rgba(243, 182, 191, 0.16) 42%, rgba(243, 182, 191, 0) 70%);
-  animation: orb-c 30s ease-in-out infinite;
+  width: 52vw; height: 52vw; left: 16vw; bottom: -18vh;
+  background: radial-gradient(circle, rgba(243, 182, 191, 0.24) 0%, rgba(243, 182, 191, 0.09) 44%, rgba(243, 182, 191, 0) 70%);
+  animation: orb-c 34s ease-in-out infinite;
 }
+
+/* glass tiles removed for a calmer, more editorial feel */
+.glass-tile { display: none !important; }
 
 .glass-tile {
   position: absolute;
@@ -693,7 +736,22 @@ html[data-theme="light"] .ambient {
    Service slide devices — built in HTML/CSS so overflow clips reliably and
    the book turns in real 3D. Animations only run when the slide is in view.
    =================================================================== */
-.dev { width: 100%; margin: 0 auto; }
+.dev { width: 100%; margin: 0 auto; position: relative; }
+/* slow, subtle float (only while the slide is in view) */
+.in-view .dev { animation: dev-float 7s ease-in-out infinite; will-change: transform; }
+.in-view .dev-phone { animation-duration: 8s; animation-delay: -1.5s; }
+.in-view .dev-book { animation-duration: 9s; animation-delay: -3s; }
+@keyframes dev-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+/* soft contact shadow grounding each device */
+.dev::after {
+  content: "";
+  position: absolute;
+  left: 12%; right: 12%; bottom: -7%;
+  height: 9%;
+  background: radial-gradient(ellipse at center, rgba(40, 22, 16, 0.22) 0%, rgba(40, 22, 16, 0) 72%);
+  filter: blur(6px);
+  z-index: -1;
+}
 .dev-laptop { max-width: 360px; }
 .dev-phone { max-width: 208px; }
 .dev-book { max-width: 400px; }
@@ -705,7 +763,8 @@ html[data-theme="light"] .ambient {
 
 /* ---------- LAPTOP ---------- */
 .lap-lid { background: linear-gradient(150deg, #3c4046, #15171b); border-radius: 16px; padding: 3px 3px 0; }
-.lap-screen { position: relative; background: #000; border-radius: 13px; padding: 7px; box-shadow: 0 16px 34px -18px rgba(0, 0, 0, 0.55); }
+.lap-screen { position: relative; background: #000; border-radius: 13px; padding: 7px; box-shadow: var(--shadow-float); }
+.lap-vp::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 4px; background: linear-gradient(120deg, rgba(255, 255, 255, 0.22) 0%, rgba(255, 255, 255, 0) 30%, rgba(255, 255, 255, 0) 100%); }
 .lap-cam { position: absolute; top: 3px; left: 50%; transform: translateX(-50%); width: 5px; height: 5px; border-radius: 50%; background: #16181d; }
 .lap-vp { aspect-ratio: 16 / 10; overflow: hidden; border-radius: 4px; background: #fbfaf7; position: relative; }
 .lap-page { position: absolute; left: 0; right: 0; top: 0; display: flex; flex-direction: column; }
@@ -731,7 +790,8 @@ html[data-theme="light"] .ambient {
 .lap-deck::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 22%; height: 4px; background: #9097a1; border-radius: 0 0 6px 6px; }
 
 /* ---------- PHONE ---------- */
-.ph-frame { position: relative; background: linear-gradient(120deg, #9aa0a8, #3c4047 45%, #7d828b); border-radius: 34px; padding: 5px; box-shadow: 0 18px 36px -18px rgba(0, 0, 0, 0.5); }
+.ph-frame { position: relative; background: linear-gradient(120deg, #9aa0a8, #3c4047 45%, #7d828b); border-radius: 34px; padding: 5px; box-shadow: var(--shadow-float); }
+.ph-screen::after { content: ""; position: absolute; inset: 0; pointer-events: none; border-radius: 30px; background: linear-gradient(125deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 26%, rgba(255, 255, 255, 0) 72%, rgba(255, 255, 255, 0.12) 100%); }
 .ph-frame::before { content: ""; position: absolute; left: -2px; top: 26%; width: 3px; height: 8%; background: #34383f; border-radius: 2px; box-shadow: 0 22px 0 #34383f, 0 40px 0 #34383f; }
 .ph-frame::after { content: ""; position: absolute; right: -2px; top: 34%; width: 3px; height: 12%; background: #34383f; border-radius: 2px; }
 .ph-screen { position: relative; overflow: hidden; border-radius: 30px; background: #fbfaf7; aspect-ratio: 1 / 2.05; padding: 4px 9px 8px; }
@@ -784,7 +844,7 @@ html[data-theme="light"] .ambient {
 }
 
 /* ---------- BOOK (real 3D page turn) ---------- */
-.book { display: flex; perspective: 1700px; background: linear-gradient(160deg, #a81934, #640d20); border-radius: 8px; padding: 9px; box-shadow: 0 26px 46px -22px rgba(0, 0, 0, 0.5); }
+.book { display: flex; perspective: 1700px; background: linear-gradient(160deg, #a81934, #640d20); border-radius: 8px; padding: 9px; box-shadow: var(--shadow-float); }
 .bk-page { aspect-ratio: 0.8 / 1; background: #f6efe0; position: relative; overflow: hidden; padding: 11px; box-sizing: border-box; }
 .bk-l { flex: 1; border-radius: 3px 0 0 3px; box-shadow: inset -10px 0 16px -10px rgba(0, 0, 0, 0.25); }
 .bk-r { flex: 1; position: relative; transform-style: preserve-3d; aspect-ratio: 0.8 / 1; }
@@ -841,8 +901,8 @@ html[data-theme="light"] .ambient {
   --lamp-bulb: #fff6df;
 }
 html[data-theme="light"] {
-  --lamp-glow: #ff4364; /* pomegranate red — light mode */
-  --lamp-bulb: #ff8094;
+  --lamp-glow: #ef6178; /* soft pomegranate — light mode (atmospheric, not neon) */
+  --lamp-bulb: #ff96a6;
 }
 
 .lamp {
@@ -863,6 +923,24 @@ html[data-theme="light"] {
   -webkit-tap-highlight-color: transparent;
 }
 .lamp:active { cursor: grabbing; }
+/* ambient halo — soft light the lamp casts into the room (layered, blurred) */
+.lamp::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 56%;
+  width: 360px;
+  height: 320px;
+  transform: translateX(-50%);
+  background:
+    radial-gradient(ellipse 42% 38% at 50% 22%, var(--lamp-glow) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 64% at 50% 36%, var(--lamp-glow) 0%, transparent 72%);
+  opacity: 0.12;
+  filter: blur(34px);
+  pointer-events: none;
+  z-index: -1;
+}
+@media (max-width: 640px) { .lamp::before { width: 240px; height: 220px; } }
 .lamp__hang {
   display: block;
   transform-origin: top center;
@@ -886,9 +964,9 @@ html[data-theme="light"] {
 .lamp-mouth-a { stop-color: var(--lamp-bulb); stop-opacity: 1; }
 .lamp-mouth-b { stop-color: var(--lamp-glow); stop-opacity: 0.85; }
 .lamp-mouth-c { stop-color: var(--lamp-glow); stop-opacity: 0.18; }
-.lamp-cone-a  { stop-color: var(--lamp-glow); stop-opacity: 0.42; }
+.lamp-cone-a  { stop-color: var(--lamp-glow); stop-opacity: 0.3; }
 .lamp-cone-b  { stop-color: var(--lamp-glow); stop-opacity: 0; }
-.lamp-pool-a  { stop-color: var(--lamp-glow); stop-opacity: 0.5; }
+.lamp-pool-a  { stop-color: var(--lamp-glow); stop-opacity: 0.34; }
 .lamp-pool-b  { stop-color: var(--lamp-glow); stop-opacity: 0; }
 .lamp__rim { stroke: var(--lamp-bulb); }
 .lamp__glow { animation: lamp-pulse 5s ease-in-out infinite; }
