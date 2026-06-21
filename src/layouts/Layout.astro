@@ -121,7 +121,8 @@ const {
       };
 
       if (lamp && hang) {
-        const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
+        try {
+          const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
         // pendulum state (degrees, deg/s)
         const SPRING = 85;   // stiffness → swing speed
@@ -196,25 +197,9 @@ const {
             if (!reduce) { vel = 160; startLoop(); }
           }
         });
-      }
-
-      // 2 + 3 — reveal-on-scroll
-      const revealEls = document.querySelectorAll("[data-reveal]");
-      if (!reduce && "IntersectionObserver" in window) {
-        const io = new IntersectionObserver(
-          (entries) => {
-            entries.forEach((e) => {
-              if (e.isIntersecting) {
-                e.target.classList.add("is-in");
-                io.unobserve(e.target);
-              }
-            });
-          },
-          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
-        );
-        revealEls.forEach((el) => io.observe(el));
-      } else {
-        revealEls.forEach((el) => el.classList.add("is-in"));
+        } catch (err) {
+          /* never let the lamp break the rest of the page scripts */
+        }
       }
 
       // 1 — smooth inertia scroll (desktop/wheel; native touch on mobile)
@@ -226,6 +211,40 @@ const {
         };
         requestAnimationFrame(raf);
       }
+    </script>
+
+    <!-- Reveal-on-scroll runs as a standalone inline (classic) script, NOT part
+         of the bundled module above. This guarantees page sections are always
+         un-hidden even if the module fails to load/parse on some browser — so a
+         script error can never leave a blank page. Plain ES5 syntax on purpose. -->
+    <script is:inline>
+      (function () {
+        var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var els = document.querySelectorAll("[data-reveal]");
+        if (!reduce && "IntersectionObserver" in window) {
+          var io = new IntersectionObserver(
+            function (entries) {
+              entries.forEach(function (e) {
+                if (e.isIntersecting) {
+                  e.target.classList.add("is-in");
+                  io.unobserve(e.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+          );
+          els.forEach(function (el) { io.observe(el); });
+        } else {
+          els.forEach(function (el) { el.classList.add("is-in"); });
+        }
+        // Failsafe: if anything is still hidden a few seconds in, show it.
+        setTimeout(function () {
+          document.querySelectorAll("[data-reveal]:not(.is-in)").forEach(function (el) {
+            var r = el.getBoundingClientRect();
+            if (r.top < window.innerHeight) el.classList.add("is-in");
+          });
+        }, 3000);
+      })();
     </script>
   </body>
 </html>
