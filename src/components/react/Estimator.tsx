@@ -1,4 +1,29 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+/** Tween a number toward its target so the estimate animates up/down. */
+function useTween(target: number, dur = 650) {
+  const [val, setVal] = useState(target);
+  const from = useRef(target);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      from.current = target; setVal(target); return;
+    }
+    const start = performance.now();
+    const a = from.current;
+    let raf = 0;
+    const tick = (t: number) => {
+      const p = Math.min((t - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      const v = a + (target - a) * eased;
+      setVal(v); from.current = v;
+      if (p < 1) raf = requestAnimationFrame(tick);
+      else { from.current = target; setVal(target); }
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [target, dur]);
+  return val;
+}
 
 type Opt = { id: string; label: string; add: number; per?: "mo" };
 type Svc = { id: string; label: string; base: number; per?: "mo"; blurb: string; options: Opt[] };
@@ -63,6 +88,11 @@ export default function Estimator() {
     }
     return { oneOff, monthly, any };
   }, [picked, opts]);
+
+  const aOne = useTween(oneOff);
+  const aOneHi = useTween(upper(oneOff));
+  const aMon = useTween(monthly);
+  const aMonHi = useTween(upper(monthly));
 
   const startEnquiry = () => {
     const lines: string[] = [];
@@ -148,16 +178,16 @@ export default function Estimator() {
               {oneOff > 0 && (
                 <div>
                   <div className="eyebrow mb-1">One-off</div>
-                  <div className="font-display text-3xl md:text-4xl gradient-crimson">
-                    {money(oneOff)}–{money(upper(oneOff))}
+                  <div className="font-display text-3xl md:text-4xl gradient-crimson tabular-nums">
+                    {money(Math.round(aOne))}–{money(Math.round(aOneHi))}
                   </div>
                 </div>
               )}
               {monthly > 0 && (
                 <div>
                   <div className="eyebrow mb-1">Monthly</div>
-                  <div className="font-display text-3xl md:text-4xl gradient-crimson">
-                    {money(monthly)}–{money(upper(monthly))}
+                  <div className="font-display text-3xl md:text-4xl gradient-crimson tabular-nums">
+                    {money(Math.round(aMon))}–{money(Math.round(aMonHi))}
                     <span className="text-base text-cream-mute font-body">/mo</span>
                   </div>
                 </div>

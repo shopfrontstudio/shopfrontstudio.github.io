@@ -1,0 +1,64 @@
+---
+// "From blank page to booked out" — a browser frame that builds itself as the
+// visitor scrolls: grid → brand → copy → images → CTA. Driven by a tall scroll
+// track + a sticky stage; JS sets the step from scroll progress.
+---
+
+<section id="live-build" class="relative text-cream">
+  <div class="lb-track">
+    <div class="lb-sticky">
+      <div class="max-w-5xl mx-auto px-6 w-full">
+        <div class="text-center mb-10 md:mb-14" data-reveal>
+          <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-5">Watch it happen</div>
+          <h2 class="font-display display-tight text-5xl md:text-7xl lg:text-[5rem]">
+            <span class="gradient-cream">From blank page</span>
+            <br />
+            <span class="gradient-crimson italic">to booked out.</span>
+          </h2>
+        </div>
+
+        <div class="lb-frame lb-step-1" data-lb aria-hidden="true">
+          <div class="lb-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span class="lb-url"></span></div>
+          <div class="lb-stage">
+            <div class="lb-layer lb-grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="lb-layer lb-brand"><u></u><b>ANARA</b></div>
+            <div class="lb-layer lb-copy"><h4>Your shopfront,<br /><em>considered online.</em></h4><p></p></div>
+            <div class="lb-layer lb-imgs"><span></span><span></span></div>
+            <div class="lb-layer lb-cta">Get a free quote →</div>
+          </div>
+        </div>
+
+        <p class="text-center mt-8 text-cream-mute text-[13px] lg:text-[16px] tracking-wide" data-reveal>
+          Keep scrolling — that's roughly how a build comes together.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var sec = document.getElementById("live-build");
+    if (!sec) return;
+    var frame = sec.querySelector("[data-lb]");
+    var track = sec.querySelector(".lb-track");
+    if (!frame || !track) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { frame.className = "lb-frame lb-step-5"; return; }
+
+    var ticking = false;
+    function update() {
+      var r = track.getBoundingClientRect();
+      var total = r.height - window.innerHeight;
+      var p = total > 0 ? (-r.top) / total : 0;
+      p = Math.min(Math.max(p, 0), 1);
+      var step = Math.min(5, Math.floor(p * 5.2) + 1);
+      frame.className = "lb-frame lb-step-" + step;
+      ticking = false;
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  })();
+</script>

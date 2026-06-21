@@ -2,30 +2,43 @@
 ---
 
 <section id="contact" class="relative text-cream py-28 md:py-40">
-  <div class="max-w-3xl mx-auto px-6">
-    <div class="hairline-gold mx-auto mb-16 md:mb-24 opacity-50"></div>
-    <div class="text-center mb-14" data-reveal>
-      <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
-        Begin
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="hairline-gold max-w-3xl mb-16 md:mb-24 opacity-50"></div>
+    <div class="grid md:grid-cols-12 gap-12 md:gap-16 items-start">
+      {/* left — message */}
+      <div class="md:col-span-5 md:pt-4" data-reveal>
+        <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+          Begin
+        </div>
+        <h2 class="font-display display-tight text-5xl md:text-6xl lg:text-[4.8rem]">
+          <span class="gradient-cream">Tell us what</span>
+          <br />
+          <span class="gradient-crimson italic">you're building.</span>
+        </h2>
+        <p class="mt-6 text-lg lg:text-[24px] text-cream-soft max-w-md leading-relaxed">
+          A short note is enough. We reply within one working day with honest next
+          steps — even if those steps are "you don't need us yet."
+        </p>
+        <div class="mt-10 space-y-3 text-[15px] lg:text-[18px]">
+          <a href="mailto:info@anaramarketing.com.au" class="link-underline flex items-center gap-3 text-cream-soft hover:text-cream transition-colors">
+            <span class="text-gold">✦</span> info@anaramarketing.com.au
+          </a>
+          <a href="tel:+61473533053" class="link-underline flex items-center gap-3 text-cream-soft hover:text-cream transition-colors">
+            <span class="text-gold">✦</span> +61 473 533 053
+          </a>
+          <div class="flex items-center gap-3 text-cream-mute">
+            <span class="text-gold">✦</span> Ballarat, Victoria
+          </div>
+        </div>
       </div>
-      <h2 class="font-display display-tight text-5xl md:text-7xl lg:text-[5.4rem]">
-        <span class="gradient-cream">Tell us about</span>
-        <br />
-        <span class="gradient-crimson italic">your business.</span>
-      </h2>
-      <p class="mt-6 text-lg lg:text-[26px] text-cream-soft max-w-xl mx-auto">
-        A short note is enough. We reply within one working day with honest next
-        steps — even if those steps are "you don't need us yet."
-      </p>
-    </div>
 
+      {/* right — form card */}
+      <div class="md:col-span-7" data-reveal style="--reveal-delay: 120ms">
     <form
       id="contact-form"
       action="https://api.web3forms.com/submit"
       method="POST"
-      class="grid gap-5 bg-graphite border border-line rounded-3xl p-8 md:p-12"
-      data-reveal
-      style="--reveal-delay: 120ms"
+      class="grid gap-5 bg-graphite border border-line rounded-3xl p-8 md:p-10 glow-hover"
     >
       {/* Web3Forms config */}
       <input type="hidden" name="access_key" value="c90c681f-8abc-4eb1-b07c-ab82aec3e435" />
@@ -96,11 +109,9 @@
       </button>
 
       <p id="form-status" role="status" aria-live="polite" class="hidden text-[14px] lg:text-[17px]"></p>
-
-      <p class="text-xs lg:text-[16px] text-cream-mute pt-2">
-        Or by mail — <a href="mailto:info@anaramarketing.com.au" class="text-gold hover:underline">info@anaramarketing.com.au</a>
-      </p>
     </form>
+      </div>
+    </div>
   </div>
 </section>
 
