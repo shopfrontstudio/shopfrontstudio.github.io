@@ -95,7 +95,7 @@ export default function Estimator() {
           return (
             <div
               key={s.id}
-              className={`rounded-2xl border p-5 transition-colors ${on ? "border-crimson-deep bg-crimson-deep/10" : "border-line bg-graphite"}`}
+              className={`rounded-2xl border p-5 transition-all duration-300 hover:-translate-y-1 ${on ? "border-crimson-deep bg-crimson-deep/10 shadow-[0_18px_34px_-18px_rgba(192,42,75,0.5)]" : "border-line bg-graphite hover:border-gold/50 hover:shadow-[0_18px_34px_-20px_rgba(40,22,16,0.5)]"}`}
             >
               <button type="button" aria-pressed={on} onClick={() => toggleSvc(s.id)} className="w-full text-left">
                 <div className="flex items-center justify-between">

@@ -737,11 +737,22 @@ html[data-theme="light"] .ambient {
    the book turns in real 3D. Animations only run when the slide is in view.
    =================================================================== */
 .dev { width: 100%; margin: 0 auto; position: relative; }
-/* slow, subtle float (only while the slide is in view) */
-.in-view .dev { animation: dev-float 7s ease-in-out infinite; will-change: transform; }
-.in-view .dev-phone { animation-duration: 8s; animation-delay: -1.5s; }
-.in-view .dev-book { animation-duration: 9s; animation-delay: -3s; }
+.dev-inner { position: relative; }
+/* slow, subtle idle float (only while the slide is in view) */
+.in-view .dev-inner { animation: dev-float 7s ease-in-out infinite; will-change: transform; }
+.in-view .dev-phone .dev-inner { animation-duration: 8s; animation-delay: -1.5s; }
+.in-view .dev-book .dev-inner { animation-duration: 9s; animation-delay: -3s; }
 @keyframes dev-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+
+/* extremely subtle scroll parallax on the device (CSS scroll-timeline; the
+   idle float lives on .dev-inner so the two never fight) */
+@supports (animation-timeline: view()) {
+  .dev { animation: dev-parallax linear both; animation-timeline: view(); animation-range: cover 0% cover 100%; }
+  @keyframes dev-parallax { from { transform: translateY(26px); } to { transform: translateY(-26px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  @supports (animation-timeline: view()) { .dev { animation: none; } }
+}
 /* soft contact shadow grounding each device */
 .dev::after {
   content: "";
@@ -889,7 +900,7 @@ html[data-theme="light"] .ambient {
 
 @media (prefers-reduced-motion: reduce) {
   .in-view .lap-page, .in-view .ig-heart, .in-view .heart, .in-view .ig-cmt,
-  .in-view .leaf, .in-view .leaf::after { animation: none; }
+  .in-view .leaf, .in-view .leaf::after, .in-view .dev-inner { animation: none; }
   .heart, .ig-cmt { opacity: 1; }
 }
 
