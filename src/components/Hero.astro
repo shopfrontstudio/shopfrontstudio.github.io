@@ -26,12 +26,7 @@ import AnimatedMark from "./AnimatedMark.astro";
       </div>
     </div>
 
-    <div class="inline-flex items-center gap-2 text-[11px] lg:text-[18px] font-medium uppercase tracking-[0.32em] text-cream-mute mb-8 hero-rise" style="--rise-delay: 160ms">
-      <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-pulse"></span>
-      Made in Ballarat
-    </div>
-
-    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl hero-rise" style="--rise-delay: 230ms">
+    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl hero-rise mt-2" style="--rise-delay: 230ms">
       <span class="gradient-cream">Your shopfront,</span>
       <br />
       <span class="gradient-crimson italic">considered online.</span>
@@ -63,23 +58,101 @@ import AnimatedMark from "./AnimatedMark.astro";
 
     <div class="hairline-gold mt-24 max-w-3xl mx-auto"></div>
 
-    <div class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-3xl mx-auto text-left" data-reveal>
-      <div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream">Two to three<span class="italic-gold"> weeks</span></div>
-        <div class="mt-2 text-[10.5px] lg:text-[16px] uppercase tracking-[0.28em] text-cream-mute">Site launch</div>
+    <div id="hero-stats" class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 max-w-3xl mx-auto text-left" data-reveal>
+      {/* 1 — launch time: a stopwatch racing in well short of the industry bar */}
+      <div class="stat">
+        <div class="stat-viz" aria-hidden="true">
+          <svg viewBox="0 0 64 72" class="sw">
+            <rect x="27" y="1" width="10" height="7" rx="2.5" class="sw-metal" />
+            <rect x="30.5" y="7" width="3" height="4" class="sw-metal" />
+            <rect x="48" y="9" width="7" height="4" rx="2" transform="rotate(38 51 11)" class="sw-metal" />
+            <circle cx="32" cy="42" r="25" class="sw-face" />
+            <circle cx="32" cy="42" r="25" class="sw-ring" />
+            <circle cx="32" cy="42" r="25" class="sw-prog" />
+            <line x1="32" y1="42" x2="32" y2="23" class="sw-hand" />
+            <circle cx="32" cy="42" r="2.6" class="sw-pin" />
+          </svg>
+        </div>
+        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">2–3<span class="italic-gold"> weeks</span></div>
+        <div class="stat-label">Live launch · most studios ~8 wks</div>
       </div>
-      <div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream">Under two<span class="italic-gold"> seconds</span></div>
-        <div class="mt-2 text-[10.5px] lg:text-[16px] uppercase tracking-[0.28em] text-cream-mute">Page weight</div>
+
+      {/* 2 — page load: a number that counts up and settles under 2s */}
+      <div class="stat">
+        <div class="stat-viz" aria-hidden="true">
+          <svg viewBox="0 0 64 72" class="gauge">
+            <path d="M10 50 A24 24 0 1 1 54 50" class="g-track" />
+            <path d="M10 50 A24 24 0 1 1 54 50" class="g-fill" />
+            <line x1="32" y1="42" x2="20" y2="30" class="g-needle" />
+            <circle cx="32" cy="42" r="3" class="sw-pin" />
+          </svg>
+        </div>
+        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none"><span class="num-count" data-to="1.8" data-dec="1">0.0</span><span class="italic-gold">s</span></div>
+        <div class="stat-label">Page load · under 2 seconds</div>
       </div>
-      <div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream">Fixed,<span class="italic-gold"> in writing</span></div>
-        <div class="mt-2 text-[10.5px] lg:text-[16px] uppercase tracking-[0.28em] text-cream-mute">Pricing</div>
+
+      {/* 3 — pricing: a price tag (plain-English, no jargon) */}
+      <div class="stat">
+        <div class="stat-viz" aria-hidden="true">
+          <svg viewBox="0 0 64 72" class="tag">
+            <path d="M8 30 L34 30 L56 52 L34 64 L34 64 L12 42 Z" class="tag-body" />
+            <circle cx="18" cy="40" r="4" class="tag-hole" />
+            <path d="M40 44 l8 8" class="tag-line" />
+          </svg>
+        </div>
+        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">One fixed<span class="italic-gold"> price</span></div>
+        <div class="stat-label">Agreed up front · no surprise bills</div>
       </div>
-      <div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream">No annual<span class="italic-gold"> lock-in</span></div>
-        <div class="mt-2 text-[10.5px] lg:text-[16px] uppercase tracking-[0.28em] text-cream-mute">Contracts</div>
+
+      {/* 4 — contracts: an open padlock (kept as-is per brief) */}
+      <div class="stat">
+        <div class="stat-viz" aria-hidden="true">
+          <svg viewBox="0 0 64 72" class="lock">
+            <path d="M22 34 V24 a10 10 0 0 1 19 -3" class="lk-shackle" />
+            <rect x="16" y="34" width="32" height="26" rx="5" class="lk-body" />
+            <circle cx="32" cy="45" r="3.2" class="sw-pin" />
+            <rect x="30.6" y="46" width="2.8" height="7" rx="1.4" class="sw-pin" />
+          </svg>
+        </div>
+        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">No annual<span class="italic-gold"> lock-in</span></div>
+        <div class="stat-label">Month to month · cancel anytime</div>
       </div>
     </div>
   </div>
 </section>
+
+<script is:inline>
+  (function () {
+    var grid = document.getElementById("hero-stats");
+    if (!grid) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function runCounts() {
+      grid.querySelectorAll(".num-count").forEach(function (el) {
+        var to = parseFloat(el.getAttribute("data-to")) || 0;
+        var dec = parseInt(el.getAttribute("data-dec") || "0", 10);
+        if (reduce) { el.textContent = to.toFixed(dec); return; }
+        var start = null, dur = 1400;
+        function tick(ts) {
+          if (!start) start = ts;
+          var p = Math.min((ts - start) / dur, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = (to * eased).toFixed(dec);
+          if (p < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { grid.classList.add("stats-in"); runCounts(); io.disconnect(); }
+        });
+      }, { threshold: 0.4 });
+      io.observe(grid);
+    } else {
+      grid.classList.add("stats-in"); runCounts();
+    }
+  })();
+</script>
