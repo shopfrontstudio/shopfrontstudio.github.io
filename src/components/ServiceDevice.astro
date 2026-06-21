@@ -1,125 +1,230 @@
 ---
-// Animated skeuomorphic device mockups shown on each service slide.
-// type: "websites" (laptop, page auto-scrolls) | "social" (phone, IG with
-// likes/hearts) | "catalogues" (book, pages turning). Realistic fixed colours
-// so they read in both light and dark themes. 2D transforms only (smooth, no lag).
+// Animated, realistic device mockups per service slide.
+// type: "websites" (MacBook, page scrolls) | "social" (iPhone, IG feed) |
+// "catalogues" (lookbook, pages turn with real content).
+// Realistic fixed colours so they read in both themes; 2D transforms only.
 const { type } = Astro.props;
 ---
 
 {type === "websites" && (
-  <svg class="dev dev-laptop" viewBox="0 0 360 300" fill="none" aria-hidden="true">
+  <svg class="dev dev-laptop" viewBox="0 0 380 286" fill="none" aria-hidden="true">
     <defs>
-      <linearGradient id="lapAlu" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#dfe3e8" /><stop offset="0.5" stop-color="#b9bfc8" /><stop offset="1" stop-color="#969ca6" />
+      <linearGradient id="lapDeck" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#eef1f4" /><stop offset="0.5" stop-color="#cfd4db" /><stop offset="1" stop-color="#a9afb8" />
+      </linearGradient>
+      <linearGradient id="lapEdge" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f3f5f7" /><stop offset="0.5" stop-color="#aeb4bd" /><stop offset="1" stop-color="#dfe3e8" />
       </linearGradient>
       <linearGradient id="lapHero" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="#c02a4b" /><stop offset="1" stop-color="#7a0f24" />
       </linearGradient>
-      <linearGradient id="lapGlass" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#ffffff" stop-opacity="0.5" /><stop offset="0.4" stop-color="#ffffff" stop-opacity="0" />
+      <linearGradient id="lapBtn" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#d8495f" /><stop offset="1" stop-color="#a01731" />
       </linearGradient>
-      <clipPath id="lapvp"><rect x="64" y="34" width="232" height="150" rx="3" /></clipPath>
+      <linearGradient id="lapGlass" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0.55" /><stop offset="0.35" stop-color="#ffffff" stop-opacity="0" />
+      </linearGradient>
+      <clipPath id="lapvp"><rect x="74" y="24" width="232" height="150" rx="3" /></clipPath>
     </defs>
-    {/* lid */}
-    <rect x="48" y="18" width="264" height="184" rx="12" fill="#1b1e24" stroke="url(#lapAlu)" stroke-width="3" />
-    <circle cx="180" cy="26" r="1.6" fill="#41464e" />
+
+    {/* lid / screen body */}
+    <rect x="60" y="10" width="260" height="178" rx="16" fill="#0b0c0f" stroke="url(#lapEdge)" stroke-width="2.5" />
+    <rect x="68" y="18" width="244" height="162" rx="7" fill="#000" />
+    {/* notch + camera */}
+    <rect x="176" y="18" width="28" height="7" rx="3.5" fill="#000" />
+    <circle cx="190" cy="21.5" r="1.4" fill="#23262d" />
     {/* scrolling page */}
     <g clip-path="url(#lapvp)">
-      <rect x="64" y="34" width="232" height="150" fill="#fbfaf7" />
+      <rect x="74" y="24" width="232" height="150" fill="#fbfaf7" />
       <g class="lap-scroll">
-        <rect x="64" y="34" width="232" height="14" fill="#ece7dd" />
-        <circle cx="73" cy="41" r="2" fill="#e0726f" /><circle cx="81" cy="41" r="2" fill="#e3b35a" /><circle cx="89" cy="41" r="2" fill="#7bbf7e" />
-        <rect x="100" y="37.5" width="120" height="7" rx="3.5" fill="#ffffff" />
-        <rect x="64" y="48" width="232" height="52" fill="url(#lapHero)" />
-        <text x="180" y="70" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="15" letter-spacing="3" fill="#f3ede0">ANARA</text>
-        <rect x="150" y="78" width="60" height="4" rx="2" fill="#f3ede0" opacity="0.7" />
-        <rect x="76" y="112" width="64" height="40" rx="4" fill="#efe9df" /><rect x="148" y="112" width="64" height="40" rx="4" fill="#efe9df" /><rect x="220" y="112" width="64" height="40" rx="4" fill="#efe9df" />
-        <rect x="84" y="120" width="20" height="20" rx="4" fill="#c8a15a" opacity="0.7" /><rect x="156" y="120" width="20" height="20" rx="4" fill="#c02a4b" opacity="0.6" /><rect x="228" y="120" width="20" height="20" rx="4" fill="#c8a15a" opacity="0.7" />
-        <rect x="76" y="166" width="150" height="6" rx="3" fill="#ddd5c6" /><rect x="76" y="178" width="200" height="6" rx="3" fill="#e7e0d2" /><rect x="76" y="190" width="170" height="6" rx="3" fill="#e7e0d2" />
-        <rect x="76" y="206" width="208" height="62" rx="5" fill="url(#lapHero)" opacity="0.9" />
-        <rect x="76" y="282" width="120" height="6" rx="3" fill="#ddd5c6" /><rect x="76" y="294" width="190" height="6" rx="3" fill="#e7e0d2" /><rect x="76" y="306" width="160" height="6" rx="3" fill="#e7e0d2" />
+        <rect x="74" y="24" width="232" height="16" fill="#ece7dd" />
+        <circle cx="84" cy="32" r="2.2" fill="#e0726f" /><circle cx="92" cy="32" r="2.2" fill="#e3b35a" /><circle cx="100" cy="32" r="2.2" fill="#7bbf7e" />
+        <rect x="112" y="28" width="150" height="8" rx="4" fill="#ffffff" />
+        {/* nav */}
+        <text x="86" y="56" font-family="Cormorant Garamond, Georgia, serif" font-size="11" letter-spacing="2" fill="#1d1d1f">ANARA</text>
+        <rect x="210" y="50" width="20" height="4" rx="2" fill="#c7bca8" /><rect x="236" y="50" width="20" height="4" rx="2" fill="#c7bca8" /><rect x="262" y="50" width="20" height="4" rx="2" fill="#c7bca8" />
+        {/* hero */}
+        <rect x="74" y="66" width="232" height="74" fill="url(#lapHero)" />
+        <text x="190" y="98" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="17" letter-spacing="1" fill="#f3ede0">Your shopfront,</text>
+        <text x="190" y="116" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="14" font-style="italic" fill="#f3b6bf">considered online.</text>
+        <rect x="160" y="124" width="60" height="11" rx="5.5" fill="#f3ede0" />
+        {/* service cards */}
+        <rect x="82" y="152" width="66" height="52" rx="5" fill="#f1ebe1" /><rect x="157" y="152" width="66" height="52" rx="5" fill="#f1ebe1" /><rect x="232" y="152" width="66" height="52" rx="5" fill="#f1ebe1" />
+        <rect x="92" y="160" width="22" height="22" rx="5" fill="#c8a15a" opacity="0.75" /><rect x="167" y="160" width="22" height="22" rx="5" fill="#c02a4b" opacity="0.6" /><rect x="242" y="160" width="22" height="22" rx="5" fill="#c8a15a" opacity="0.75" />
+        <rect x="92" y="188" width="46" height="4" rx="2" fill="#d3c9b6" /><rect x="167" y="188" width="46" height="4" rx="2" fill="#d3c9b6" /><rect x="242" y="188" width="46" height="4" rx="2" fill="#d3c9b6" />
+        {/* feature row */}
+        <rect x="82" y="218" width="100" height="64" rx="5" fill="url(#lapHero)" opacity="0.92" />
+        <rect x="196" y="220" width="102" height="6" rx="3" fill="#d7cdb9" /><rect x="196" y="232" width="86" height="6" rx="3" fill="#e3dac8" /><rect x="196" y="244" width="98" height="6" rx="3" fill="#e3dac8" /><rect x="196" y="262" width="56" height="14" rx="7" fill="url(#lapBtn)" />
+        {/* footer */}
+        <rect x="74" y="298" width="232" height="40" fill="#1b1416" />
+        <rect x="86" y="312" width="60" height="5" rx="2.5" fill="#6c5a52" /><rect x="86" y="322" width="90" height="5" rx="2.5" fill="#4f433e" />
       </g>
     </g>
-    <rect x="64" y="34" width="232" height="150" fill="url(#lapGlass)" opacity="0.12" />
-    {/* base */}
-    <path d="M30 202 L330 202 L352 228 L8 228 Z" fill="url(#lapAlu)" stroke="#8b9099" stroke-width="1" />
-    <rect x="150" y="204" width="60" height="5" rx="2.5" fill="#9aa0a8" />
-    <ellipse cx="180" cy="236" rx="176" ry="6" fill="#000000" opacity="0.12" />
+    <rect x="74" y="24" width="232" height="150" fill="url(#lapGlass)" opacity="0.10" />
+
+    {/* hinge */}
+    <rect x="58" y="188" width="264" height="3" rx="1.5" fill="#2b2e33" />
+    {/* base deck (neumorphic aluminium) */}
+    <path d="M40 191 L340 191 L360 222 Q360 230 351 230 L29 230 Q20 230 20 222 Z" fill="url(#lapDeck)" />
+    <path d="M40 191 L340 191 L342 196 L38 196 Z" fill="#ffffff" opacity="0.55" />
+    <path d="M150 191 q40 11 80 0 q-40 5 -80 0 Z" fill="#9aa0a8" opacity="0.55" />
+    <rect x="20" y="224" width="340" height="6" rx="3" fill="#9097a1" />
+    {/* contact shadow */}
+    <ellipse cx="190" cy="236" rx="186" ry="7" fill="#000000" opacity="0.16" />
   </svg>
 )}
 
 {type === "social" && (
-  <svg class="dev dev-phone" viewBox="0 0 200 384" fill="none" aria-hidden="true">
+  <svg class="dev dev-phone" viewBox="0 0 214 392" fill="none" aria-hidden="true">
     <defs>
-      <linearGradient id="phEdge" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#3a3f47" /><stop offset="0.5" stop-color="#15171c" /><stop offset="1" stop-color="#42474f" />
+      <linearGradient id="phTi" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#8d929b" /><stop offset="0.12" stop-color="#5b616a" /><stop offset="0.5" stop-color="#3c4047" /><stop offset="0.88" stop-color="#6c717a" /><stop offset="1" stop-color="#9aa0a8" />
+      </linearGradient>
+      <linearGradient id="phTi2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#9aa0a8" /><stop offset="0.5" stop-color="#41454c" /><stop offset="1" stop-color="#7d828b" />
       </linearGradient>
       <linearGradient id="igPhoto" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="#e3b35a" /><stop offset="0.55" stop-color="#c02a4b" /><stop offset="1" stop-color="#7a0f24" />
+        <stop offset="0" stop-color="#f4c06a" /><stop offset="0.5" stop-color="#c02a4b" /><stop offset="1" stop-color="#6e0f22" />
       </linearGradient>
-      <clipPath id="phvp"><rect x="42" y="16" width="116" height="352" rx="24" /></clipPath>
+      <linearGradient id="igStory" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#e3b35a" /><stop offset="1" stop-color="#c02a4b" />
+      </linearGradient>
+      <linearGradient id="phScreenSheen" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ffffff" stop-opacity="0.16" /><stop offset="0.3" stop-color="#ffffff" stop-opacity="0" />
+      </linearGradient>
+      <clipPath id="phvp"><rect x="36" y="14" width="142" height="364" rx="34" /></clipPath>
     </defs>
-    <rect x="34" y="8" width="132" height="368" rx="30" fill="#15171c" stroke="url(#phEdge)" stroke-width="3" />
+
+    {/* titanium frame */}
+    <rect x="28" y="8" width="158" height="376" rx="44" fill="url(#phTi2)" />
+    <rect x="31" y="11" width="152" height="370" rx="41" fill="url(#phTi)" />
+    {/* side buttons */}
+    <rect x="26" y="96" width="3" height="20" rx="1.5" fill="#3a3e45" /><rect x="26" y="124" width="3" height="34" rx="1.5" fill="#3a3e45" /><rect x="26" y="166" width="3" height="34" rx="1.5" fill="#3a3e45" />
+    <rect x="185" y="140" width="3" height="48" rx="1.5" fill="#3a3e45" />
+    {/* bezel */}
+    <rect x="33" y="13" width="148" height="366" rx="42" fill="#0a0a0c" />
+
     <g clip-path="url(#phvp)">
-      <rect x="42" y="16" width="116" height="352" fill="#fbfaf7" />
-      {/* top bar */}
-      <text x="52" y="36" font-family="Cormorant Garamond, Georgia, serif" font-size="14" font-style="italic" fill="#1d1d1f">Instagram</text>
-      <path class="ig-toplike" d="M150 28 c-1.6 -2.4 -6 -1.6 -6 1.6 c0 2.4 6 5.4 6 5.4 c0 0 6 -3 6 -5.4 c0 -3.2 -4.4 -4 -6 -1.6 Z" fill="#c02a4b" />
+      <rect x="36" y="14" width="142" height="364" fill="#fbfaf7" />
+      {/* status bar */}
+      <text x="52" y="34" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#1d1d1f">9:41</text>
+      <path d="M150 27 h2 v6 h-2 Z M154 25 h2 v8 h-2 Z M158 23 h2 v10 h-2 Z" fill="#1d1d1f" />
+      <rect x="163" y="25" width="13" height="8" rx="2" fill="none" stroke="#1d1d1f" stroke-width="1" /><rect x="164.5" y="26.5" width="9" height="5" rx="1" fill="#1d1d1f" />
+      {/* IG header */}
+      <text x="48" y="58" font-family="Cormorant Garamond, Georgia, serif" font-size="16" font-style="italic" fill="#1d1d1f">Instagram</text>
+      <path class="ig-toplike" d="M150 50 c-1.8 -2.6 -6.4 -1.8 -6.4 1.8 c0 2.6 6.4 5.8 6.4 5.8 c0 0 6.4 -3.2 6.4 -5.8 c0 -3.6 -4.6 -4.4 -6.4 -1.8 Z" fill="#c02a4b" />
+      <circle cx="166" cy="53" r="5.5" fill="none" stroke="#1d1d1f" stroke-width="1.4" /><path d="M163 53 h6 M166 50 v6" stroke="#1d1d1f" stroke-width="1.4" />
       {/* stories */}
-      <circle cx="54" cy="56" r="7" fill="none" stroke="#c8a15a" stroke-width="1.6" /><circle cx="74" cy="56" r="7" fill="none" stroke="#c02a4b" stroke-width="1.6" /><circle cx="94" cy="56" r="7" fill="none" stroke="#c8a15a" stroke-width="1.6" /><circle cx="114" cy="56" r="7" fill="none" stroke="#d8d2c6" stroke-width="1.6" />
+      <circle cx="52" cy="80" r="9" fill="none" stroke="url(#igStory)" stroke-width="2" /><circle cx="52" cy="80" r="6" fill="#e8dfce" />
+      <circle cx="78" cy="80" r="9" fill="none" stroke="url(#igStory)" stroke-width="2" /><circle cx="78" cy="80" r="6" fill="#d9cdb8" />
+      <circle cx="104" cy="80" r="9" fill="none" stroke="#d3c9b6" stroke-width="2" /><circle cx="104" cy="80" r="6" fill="#e8dfce" />
+      <circle cx="130" cy="80" r="9" fill="none" stroke="url(#igStory)" stroke-width="2" /><circle cx="130" cy="80" r="6" fill="#d9cdb8" />
       {/* post header */}
-      <circle cx="54" cy="80" r="7" fill="url(#igPhoto)" /><rect x="66" y="76" width="44" height="5" rx="2.5" fill="#d8d2c6" /><rect x="66" y="84" width="30" height="4" rx="2" fill="#e7e0d2" />
+      <circle cx="52" cy="108" r="8" fill="url(#igPhoto)" /><rect x="64" y="103" width="50" height="5" rx="2.5" fill="#cfc6b4" /><rect x="64" y="111" width="34" height="4" rx="2" fill="#e0d8c8" />
       {/* photo */}
-      <rect x="42" y="94" width="116" height="116" fill="url(#igPhoto)" />
+      <rect x="36" y="124" width="142" height="142" fill="url(#igPhoto)" />
+      <circle cx="107" cy="195" r="20" fill="#ffffff" opacity="0.12" />
       {/* actions */}
-      <path class="ig-like" d="M58 226 c-2.2 -3.2 -8 -2.2 -8 2.2 c0 3.2 8 7.2 8 7.2 c0 0 8 -4 8 -7.2 c0 -4.4 -5.8 -5.4 -8 -2.2 Z" fill="#c02a4b" />
-      <circle cx="84" cy="230" r="6.5" fill="none" stroke="#1d1d1f" stroke-width="1.6" />
-      <path d="M104 224 l11 6 l-11 6 l3 -6 Z" fill="none" stroke="#1d1d1f" stroke-width="1.6" stroke-linejoin="round" />
+      <path class="ig-like" d="M54 286 c-2.4 -3.4 -8.4 -2.4 -8.4 2.4 c0 3.4 8.4 7.6 8.4 7.6 c0 0 8.4 -4.2 8.4 -7.6 c0 -4.8 -6 -5.8 -8.4 -2.4 Z" fill="#c02a4b" />
+      <circle cx="82" cy="290" r="7" fill="none" stroke="#1d1d1f" stroke-width="1.6" />
+      <path d="M104 283 l12 6.5 l-12 6.5 l3 -6.5 Z" fill="none" stroke="#1d1d1f" stroke-width="1.6" stroke-linejoin="round" />
+      <path d="M162 283 v13 l-5 -4 l-5 4 v-13 Z" fill="none" stroke="#1d1d1f" stroke-width="1.6" stroke-linejoin="round" />
       {/* likes + caption */}
-      <text x="50" y="252" font-family="Montserrat, Arial, sans-serif" font-size="8" font-weight="700" fill="#1d1d1f"><tspan class="like-count">1,284</tspan> likes</text>
-      <rect x="50" y="262" width="92" height="5" rx="2.5" fill="#d8d2c6" /><rect x="50" y="272" width="70" height="5" rx="2.5" fill="#e7e0d2" />
-      <rect x="50" y="290" width="100" height="5" rx="2.5" fill="#ece6da" /><rect x="50" y="300" width="80" height="5" rx="2.5" fill="#ece6da" />
-      {/* floating hearts + comment (base position on wrapper g, inner element animated) */}
+      <text x="46" y="316" font-family="Montserrat, Arial, sans-serif" font-size="9" font-weight="700" fill="#1d1d1f"><tspan class="like-count">1,284</tspan> likes</text>
+      <rect x="46" y="326" width="110" height="5" rx="2.5" fill="#cfc6b4" /><rect x="46" y="336" width="84" height="5" rx="2.5" fill="#e0d8c8" />
+      <rect x="46" y="352" width="120" height="5" rx="2.5" fill="#e7e0d2" /><rect x="46" y="362" width="92" height="5" rx="2.5" fill="#e7e0d2" />
+      {/* floating hearts + comment */}
       <g class="ig-floats">
-        <g transform="translate(120 208)"><path class="fl-heart fl1" d="M0 3 c-2 -3 -7 -2 -7 2 c0 3.4 7 7 7 7 c0 0 7 -3.6 7 -7 c0 -4 -5 -5 -7 -2 Z" fill="#c02a4b" /></g>
-        <g transform="translate(96 212)"><path class="fl-heart fl2" d="M0 3 c-2 -3 -7 -2 -7 2 c0 3.4 7 7 7 7 c0 0 7 -3.6 7 -7 c0 -4 -5 -5 -7 -2 Z" fill="#e0566f" /></g>
-        <g transform="translate(138 214)"><path class="fl-heart fl3" d="M0 3 c-2 -3 -7 -2 -7 2 c0 3.4 7 7 7 7 c0 0 7 -3.6 7 -7 c0 -4 -5 -5 -7 -2 Z" fill="#c02a4b" /></g>
-        <g transform="translate(58 198)"><g class="fl-cmt cm1"><rect x="0" y="0" width="66" height="18" rx="9" fill="#ffffff" stroke="#e7e0d2" /><rect x="9" y="6" width="30" height="3.5" rx="1.75" fill="#c8a15a" /><rect x="9" y="11" width="48" height="3.5" rx="1.75" fill="#ddd5c6" /></g></g>
+        <g transform="translate(130 250)"><path class="fl-heart fl1" d="M0 3 c-2.2 -3.2 -7.6 -2.2 -7.6 2.2 c0 3.6 7.6 7.6 7.6 7.6 c0 0 7.6 -4 7.6 -7.6 c0 -4.4 -5.4 -5.4 -7.6 -2.2 Z" fill="#c02a4b" /></g>
+        <g transform="translate(104 256)"><path class="fl-heart fl2" d="M0 3 c-2.2 -3.2 -7.6 -2.2 -7.6 2.2 c0 3.6 7.6 7.6 7.6 7.6 c0 0 7.6 -4 7.6 -7.6 c0 -4.4 -5.4 -5.4 -7.6 -2.2 Z" fill="#e0566f" /></g>
+        <g transform="translate(150 258)"><path class="fl-heart fl3" d="M0 3 c-2.2 -3.2 -7.6 -2.2 -7.6 2.2 c0 3.6 7.6 7.6 7.6 7.6 c0 0 7.6 -4 7.6 -7.6 c0 -4.4 -5.4 -5.4 -7.6 -2.2 Z" fill="#c02a4b" /></g>
+        <g transform="translate(50 244)"><g class="fl-cmt cm1"><rect x="0" y="0" width="74" height="20" rx="10" fill="#ffffff" stroke="#e7e0d2" /><rect x="10" y="6" width="32" height="4" rx="2" fill="#c8a15a" /><rect x="10" y="12" width="54" height="4" rx="2" fill="#ddd5c6" /></g></g>
       </g>
     </g>
-    <rect x="84" y="14" width="32" height="9" rx="4.5" fill="#0a0a0c" />
-    <ellipse cx="100" cy="378" rx="74" ry="5" fill="#000000" opacity="0.12" />
+
+    {/* dynamic island */}
+    <rect x="84" y="24" width="46" height="13" rx="6.5" fill="#000" />
+    <circle cx="120" cy="30.5" r="2.4" fill="#11131a" /><circle cx="120" cy="30.5" r="1" fill="#2b3550" />
+    {/* screen reflection */}
+    <rect x="36" y="14" width="142" height="364" rx="34" fill="url(#phScreenSheen)" />
+    <ellipse cx="107" cy="388" rx="70" ry="5" fill="#000000" opacity="0.14" />
   </svg>
 )}
 
 {type === "catalogues" && (
-  <svg class="dev dev-book" viewBox="0 0 340 264" fill="none" aria-hidden="true">
+  <svg class="dev dev-book" viewBox="0 0 372 268" fill="none" aria-hidden="true">
     <defs>
       <linearGradient id="bkCover" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#a01731" /><stop offset="1" stop-color="#6a0f22" />
+        <stop offset="0" stop-color="#a81934" /><stop offset="1" stop-color="#640d20" />
       </linearGradient>
       <linearGradient id="bkLeaf" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#fbf7ee" /><stop offset="1" stop-color="#ece3d2" />
+        <stop offset="0" stop-color="#fdfaf3" /><stop offset="1" stop-color="#eee5d4" />
+      </linearGradient>
+      <linearGradient id="bkLeafL" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#efe7d6" /><stop offset="1" stop-color="#fbf7ee" />
+      </linearGradient>
+      <linearGradient id="ph1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0a96a" /><stop offset="1" stop-color="#b06a3a" /></linearGradient>
+      <linearGradient id="ph2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c64a5e" /><stop offset="1" stop-color="#7a1f34" /></linearGradient>
+      <linearGradient id="ph3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7d8a6a" /><stop offset="1" stop-color="#4d5740" /></linearGradient>
+      <linearGradient id="ph4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8a15a" /><stop offset="1" stop-color="#8a6a30" /></linearGradient>
+      <linearGradient id="leafShade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#000000" stop-opacity="0.28" /><stop offset="0.4" stop-color="#000000" stop-opacity="0" />
       </linearGradient>
     </defs>
-    <ellipse cx="170" cy="240" rx="150" ry="12" fill="#000000" opacity="0.14" />
+
+    <ellipse cx="186" cy="246" rx="160" ry="12" fill="#000000" opacity="0.14" />
     {/* covers */}
-    <rect x="20" y="38" width="300" height="192" rx="7" fill="url(#bkCover)" />
-    <rect x="26" y="44" width="288" height="180" rx="4" fill="#560b1b" />
-    {/* static pages under */}
-    <rect x="30" y="48" width="138" height="172" fill="#efe7d6" />
-    <rect x="172" y="48" width="138" height="172" fill="#f3ece0" />
-    {/* content on right static page */}
-    <rect x="184" y="60" width="80" height="44" rx="3" fill="#c02a4b" opacity="0.18" />
-    <rect x="184" y="112" width="114" height="5" rx="2.5" fill="#d7cdb9" /><rect x="184" y="122" width="96" height="5" rx="2.5" fill="#e3dac8" /><rect x="184" y="132" width="108" height="5" rx="2.5" fill="#e3dac8" />
-    <rect x="184" y="150" width="50" height="34" rx="3" fill="#c8a15a" opacity="0.3" /><rect x="244" y="150" width="54" height="34" rx="3" fill="#c02a4b" opacity="0.16" />
+    <rect x="22" y="34" width="328" height="200" rx="8" fill="url(#bkCover)" />
+    <rect x="28" y="40" width="316" height="188" rx="4" fill="#560b1b" />
+
+    {/* LEFT static page — lookbook cover */}
+    <rect x="32" y="44" width="150" height="180" fill="url(#bkLeafL)" />
+    <rect x="44" y="56" width="126" height="96" rx="3" fill="url(#ph2)" />
+    <circle cx="107" cy="104" r="20" fill="#ffffff" opacity="0.12" />
+    <text x="48" y="174" font-family="Cormorant Garamond, Georgia, serif" font-size="15" fill="#3a2329">Spring Lookbook</text>
+    <text x="48" y="190" font-family="Montserrat, Arial, sans-serif" font-size="7" letter-spacing="2" fill="#9a8a7a">VOLUME 01 · 2026</text>
+    <rect x="48" y="200" width="80" height="4" rx="2" fill="#d7cdb9" /><rect x="48" y="209" width="60" height="4" rx="2" fill="#e3dac8" />
+    <text x="160" y="219" font-family="Montserrat, Arial, sans-serif" font-size="7" fill="#b3a594">02</text>
+
+    {/* RIGHT static page (revealed last) — product grid */}
+    <rect x="190" y="44" width="150" height="180" fill="url(#bkLeaf)" />
+    <text x="204" y="62" font-family="Cormorant Garamond, Georgia, serif" font-size="12" fill="#3a2329">New Season</text>
+    <rect x="204" y="70" width="58" height="52" rx="3" fill="url(#ph3)" /><rect x="270" y="70" width="58" height="52" rx="3" fill="url(#ph4)" />
+    <rect x="204" y="126" width="40" height="4" rx="2" fill="#cfc3ad" /><text x="246" y="130" font-family="Montserrat, Arial, sans-serif" font-size="6" fill="#a8987f">$48</text>
+    <rect x="270" y="126" width="40" height="4" rx="2" fill="#cfc3ad" /><text x="312" y="130" font-family="Montserrat, Arial, sans-serif" font-size="6" fill="#a8987f">$62</text>
+    <rect x="204" y="140" width="58" height="52" rx="3" fill="url(#ph1)" /><rect x="270" y="140" width="58" height="52" rx="3" fill="url(#ph2)" />
+    <rect x="204" y="196" width="40" height="4" rx="2" fill="#cfc3ad" /><rect x="270" y="196" width="40" height="4" rx="2" fill="#cfc3ad" />
+
     {/* spine */}
-    <rect x="168" y="38" width="4" height="192" fill="#4a0a16" />
-    {/* flipping leaves (right half, hinge at spine x=170) */}
-    <g class="bk-leaf lf1"><rect x="170" y="48" width="140" height="172" fill="url(#bkLeaf)" /><rect x="182" y="60" width="78" height="40" rx="3" fill="#c8a15a" opacity="0.25" /><rect x="182" y="108" width="110" height="5" rx="2.5" fill="#dcd2bf" /><rect x="182" y="118" width="92" height="5" rx="2.5" fill="#e6ddca" /><rect x="182" y="140" width="116" height="5" rx="2.5" fill="#e6ddca" /></g>
-    <g class="bk-leaf lf2"><rect x="170" y="48" width="140" height="172" fill="url(#bkLeaf)" /><rect x="182" y="60" width="116" height="5" rx="2.5" fill="#dcd2bf" /><rect x="182" y="72" width="96" height="5" rx="2.5" fill="#e6ddca" /><rect x="182" y="92" width="70" height="48" rx="3" fill="#c02a4b" opacity="0.16" /><rect x="262" y="92" width="36" height="48" rx="3" fill="#c8a15a" opacity="0.22" /></g>
-    <g class="bk-leaf lf3"><rect x="170" y="48" width="140" height="172" fill="url(#bkLeaf)" /><rect x="182" y="60" width="80" height="44" rx="3" fill="#c8a15a" opacity="0.22" /><rect x="182" y="112" width="112" height="5" rx="2.5" fill="#dcd2bf" /><rect x="182" y="122" width="92" height="5" rx="2.5" fill="#e6ddca" /></g>
-    {/* page edge stack on the right */}
-    <rect x="308" y="50" width="4" height="168" fill="#d8cdb6" />
+    <rect x="184" y="34" width="4" height="200" fill="#4a0a16" />
+
+    {/* turning leaves (hinge at spine x=186) */}
+    <g class="bk-leaf lf1">
+      <rect x="186" y="44" width="154" height="180" fill="url(#bkLeaf)" />
+      <rect x="200" y="56" width="126" height="86" rx="3" fill="url(#ph1)" />
+      <text x="200" y="162" font-family="Cormorant Garamond, Georgia, serif" font-size="12" fill="#3a2329">The Essentials</text>
+      <rect x="200" y="172" width="110" height="4" rx="2" fill="#d7cdb9" /><rect x="200" y="181" width="86" height="4" rx="2" fill="#e3dac8" />
+      <text x="200" y="200" font-family="Montserrat, Arial, sans-serif" font-size="7" fill="#a8987f">from $35</text>
+      <rect class="leaf-shade" x="186" y="44" width="154" height="180" fill="url(#leafShade)" />
+    </g>
+    <g class="bk-leaf lf2">
+      <rect x="186" y="44" width="154" height="180" fill="url(#bkLeaf)" />
+      <text x="200" y="64" font-family="Cormorant Garamond, Georgia, serif" font-size="12" fill="#3a2329">Featured</text>
+      <rect x="200" y="72" width="58" height="56" rx="3" fill="url(#ph4)" /><rect x="266" y="72" width="58" height="56" rx="3" fill="url(#ph3)" />
+      <rect x="200" y="138" width="124" height="42" rx="3" fill="url(#ph2)" />
+      <rect x="200" y="190" width="90" height="4" rx="2" fill="#d7cdb9" />
+      <rect class="leaf-shade" x="186" y="44" width="154" height="180" fill="url(#leafShade)" />
+    </g>
+    <g class="bk-leaf lf3">
+      <rect x="186" y="44" width="154" height="180" fill="url(#bkLeaf)" />
+      <rect x="200" y="56" width="126" height="70" rx="3" fill="url(#ph3)" />
+      <text x="200" y="146" font-family="Cormorant Garamond, Georgia, serif" font-size="12" fill="#3a2329">Behind the Make</text>
+      <rect x="200" y="156" width="116" height="4" rx="2" fill="#d7cdb9" /><rect x="200" y="165" width="96" height="4" rx="2" fill="#e3dac8" /><rect x="200" y="174" width="104" height="4" rx="2" fill="#e3dac8" />
+      <rect class="leaf-shade" x="186" y="44" width="154" height="180" fill="url(#leafShade)" />
+    </g>
+
+    {/* page edge stack */}
+    <rect x="340" y="46" width="4" height="176" fill="#d8cdb6" />
+    <rect x="28" y="46" width="4" height="176" fill="#d8cdb6" />
   </svg>
 )}
