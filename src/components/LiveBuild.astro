@@ -17,14 +17,16 @@
           </h2>
         </div>
 
-        <div class="lb-frame lb-step-1" data-lb aria-hidden="true">
-          <div class="lb-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span class="lb-url"></span></div>
+        <div class="lb-frame lb-step-0" data-lb aria-hidden="true">
+          <div class="lb-bar"><i class="d1"></i><i class="d2"></i><i class="d3"></i><span class="lb-url"><b></b></span></div>
           <div class="lb-stage">
             <div class="lb-layer lb-grid"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="lb-layer lb-band"></div>
             <div class="lb-layer lb-brand"><u></u><b>ANARA</b></div>
             <div class="lb-layer lb-copy"><h4>Your shopfront,<br /><em>considered online.</em></h4><p></p></div>
             <div class="lb-layer lb-imgs"><span></span><span></span></div>
             <div class="lb-layer lb-cta">Get a free quote →</div>
+            <div class="lb-layer lb-badges"><span>★ 4.9</span><span>Secure</span><span>Fast</span></div>
           </div>
         </div>
 
@@ -44,7 +46,7 @@
     var track = sec.querySelector(".lb-track");
     if (!frame || !track) return;
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) { frame.className = "lb-frame lb-step-5"; return; }
+    if (reduce) { frame.className = "lb-frame lb-step-7"; return; }
 
     var ticking = false;
     function update() {
@@ -52,8 +54,9 @@
       var total = r.height - window.innerHeight;
       var p = total > 0 ? (-r.top) / total : 0;
       p = Math.min(Math.max(p, 0), 1);
-      var step = Math.min(5, Math.floor(p * 5.2) + 1);
+      var step = Math.min(7, Math.floor(p * 7.6));
       frame.className = "lb-frame lb-step-" + step;
+      frame.style.setProperty("--lb-p", (p * 100).toFixed(1) + "%");
       ticking = false;
     }
     function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
