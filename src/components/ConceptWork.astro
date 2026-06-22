@@ -1,0 +1,70 @@
+---
+import ServiceDevice from "./ServiceDevice.astro";
+
+const concepts = [
+  { type: "websites", title: "Café website concept", desc: "Menu, story and bookings — warm, quick, easy to run." },
+  { type: "social", title: "Boutique social refresh", desc: "A feed that finally looks the way the shop feels." },
+  { type: "catalogues", title: "Maker catalogue concept", desc: "A print + digital lookbook worth keeping." },
+  { type: "google", title: "Local search presence", desc: "On the map and first in the results, nearby." },
+];
+---
+
+<section id="work" class="relative text-cream py-28 md:py-40">
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="hairline-gold max-w-3xl mx-auto mb-20 md:mb-28 opacity-50"></div>
+    <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20" data-reveal>
+      <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+        Concept work
+      </div>
+      <h2 class="font-display display-tight text-5xl md:text-7xl lg:text-[5rem]">
+        <span class="gradient-cream">Sample</span>
+        <span class="gradient-crimson italic">directions.</span>
+      </h2>
+      <p class="mt-6 text-lg lg:text-[24px] text-cream-soft">
+        A feel for how we'd approach different briefs. Concept directions — not real
+        client work yet, so nothing here is overclaimed.
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-7 md:gap-8">
+      {
+        concepts.map((c, i) => (
+          <article
+            class="concept-card glow-hover relative rounded-3xl border border-line bg-graphite/60 p-7 md:p-9 overflow-hidden"
+            data-reveal
+            data-inview
+            data-tilt
+            style={`--reveal-delay: ${i * 90}ms`}
+          >
+            <div class="flex items-center justify-center min-h-[210px] md:min-h-[240px]">
+              <ServiceDevice type={c.type} />
+            </div>
+            <div class="mt-7">
+              <span class="text-[11px] uppercase tracking-[0.28em] text-gold">Concept direction</span>
+              <h3 class="font-display display-tight text-2xl md:text-3xl text-cream mt-2">{c.title}</h3>
+              <p class="mt-2 text-cream-soft text-[15px] lg:text-[18px] leading-relaxed">{c.desc}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var cards = document.querySelectorAll("#work [data-inview]");
+    if (!cards.length) return;
+    if (!("IntersectionObserver" in window)) {
+      cards.forEach(function (c) { c.classList.add("in-view"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (e.isIntersecting) e.target.classList.add("in-view");
+        else e.target.classList.remove("in-view");
+      });
+    }, { threshold: 0.3 });
+    cards.forEach(function (c) { io.observe(c); });
+  })();
+</script>
