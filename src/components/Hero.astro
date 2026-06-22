@@ -4,86 +4,78 @@ import AnimatedMark from "./AnimatedMark.astro";
 
 <section class="relative overflow-hidden text-cream" data-hero>
   <div class="hero-glow"></div>
-  <span class="seed" style="left:6%;top:16%;width:10px;height:10px;--sd:15s"></span>
-  <span class="seed" style="left:46%;top:10%;width:6px;height:6px;--sd:24s"></span>
-  <span class="seed" style="left:54%;top:66%;width:7px;height:7px;--sd:19s"></span>
-  <span class="seed" style="left:90%;top:30%;width:8px;height:8px;--sd:21s"></span>
+  <span class="seed" style="left:8%;top:18%;width:10px;height:10px;--sd:15s"></span>
+  <span class="seed" style="left:88%;top:24%;width:7px;height:7px;--sd:19s"></span>
+  <span class="seed" style="left:15%;top:64%;width:6px;height:6px;--sd:17s"></span>
+  <span class="seed" style="left:80%;top:72%;width:9px;height:9px;--sd:22s"></span>
+  <span class="seed" style="left:50%;top:10%;width:5px;height:5px;--sd:24s"></span>
 
-  <div class="relative max-w-6xl mx-auto px-6 w-full">
-    <div class="grid lg:grid-cols-2 gap-12 lg:gap-12 items-center lg:min-h-[88vh] pt-6 md:pt-10 lg:pt-0 pb-12">
-      {/* LEFT — brand + headline */}
-      <div class="text-center lg:text-left">
-        <div class="mx-auto lg:mx-0 max-w-[260px] md:max-w-[300px] lg:max-w-[260px] mb-1 hero-rise">
-          <AnimatedMark />
-        </div>
+  <div class="relative max-w-6xl mx-auto px-6 pt-6 pb-24 md:pt-10 md:pb-32 text-center">
+    <!-- Animated pomegranate — dots rest in fruit form, then disperse,
+         cluster around a one-word service punch, and reform. -->
+    <div class="mb-2 hero-rise">
+      <AnimatedMark />
+    </div>
 
-        <div class="flex flex-col items-center lg:items-start mb-8 hero-rise" style="--rise-delay: 90ms">
-          <div class="font-display text-4xl md:text-6xl lg:text-6xl tracking-[0.22em] text-cream font-medium">ANARA</div>
-          <div class="flex items-center gap-4 mt-3">
-            <span class="h-px w-10 bg-gold/70"></span>
-            <span class="text-[10px] md:text-[11px] lg:text-[15px] font-medium tracking-[0.40em] uppercase text-gold">Marketing Solutions</span>
-            <span class="h-px w-10 bg-gold/70 lg:hidden"></span>
-          </div>
-        </div>
-
-        <h1 class="font-display display-tight text-[44px] sm:text-6xl md:text-7xl lg:text-[5.2rem] word-reveal">
-          <span class="w gradient-cream" style="--wd: 240ms">Your</span>
-          <span class="w gradient-cream" style="--wd: 330ms">shopfront,</span>
-          <br />
-          <span class="w gradient-crimson italic" style="--wd: 450ms">considered</span>
-          <span class="w gradient-crimson italic" style="--wd: 560ms">online.</span>
-        </h1>
-
-        <p class="mt-7 mx-auto lg:mx-0 max-w-xl text-lg md:text-xl lg:text-[22px] text-cream-soft leading-relaxed hero-rise" style="--rise-delay: 320ms">
-          A small studio in Ballarat. Websites, social and catalogues — built with
-          care, wired to Google, and quietly cinematic.
-        </p>
-
-        <div class="mt-9 flex flex-wrap gap-3 justify-center lg:justify-start hero-rise" style="--rise-delay: 400ms">
-          <a href="#contact" data-magnetic class="group btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-semibold tracking-wide">
-            Get a free quote
-            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-          </a>
-          <a href="#services" class="btn-ghost inline-flex items-center px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide">
-            View services
-          </a>
-        </div>
-
-        <div class="ticker mt-10 max-w-xl mx-auto lg:mx-0 hero-rise" style="--rise-delay: 480ms">
-          <div class="ticker__row text-[12px] lg:text-[14px] font-medium uppercase tracking-[0.2em]">
-            <span><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Ballarat-born</b><i>·</i></span>
-            <span aria-hidden="true"><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Ballarat-born</b><i>·</i></span>
-          </div>
-        </div>
+    <!-- Wordmark — rebuilt in code so it lives on any background -->
+    <div class="flex flex-col items-center mb-10 hero-rise" style="--rise-delay: 90ms">
+      <div class="font-display text-5xl md:text-7xl tracking-[0.22em] text-cream font-medium">
+        ANARA
       </div>
-
-      {/* RIGHT — floating live browser preview */}
-      <div class="hidden lg:block hero-rise" style="--rise-delay: 360ms">
-        <div class="hero-browser" data-tilt aria-hidden="true">
-          <div class="dev-inner">
-            <div class="hb-win">
-              <div class="hb-bar"><i></i><i></i><i></i><span class="hb-url"></span></div>
-              <div class="lap-vp">
-                <div class="lap-page">
-                  <div class="lp-nav"><span class="lp-logo">ANARA</span><span class="lp-menu"><i></i><i></i><i></i></span></div>
-                  <div class="lp-hero"><div class="lp-h1">Your shopfront,</div><div class="lp-h2">considered online.</div><span class="lp-btn"></span></div>
-                  <div class="lp-cards"><div></div><div></div><div></div></div>
-                  <div class="lp-feat"><span class="lp-fimg"></span><span class="lp-flines"><i></i><i></i><i></i></span></div>
-                  <div class="lp-cards"><div></div><div></div><div></div></div>
-                  <div class="lp-foot"></div>
-                </div>
-              </div>
-            </div>
-            <span class="hb-badge hb-badge--1">★ 4.9 · Google</span>
-            <span class="hb-badge hb-badge--2">Live in 2–3 weeks</span>
-          </div>
-        </div>
+      <div class="flex items-center gap-4 mt-3">
+        <span class="h-px w-10 bg-gold/70"></span>
+        <span class="text-[10px] md:text-[11px] lg:text-[17px] font-medium tracking-[0.40em] uppercase text-gold">
+          Marketing Solutions
+        </span>
+        <span class="h-px w-10 bg-gold/70"></span>
       </div>
     </div>
 
-    <div class="hairline-gold mt-4 lg:mt-2 max-w-3xl mx-auto"></div>
+    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl word-reveal mt-2">
+      <span class="w gradient-cream" style="--wd: 240ms">Your</span>
+      <span class="w gradient-cream" style="--wd: 330ms">shopfront,</span>
+      <br />
+      <span class="w gradient-crimson italic" style="--wd: 450ms">considered</span>
+      <span class="w gradient-crimson italic" style="--wd: 560ms">online.</span>
+    </h1>
+
+    <p class="mt-10 mx-auto max-w-2xl text-lg md:text-xl lg:text-[26px] text-cream-soft leading-relaxed font-normal hero-rise" style="--rise-delay: 300ms">
+      A small studio in Ballarat. Websites built with care. Social that
+      brings people through the door. Print and digital catalogues that
+      keep working long after they leave your hand.
+    </p>
+
+    <div class="mt-12 flex flex-wrap gap-3 justify-center hero-rise" style="--rise-delay: 370ms">
+      <a
+        href="#contact"
+        data-magnetic
+        class="group btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-semibold tracking-wide"
+      >
+        Get a free quote
+        <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+          <path d="M5 12h14M13 5l7 7-7 7" />
+        </svg>
+      </a>
+      <a
+        href="#services"
+        class="btn-ghost inline-flex items-center px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide"
+      >
+        View services
+      </a>
+    </div>
+
+    {/* live ticker */}
+    <div class="ticker mt-14 max-w-3xl mx-auto hero-rise" style="--rise-delay: 460ms">
+      <div class="ticker__row text-[12px] lg:text-[15px] font-medium uppercase tracking-[0.2em]">
+        <span><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Ballarat-born</b><i>·</i></span>
+        <span aria-hidden="true"><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Ballarat-born</b><i>·</i></span>
+      </div>
+    </div>
+
+    <div class="hairline-gold mt-20 max-w-3xl mx-auto"></div>
 
     <div id="hero-stats" class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 max-w-3xl mx-auto text-left" data-reveal>
+      {/* 1 — launch time: a stopwatch racing in well short of the industry bar */}
       <div class="stat">
         <div class="stat-viz" aria-hidden="true">
           <svg viewBox="0 0 64 72" class="sw">
@@ -100,6 +92,8 @@ import AnimatedMark from "./AnimatedMark.astro";
         <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">2–3<span class="italic-gold"> weeks</span></div>
         <div class="stat-label">Live launch · most studios ~8 wks</div>
       </div>
+
+      {/* 2 — page load: a number that counts up and settles under 2s */}
       <div class="stat">
         <div class="stat-viz" aria-hidden="true">
           <svg viewBox="0 0 64 72" class="gauge">
@@ -112,6 +106,8 @@ import AnimatedMark from "./AnimatedMark.astro";
         <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none"><span class="num-count" data-to="1.8" data-dec="1">0.0</span><span class="italic-gold">s</span></div>
         <div class="stat-label">Page load · under 2 seconds</div>
       </div>
+
+      {/* 3 — pricing: a price tag (plain-English, no jargon) */}
       <div class="stat">
         <div class="stat-viz" aria-hidden="true">
           <svg viewBox="0 0 64 72" class="tag">
@@ -123,6 +119,8 @@ import AnimatedMark from "./AnimatedMark.astro";
         <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">One fixed<span class="italic-gold"> price</span></div>
         <div class="stat-label">Agreed up front · no surprise bills</div>
       </div>
+
+      {/* 4 — contracts: an open padlock (kept as-is per brief) */}
       <div class="stat">
         <div class="stat-viz" aria-hidden="true">
           <svg viewBox="0 0 64 72" class="lock">
@@ -137,7 +135,7 @@ import AnimatedMark from "./AnimatedMark.astro";
       </div>
     </div>
 
-    <div class="flex justify-center mt-16 hero-rise" style="--rise-delay: 640ms">
+    <div class="flex justify-center mt-16 hero-rise" style="--rise-delay: 620ms">
       <span class="scroll-cue" aria-hidden="true"></span>
     </div>
   </div>
@@ -148,6 +146,7 @@ import AnimatedMark from "./AnimatedMark.astro";
     var grid = document.getElementById("hero-stats");
     if (!grid) return;
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
     function runCounts() {
       grid.querySelectorAll(".num-count").forEach(function (el) {
         var to = parseFloat(el.getAttribute("data-to")) || 0;
@@ -164,6 +163,7 @@ import AnimatedMark from "./AnimatedMark.astro";
         requestAnimationFrame(tick);
       });
     }
+
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) {
