@@ -1,0 +1,104 @@
+---
+import ServiceDevice from "./ServiceDevice.astro";
+// "From blank page to digital shopfront" — a pinned, scroll-scrubbed cinematic
+// build scene. Scroll progress drives the stages: signage → browser builds →
+// phone → catalogue → Google listing → settle → CTA. Mobile = stacked steps.
+---
+
+<section id="shopfront" class="relative text-cream">
+  <div class="sf-track">
+    <div class="sf-sticky">
+      <div class="max-w-6xl mx-auto px-6 w-full">
+        <div class="text-center mb-7 md:mb-9" data-reveal>
+          <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-4">The build</div>
+          <h2 class="font-display display-tight text-5xl md:text-7xl lg:text-[4.6rem]">
+            <span class="gradient-cream">From blank page</span>
+            <span class="gradient-crimson italic"> to digital shopfront.</span>
+          </h2>
+        </div>
+
+        <div class="sf-scene sf-stage-0" data-sf aria-hidden="true">
+          {/* signage */}
+          <div class="sf-sign"><u></u><b>ANARA</b><em>Marketing</em></div>
+
+          {/* centre — the website builds itself */}
+          <div class="sf-layer sf-browser">
+            <div class="hb-win">
+              <div class="hb-bar"><i></i><i></i><i></i><span class="hb-url"></span></div>
+              <div class="sf-vp">
+                <div class="sf-wire"><span></span><span></span><span></span><span></span><span></span></div>
+                <div class="sf-site">
+                  <div class="lp-nav"><span class="lp-logo">ANARA</span><span class="lp-menu"><i></i><i></i><i></i></span></div>
+                  <div class="lp-hero"><div class="lp-h1">Your shopfront,</div><div class="lp-h2">considered online.</div><span class="lp-btn"></span></div>
+                  <div class="lp-cards"><div></div><div></div><div></div></div>
+                  <div class="lp-feat"><span class="lp-fimg"></span><span class="lp-flines"><i></i><i></i><i></i></span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* phone — social */}
+          <div class="sf-layer sf-phone"><ServiceDevice type="social" /></div>
+          {/* catalogue */}
+          <div class="sf-layer sf-book"><ServiceDevice type="catalogues" /></div>
+          {/* google listing */}
+          <div class="sf-layer sf-google"><ServiceDevice type="google" /></div>
+
+          {/* final CTA inside the scene */}
+          <a href="#contact" class="sf-cta btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3.5 rounded-full text-[15px] lg:text-[18px] font-semibold tracking-wide" data-magnetic>
+            Build your digital shopfront
+            <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function () {
+    var sec = document.getElementById("shopfront");
+    if (!sec) return;
+    var scene = sec.querySelector("[data-sf]");
+    var track = sec.querySelector(".sf-track");
+    if (!scene || !track) return;
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var mobile = window.matchMedia("(max-width: 767px)").matches;
+
+    var STAGES = [
+      [0.06, "is-sign"],
+      [0.16, "is-browser"],
+      [0.30, "is-site"],
+      [0.44, "is-phone"],
+      [0.57, "is-catalogue"],
+      [0.70, "is-google"],
+      [0.83, "is-settle"],
+      [0.93, "is-cta"],
+    ];
+    function setAll(on) { STAGES.forEach(function (s) { scene.classList.toggle(s[1], on); }); }
+
+    // device internals come alive whenever the scene is on screen
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (es) {
+        es.forEach(function (e) { scene.classList.toggle("in-view", e.isIntersecting); });
+      }, { threshold: 0.05 }).observe(scene);
+    } else { scene.classList.add("in-view"); }
+
+    if (reduce || mobile) { setAll(true); scene.style.setProperty("--p", "1"); return; }
+
+    var ticking = false;
+    function update() {
+      var r = track.getBoundingClientRect();
+      var total = r.height - window.innerHeight;
+      var p = total > 0 ? (-r.top) / total : 0;
+      p = Math.min(Math.max(p, 0), 1);
+      scene.style.setProperty("--p", p.toFixed(3));
+      STAGES.forEach(function (s) { scene.classList.toggle(s[1], p >= s[0]); });
+      ticking = false;
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
+  })();
+</script>
