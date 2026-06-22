@@ -84,7 +84,31 @@ import ServiceDevice from "./ServiceDevice.astro";
       }, { threshold: 0.05 }).observe(scene);
     } else { scene.classList.add("in-view"); }
 
-    if (reduce || mobile) { setAll(true); scene.style.setProperty("--p", "1"); return; }
+    if (reduce) { setAll(true); scene.style.setProperty("--p", "1"); return; }
+
+    // Mobile: build-as-you-scroll — each piece animates in as it enters view,
+    // and the browser draws its wireframe then fills.
+    if (mobile) {
+      var pieces = scene.querySelectorAll(".sf-layer, .sf-sign, .sf-cta");
+      if ("IntersectionObserver" in window) {
+        var io2 = new IntersectionObserver(function (es) {
+          es.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            e.target.classList.add("sf-in");
+            if (e.target.classList.contains("sf-browser")) {
+              scene.classList.add("is-browser");
+              setTimeout(function () { scene.classList.add("is-site"); }, 650);
+            }
+            io2.unobserve(e.target);
+          });
+        }, { threshold: 0.35, rootMargin: "0px 0px -8% 0px" });
+        pieces.forEach(function (p) { io2.observe(p); });
+      } else {
+        setAll(true);
+        pieces.forEach(function (p) { p.classList.add("sf-in"); });
+      }
+      return;
+    }
 
     var ticking = false;
     function update() {
