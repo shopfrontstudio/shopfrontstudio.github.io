@@ -84,3 +84,26 @@ const { type } = Astro.props;
     </div>
   </div>
 )}
+
+{type === "google" && (
+  <div class="dev dev-search" aria-hidden="true">
+    <div class="dev-inner">
+      <div class="gs">
+        <div class="gs-bar"><span class="gs-q"></span><span class="gs-dot"></span></div>
+        <div class="gs-card">
+          <span class="gs-thumb"></span>
+          <div class="gs-info">
+            <b>Anara Marketing</b>
+            <div class="gs-stars"><span class="gs-fill"></span>★★★★★ <i>4.9 (48)</i></div>
+            <div class="gs-meta">Marketing studio · Ballarat VIC</div>
+            <div class="gs-tags"><u>Website</u><u>Open now</u><u>Directions</u></div>
+          </div>
+        </div>
+        <div class="gs-map">
+          <span class="gs-road r1"></span><span class="gs-road r2"></span><span class="gs-road r3"></span>
+          <span class="gs-pin"><span class="gs-ping"></span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
