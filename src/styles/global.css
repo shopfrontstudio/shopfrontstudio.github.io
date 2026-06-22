@@ -1170,14 +1170,25 @@ html[data-theme="light"] .sf-vp { background: #fbfaf7; }
 .sf-cta { position: absolute; left: 50%; bottom: -4%; transform: translate(-50%, 14px); opacity: 0; transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1); z-index: 7; box-shadow: var(--shadow-float); }
 .sf-scene.is-cta .sf-cta { opacity: 1; transform: translate(-50%, 0); }
 
-/* mobile — simplified stacked steps, no pin / no camera */
+/* mobile — build-as-you-scroll: stacked steps that animate in one by one */
 @media (max-width: 767px) {
   #shopfront .sf-track { height: auto; }
   #shopfront .sf-sticky { position: static; min-height: 0; display: block; padding-bottom: 1rem; }
-  .sf-scene { aspect-ratio: auto; transform: none !important; display: flex; flex-direction: column; align-items: center; gap: 2.2rem; padding-top: 3rem; }
-  .sf-layer, .sf-sign, .sf-cta { position: static !important; width: 78% !important; max-width: 320px; transform: none !important; opacity: 1 !important; }
+  .sf-scene { aspect-ratio: auto; transform: none !important; display: flex; flex-direction: column; align-items: center; gap: 2.6rem; padding-top: 2.5rem; }
+  .sf-layer, .sf-sign, .sf-cta {
+    position: static !important;
+    width: 80% !important;
+    max-width: 340px;
+    opacity: 0;
+    transform: translateY(28px) !important;
+    transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .sf-layer.sf-in, .sf-sign.sf-in, .sf-cta.sf-in { opacity: 1 !important; transform: none !important; }
   .sf-sign { justify-content: center; }
   .sf-cta { width: auto !important; }
+  @media (prefers-reduced-motion: reduce) {
+    .sf-layer, .sf-sign, .sf-cta { opacity: 1; transform: none !important; }
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .sf-layer, .sf-sign, .sf-cta, .sf-site, .sf-wire span { transition: none; }
