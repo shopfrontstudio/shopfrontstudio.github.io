@@ -994,6 +994,24 @@ header.is-scrolled .glass-dark, header.is-scrolled.glass-dark { backdrop-filter:
 [data-magnetic] { transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
 [data-tilt] .dev-inner { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 
+/* ===== Hero floating browser preview ===== */
+.hero-browser { position: relative; will-change: transform; }
+.has-motion .hero-browser { animation: dev-float 8s ease-in-out infinite; }
+.hero-browser .dev-inner { position: relative; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.hb-win { border-radius: 14px; overflow: hidden; background: #0b0c0f; border: 1px solid rgba(255, 255, 255, 0.06); box-shadow: var(--shadow-float); }
+.hb-bar { display: flex; align-items: center; gap: 8px; padding: 11px 14px; background: #15171b; }
+.hb-bar i { width: 9px; height: 9px; border-radius: 50%; }
+.hb-bar i:nth-child(1) { background: #e0726f; } .hb-bar i:nth-child(2) { background: #e3b35a; } .hb-bar i:nth-child(3) { background: #7bbf7e; }
+.hb-url { flex: 1; height: 14px; border-radius: 7px; background: #26262d; max-width: 320px; margin-left: 6px; }
+.hero-browser .lap-vp { aspect-ratio: 16 / 11; }
+.has-motion .hero-browser .lap-page { animation: lapscroll 7s ease-in-out 1.2s infinite alternate; }
+.hb-badge { position: absolute; z-index: 2; font-family: var(--font-body); font-size: 12px; font-weight: 600; padding: 8px 14px; border-radius: 999px; background: rgba(20, 16, 17, 0.82); border: 1px solid rgba(200, 161, 90, 0.32); color: var(--color-cream); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: var(--shadow-soft); white-space: nowrap; }
+html[data-theme="light"] .hb-badge { background: rgba(255, 255, 255, 0.86); color: #2a1c20; }
+.hb-badge--1 { top: -14px; right: -6px; }
+.hb-badge--2 { bottom: -14px; left: -8px; }
+.has-motion .hb-badge--1 { animation: dev-float 6s ease-in-out infinite; }
+.has-motion .hb-badge--2 { animation: dev-float 7s ease-in-out -2.5s infinite; }
+
 /* ===== Live-build section ===== */
 #live-build .lb-track { position: relative; height: 230vh; }
 #live-build .lb-sticky { position: sticky; top: 0; min-height: 100vh; display: flex; align-items: center; }
