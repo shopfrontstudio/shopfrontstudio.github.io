@@ -1298,13 +1298,26 @@ html[data-theme="light"] .lamp-txt-dark { display: inline; }
   z-index: 1;
 }
 .hero-lockup {
-  display: none;
+  display: inline-flex;
   align-items: center;
-  gap: 0.85rem;
+  gap: 1rem;
+  position: relative;
+  margin-bottom: 1.45rem;
+}
+.hero-lockup::before {
+  content: "";
+  position: absolute;
+  inset: -28px -40px;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 20% 48%, rgba(192, 42, 75, 0.22), transparent 42%),
+    radial-gradient(circle at 66% 44%, rgba(200, 161, 90, 0.12), transparent 54%);
+  filter: blur(18px);
+  opacity: 0.85;
 }
 .hero-mark-mini {
-  width: 60px;
-  height: 60px;
+  width: clamp(78px, 8vw, 116px);
+  height: clamp(78px, 8vw, 116px);
   display: grid;
   place-items: center;
   flex: none;
@@ -1316,21 +1329,21 @@ html[data-theme="light"] .lamp-txt-dark { display: inline; }
   object-fit: contain;
 }
 .hero-wordmark {
-  font-size: clamp(2.05rem, 4vw, 3.75rem);
+  font-size: clamp(2.75rem, 5vw, 5.25rem);
   line-height: 0.82;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.22em;
 }
 .hero-submark {
-  margin-top: 0.55rem;
-  font-size: clamp(0.55rem, 0.95vw, 0.78rem);
-  letter-spacing: 0.34em;
+  margin-top: 0.7rem;
+  font-size: clamp(0.62rem, 1vw, 0.92rem);
+  letter-spacing: 0.36em;
   font-weight: 600;
 }
 .hero-kicker {
   display: inline-flex;
   align-items: center;
   gap: 0.75rem;
-  margin-top: 0;
+  margin-top: 0.25rem;
   color: var(--color-gold);
   font-size: clamp(0.72rem, 1vw, 0.98rem);
   font-weight: 600;
@@ -1343,7 +1356,7 @@ html[data-theme="light"] .lamp-txt-dark { display: inline; }
   background: linear-gradient(90deg, var(--color-gold), transparent);
 }
 .hero-title {
-  font-size: clamp(3rem, 6vw, 5rem);
+  font-size: clamp(2.85rem, 5.5vw, 4.75rem);
 }
 .hero-title .w {
   white-space: nowrap;
@@ -1780,11 +1793,11 @@ html[data-theme="light"] .hero-proof-grid {
   }
   .hero-mark-mini,
   .hero-mark-mini img {
-    width: 62px;
-    height: 62px;
+    width: 76px;
+    height: 76px;
   }
   .hero-wordmark {
-    font-size: clamp(2.4rem, 13vw, 3.45rem);
+    font-size: clamp(2.65rem, 13vw, 3.75rem);
   }
   .hero-submark {
     font-size: 0.56rem;
