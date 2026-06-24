@@ -1,8 +1,13 @@
 ---
-import AnimatedMark from "./AnimatedMark.astro";
+const proof = [
+  { value: "2-3", label: "week website launches" },
+  { value: "1.8s", label: "target page-load feel" },
+  { value: "Fixed", label: "written pricing first" },
+  { value: "AU", label: "Victoria-based, Australia-wide" },
+];
 ---
 
-<section class="relative overflow-hidden text-cream" data-hero>
+<section class="hero-cinema relative overflow-hidden text-cream" data-hero>
   <div class="hero-glow"></div>
   <span class="seed" style="left:8%;top:18%;width:10px;height:10px;--sd:15s"></span>
   <span class="seed" style="left:88%;top:24%;width:7px;height:7px;--sd:19s"></span>
@@ -10,131 +15,135 @@ import AnimatedMark from "./AnimatedMark.astro";
   <span class="seed" style="left:80%;top:72%;width:9px;height:9px;--sd:22s"></span>
   <span class="seed" style="left:50%;top:10%;width:5px;height:5px;--sd:24s"></span>
 
-  <div class="relative max-w-6xl mx-auto px-6 pt-6 pb-24 md:pt-10 md:pb-32 text-center">
-    <!-- Animated pomegranate — dots rest in fruit form, then disperse,
-         cluster around a one-word service punch, and reform. -->
-    <div class="mb-2 hero-rise">
-      <AnimatedMark />
-    </div>
-
-    <!-- Wordmark — rebuilt in code so it lives on any background -->
-    <div class="flex flex-col items-center mb-10 hero-rise" style="--rise-delay: 90ms">
-      <div class="font-display text-5xl md:text-7xl tracking-[0.22em] text-cream font-medium">
-        ANARA
+  <div class="hero-shell relative max-w-6xl mx-auto px-6 pt-10 pb-20 md:pt-16 md:pb-28 lg:min-h-[calc(100vh-4rem)] lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
+    <div class="lg:col-span-6 xl:col-span-5">
+      <div class="hero-lockup hero-rise" style="--rise-delay: 40ms">
+        <div class="hero-mark-mini" aria-hidden="true">
+          <img src="/images/anara-mark.png" alt="" />
+        </div>
+        <div>
+          <div class="font-display hero-wordmark text-cream font-medium">ANARA</div>
+          <div class="hero-submark text-gold uppercase">Marketing Solutions</div>
+        </div>
       </div>
-      <div class="flex items-center gap-4 mt-3">
-        <span class="h-px w-10 bg-gold/70"></span>
-        <span class="text-[10px] md:text-[11px] lg:text-[17px] font-medium tracking-[0.40em] uppercase text-gold">
-          Marketing Solutions
-        </span>
-        <span class="h-px w-10 bg-gold/70"></span>
+
+      <div class="hero-kicker hero-rise" style="--rise-delay: 130ms">
+        <span></span>
+        Boutique digital presence for small business
+      </div>
+
+      <h1 class="hero-title font-display display-tight word-reveal mt-5">
+        <span class="w gradient-cream" style="--wd: 210ms">Your shopfront,</span>
+        <br />
+        <span class="w gradient-crimson italic" style="--wd: 360ms">considered</span>
+        <br />
+        <span class="w gradient-crimson italic" style="--wd: 500ms">online.</span>
+      </h1>
+
+      <p class="mt-6 max-w-lg text-lg md:text-xl lg:text-[22px] text-cream-soft leading-relaxed hero-rise" style="--rise-delay: 300ms">
+        Premium websites, social and Google-connected presence for Australian
+        businesses ready to look established online.
+      </p>
+
+      <div class="mt-7 flex flex-col sm:flex-row gap-3 hero-rise" style="--rise-delay: 370ms">
+        <a
+          href="#contact"
+          data-magnetic
+          class="group btn-primary inline-flex items-center justify-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3.5 lg:px-8 lg:py-4 rounded-full text-[14px] lg:text-[18px] font-semibold tracking-wide"
+        >
+          Get a free quote
+          <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+        <a
+          href="#estimate"
+          class="btn-ghost inline-flex items-center justify-center px-7 py-3.5 lg:px-8 lg:py-4 rounded-full text-[14px] lg:text-[18px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide"
+        >
+          Shape a project
+        </a>
+      </div>
+
+      <div class="hero-trust mt-8 hero-rise" style="--rise-delay: 460ms">
+        <span>Written quotes</span>
+        <span>No annual lock-ins</span>
+        <span>Reply within 1 working day</span>
       </div>
     </div>
 
-    <h1 class="font-display display-tight text-[48px] sm:text-6xl md:text-7xl lg:text-8xl word-reveal mt-2">
-      <span class="w gradient-cream" style="--wd: 240ms">Your</span>
-      <span class="w gradient-cream" style="--wd: 330ms">shopfront,</span>
-      <br />
-      <span class="w gradient-crimson italic" style="--wd: 450ms">considered</span>
-      <span class="w gradient-crimson italic" style="--wd: 560ms">online.</span>
-    </h1>
+    <div class="hero-stage-wrap lg:col-span-6 xl:col-span-7 mt-14 lg:mt-0 hero-rise" style="--rise-delay: 430ms">
+      <div class="hero-stage" data-hero-stage aria-hidden="true">
+        <div class="hero-browser">
+          <div class="hb-win hero-shopfront">
+            <div class="hb-bar"><i></i><i></i><i></i><span class="hb-url"></span></div>
+            <div class="hero-site">
+              <div class="hero-site-nav">
+                <span>ANARA</span>
+                <i></i><i></i><i></i>
+              </div>
+              <div class="hero-site-main">
+                <div>
+                  <b>Your shopfront,</b>
+                  <em>considered online.</em>
+                  <u></u>
+                </div>
+                <span class="hero-site-photo"></span>
+              </div>
+              <div class="hero-site-grid"><span></span><span></span><span></span></div>
+            </div>
+          </div>
+        </div>
 
-    <p class="mt-10 mx-auto max-w-2xl text-lg md:text-xl lg:text-[26px] text-cream-soft leading-relaxed font-normal hero-rise" style="--rise-delay: 300ms">
-      A Victoria-based boutique studio building websites, social, catalogues and
-      Google-connected presence for Australian small businesses.
-    </p>
+        <div class="hero-phone">
+          <div class="hero-phone-screen">
+            <span class="hero-phone-top"></span>
+            <div class="hero-post"></div>
+            <div class="hero-hearts"><i></i><i></i><i></i></div>
+            <b>1,329</b>
+            <u></u><u></u>
+          </div>
+        </div>
 
-    <div class="mt-12 flex flex-wrap gap-3 justify-center hero-rise" style="--rise-delay: 370ms">
-      <a
-        href="#contact"
-        data-magnetic
-        class="group btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-semibold tracking-wide"
-      >
-        Get a free quote
-        <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
-          <path d="M5 12h14M13 5l7 7-7 7" />
-        </svg>
-      </a>
-      <a
-        href="#services"
-        class="btn-ghost inline-flex items-center px-7 py-3 lg:px-9 lg:py-4 rounded-full text-[14px] lg:text-[19px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide"
-      >
-        View services
-      </a>
+        <div class="hero-search">
+          <div class="hero-search-bar"></div>
+          <div class="hero-search-row">
+            <span></span>
+            <div>
+              <b>Anara Marketing</b>
+              <em>★★★★★ 4.9</em>
+              <p>Marketing studio · Victoria AU</p>
+            </div>
+          </div>
+          <div class="hero-map"><i></i><u></u></div>
+        </div>
+
+        <div class="hero-note">
+          <span>Launch plan</span>
+          <b>Website + Google + content</b>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-6 pb-16 md:pb-22">
+    <div class="hero-proof-grid" id="hero-stats" data-reveal>
+      {proof.map((item, i) => (
+        <div class="hero-proof">
+          <span>0{i + 1}</span>
+          <b>{item.value}</b>
+          <p>{item.label}</p>
+        </div>
+      ))}
     </div>
 
-    {/* live ticker */}
-    <div class="ticker mt-14 max-w-3xl mx-auto hero-rise" style="--rise-delay: 460ms">
-      <div class="ticker__row text-[12px] lg:text-[15px] font-medium uppercase tracking-[0.2em]">
+    <div class="ticker mt-10 md:mt-12 max-w-4xl mx-auto hero-rise" style="--rise-delay: 560ms">
+      <div class="ticker__row text-[11px] lg:text-[14px] font-medium uppercase tracking-[0.2em]">
         <span><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Victoria-based</b><i>·</i></span>
         <span aria-hidden="true"><b>Websites</b><i>·</i><b>Social</b><i>·</i><b>Catalogues</b><i>·</i><b>Google-connected</b><i>·</i><b>Fixed-price</b><i>·</i><b>Victoria-based</b><i>·</i></span>
       </div>
     </div>
 
-    <div class="hairline-gold mt-20 max-w-3xl mx-auto"></div>
-
-    <div id="hero-stats" class="mt-14 grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-10 max-w-3xl mx-auto text-left" data-reveal>
-      {/* 1 — launch time: a stopwatch racing in well short of the industry bar */}
-      <div class="stat">
-        <div class="stat-viz" aria-hidden="true">
-          <svg viewBox="0 0 64 72" class="sw">
-            <rect x="27" y="1" width="10" height="7" rx="2.5" class="sw-metal" />
-            <rect x="30.5" y="7" width="3" height="4" class="sw-metal" />
-            <rect x="48" y="9" width="7" height="4" rx="2" transform="rotate(38 51 11)" class="sw-metal" />
-            <circle cx="32" cy="42" r="25" class="sw-face" />
-            <circle cx="32" cy="42" r="25" class="sw-ring" />
-            <circle cx="32" cy="42" r="25" class="sw-prog" />
-            <line x1="32" y1="42" x2="32" y2="23" class="sw-hand" />
-            <circle cx="32" cy="42" r="2.6" class="sw-pin" />
-          </svg>
-        </div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">2–3<span class="italic-gold"> weeks</span></div>
-        <div class="stat-label">Live launch · most studios ~8 wks</div>
-      </div>
-
-      {/* 2 — page load: a number that counts up and settles under 2s */}
-      <div class="stat">
-        <div class="stat-viz" aria-hidden="true">
-          <svg viewBox="0 0 64 72" class="gauge">
-            <path d="M10 50 A24 24 0 1 1 54 50" class="g-track" />
-            <path d="M10 50 A24 24 0 1 1 54 50" class="g-fill" />
-            <line x1="32" y1="42" x2="20" y2="30" class="g-needle" />
-            <circle cx="32" cy="42" r="3" class="sw-pin" />
-          </svg>
-        </div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none"><span class="num-count" data-to="1.8" data-dec="1">0.0</span><span class="italic-gold">s</span></div>
-        <div class="stat-label">Page load · under 2 seconds</div>
-      </div>
-
-      {/* 3 — pricing: a price tag (plain-English, no jargon) */}
-      <div class="stat">
-        <div class="stat-viz" aria-hidden="true">
-          <svg viewBox="0 0 64 72" class="tag">
-            <path d="M8 30 L34 30 L56 52 L34 64 L34 64 L12 42 Z" class="tag-body" />
-            <circle cx="18" cy="40" r="4" class="tag-hole" />
-            <path d="M40 44 l8 8" class="tag-line" />
-          </svg>
-        </div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">One fixed<span class="italic-gold"> price</span></div>
-        <div class="stat-label">Agreed up front · no surprise bills</div>
-      </div>
-
-      {/* 4 — contracts: an open padlock (kept as-is per brief) */}
-      <div class="stat">
-        <div class="stat-viz" aria-hidden="true">
-          <svg viewBox="0 0 64 72" class="lock">
-            <path d="M22 34 V24 a10 10 0 0 1 19 -3" class="lk-shackle" />
-            <rect x="16" y="34" width="32" height="26" rx="5" class="lk-body" />
-            <circle cx="32" cy="45" r="3.2" class="sw-pin" />
-            <rect x="30.6" y="46" width="2.8" height="7" rx="1.4" class="sw-pin" />
-          </svg>
-        </div>
-        <div class="font-display text-3xl md:text-4xl lg:text-[2.7rem] gradient-cream leading-none">No annual<span class="italic-gold"> lock-in</span></div>
-        <div class="stat-label">Month to month · cancel anytime</div>
-      </div>
-    </div>
-
-    <div class="flex justify-center mt-16 hero-rise" style="--rise-delay: 620ms">
+    <div class="flex justify-center mt-12 hero-rise" style="--rise-delay: 650ms">
       <span class="scroll-cue" aria-hidden="true"></span>
     </div>
   </div>
@@ -142,36 +151,26 @@ import AnimatedMark from "./AnimatedMark.astro";
 
 <script is:inline>
   (function () {
-    var grid = document.getElementById("hero-stats");
-    if (!grid) return;
+    var stage = document.querySelector("[data-hero-stage]");
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!stage || reduce) return;
 
-    function runCounts() {
-      grid.querySelectorAll(".num-count").forEach(function (el) {
-        var to = parseFloat(el.getAttribute("data-to")) || 0;
-        var dec = parseInt(el.getAttribute("data-dec") || "0", 10);
-        if (reduce) { el.textContent = to.toFixed(dec); return; }
-        var start = null, dur = 1400;
-        function tick(ts) {
-          if (!start) start = ts;
-          var p = Math.min((ts - start) / dur, 1);
-          var eased = 1 - Math.pow(1 - p, 3);
-          el.textContent = (to * eased).toFixed(dec);
-          if (p < 1) requestAnimationFrame(tick);
-        }
-        requestAnimationFrame(tick);
-      });
+    var ticking = false;
+    function update() {
+      var h = window.innerHeight || 1;
+      var rect = stage.getBoundingClientRect();
+      var p = Math.min(Math.max((h - rect.top) / (h + rect.height), 0), 1);
+      stage.style.setProperty("--hero-p", p.toFixed(3));
+      ticking = false;
     }
-
-    if ("IntersectionObserver" in window) {
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { grid.classList.add("stats-in"); runCounts(); io.disconnect(); }
-        });
-      }, { threshold: 0.4 });
-      io.observe(grid);
-    } else {
-      grid.classList.add("stats-in"); runCounts();
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
     }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    update();
   })();
 </script>
