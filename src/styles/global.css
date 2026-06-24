@@ -1298,12 +1298,19 @@ html[data-theme="light"] .lamp-txt-dark { display: inline; }
   z-index: 1;
 }
 .hero-lockup {
-  display: inline-flex;
-  align-items: center;
-  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
   position: relative;
   margin-bottom: 1.45rem;
 }
+/* the original animated pomegranate mark, used as the hero logo */
+.hero-anim {
+  width: clamp(108px, 11vw, 156px);
+  margin-left: -0.4rem;
+}
+.hero-anim-words { display: flex; flex-direction: column; }
 .hero-lockup::before {
   content: "";
   position: absolute;
@@ -1773,6 +1780,8 @@ html[data-theme="light"] .hero-proof-grid {
     justify-content: center;
     margin-inline: auto;
   }
+  .hero-lockup { align-items: center; }
+  .hero-anim { margin-left: 0; }
   .hero-title {
     font-size: clamp(3.25rem, 12vw, 5.8rem);
   }
@@ -1795,6 +1804,9 @@ html[data-theme="light"] .hero-proof-grid {
   .hero-mark-mini img {
     width: 76px;
     height: 76px;
+  }
+  .hero-anim {
+    width: clamp(116px, 34vw, 168px);
   }
   .hero-wordmark {
     font-size: clamp(2.65rem, 13vw, 3.75rem);

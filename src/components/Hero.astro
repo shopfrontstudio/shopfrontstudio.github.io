@@ -1,4 +1,6 @@
 ---
+import AnimatedMark from "./AnimatedMark.astro";
+
 const proof = [
   { value: "2-3", label: "week website launches" },
   { value: "1.8s", label: "target page-load feel" },
@@ -18,10 +20,10 @@ const proof = [
   <div class="hero-shell relative max-w-6xl mx-auto px-6 pt-10 pb-20 md:pt-16 md:pb-28 lg:min-h-[calc(100vh-4rem)] lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
     <div class="lg:col-span-6 xl:col-span-5">
       <div class="hero-lockup hero-rise" style="--rise-delay: 40ms">
-        <div class="hero-mark-mini" aria-hidden="true">
-          <img src="/images/anara-mark.png" alt="" />
+        <div class="hero-anim" aria-hidden="true">
+          <AnimatedMark />
         </div>
-        <div>
+        <div class="hero-anim-words">
           <div class="font-display hero-wordmark text-cream font-medium">ANARA</div>
           <div class="hero-submark text-gold uppercase">Marketing Solutions</div>
         </div>
