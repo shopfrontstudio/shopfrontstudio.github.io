@@ -42,7 +42,7 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   background: var(--color-night);
   overflow-x: hidden;
 }
@@ -331,19 +331,7 @@ body::after {
   pointer-events: none;
 }
 
-/* ===== Motion: smooth scroll, reveal-on-scroll, parallax, intro ===== */
-
-/* Lenis smooth scroll */
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
+/* ===== Motion: reveal-on-scroll, parallax, intro ===== */
 
 /* 2 — reveal on scroll (only when motion is enabled) */
 .has-motion [data-reveal] {
