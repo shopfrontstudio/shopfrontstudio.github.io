@@ -100,8 +100,6 @@ const {
     <Footer />
 
     <script>
-      import Lenis from "lenis";
-
       const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       // ── Theme toggle: the hanging pendant lamp ──────────────────────────
@@ -204,17 +202,6 @@ const {
         }
       }
 
-      // 1 — smooth inertia scroll (desktop/wheel; native touch on mobile)
-      let lenis = null;
-      if (!reduce) {
-        lenis = new Lenis({ duration: 1.1, smoothWheel: true });
-        const raf = (t) => {
-          lenis.raf(t);
-          requestAnimationFrame(raf);
-        };
-        requestAnimationFrame(raf);
-      }
-
       const isDesktop = window.matchMedia("(min-width: 1024px) and (pointer: fine)").matches;
 
       // ── Scroll progress bar ─────────────────────────────────────────────
@@ -241,7 +228,7 @@ const {
         onScrollHeader();
       }
 
-      // ── Smooth anchor scrolling (routes through Lenis when active) ───────
+      // ── Anchor navigation: native continuous scroll, no inertia layer ────
       document.querySelectorAll('a[href^="#"]').forEach((a) => {
         a.addEventListener("click", (e) => {
           const id = a.getAttribute("href");
@@ -249,8 +236,8 @@ const {
           const target = document.querySelector(id);
           if (!target) return;
           e.preventDefault();
-          if (lenis) lenis.scrollTo(target, { offset: -64, duration: 1.2 });
-          else target.scrollIntoView({ behavior: "smooth" });
+          const y = target.getBoundingClientRect().top + window.scrollY - 64;
+          window.scrollTo({ top: y, behavior: reduce ? "auto" : "smooth" });
         });
       });
 
