@@ -6,12 +6,17 @@ import Footer from "../components/Footer.astro";
 interface Props {
   title?: string;
   description?: string;
+  noindex?: boolean;
 }
 
 const {
   title = "Anara Marketing Solutions — Websites, social and catalogues for Australian small businesses",
   description = "Anara Marketing is a Victoria-based boutique studio creating websites, social content, catalogues and Google-connected digital presence for small businesses across Australia.",
+  noindex = false,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const ogImage = new URL("/og-image.jpg", Astro.site).href;
 ---
 
 <!doctype html>
@@ -51,24 +56,47 @@ const {
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap"
     />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Anara Marketing Solutions" />
+    <meta property="og:locale" content="en_AU" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content={Astro.site} />
-    <meta property="og:image" content="/images/anara-logo.jpg" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Anara Marketing Solutions" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
     <title>{title}</title>
     <script
       type="application/ld+json"
       set:html={JSON.stringify({
         "@context": "https://schema.org",
         "@type": "ProfessionalService",
+        "@id": "https://anaramarketing.com.au/#business",
         name: "Anara Marketing Solutions",
+        alternateName: "Anara Marketing",
         description:
           "A Victoria-based boutique studio building websites, social content, catalogues and Google-connected digital presence for small businesses across Australia.",
+        slogan: "Your shopfront, considered online.",
         url: "https://anaramarketing.com.au",
         email: "info@anaramarketing.com.au",
-        image: "https://anaramarketing.com.au/apple-touch-icon.png",
-        areaServed: "Australia",
+        image: ogImage,
+        logo: new URL("/apple-touch-icon.png", Astro.site).href,
+        founder: { "@type": "Person", name: "Mohammad Abdullah Ashraf", jobTitle: "Founder" },
+        knowsAbout: [
+          "Web design",
+          "Social media management",
+          "Print and digital catalogues",
+          "Google Business Profile",
+          "Local SEO",
+        ],
+        areaServed: { "@type": "Country", name: "Australia" },
         address: {
           "@type": "PostalAddress",
           addressLocality: "Ballarat",

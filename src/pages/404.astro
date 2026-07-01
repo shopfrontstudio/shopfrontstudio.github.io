@@ -1,0 +1,30 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Page not found — Anara Marketing Solutions" noindex={true}>
+  <section class="relative text-cream min-h-[70vh] flex items-center overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="relative max-w-3xl mx-auto px-6 py-28 text-center">
+      <div class="text-[12px] lg:text-[16px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+        404
+      </div>
+      <h1 class="font-display display-tight text-5xl md:text-7xl">
+        <span class="gradient-cream">This page</span>
+        <span class="gradient-crimson italic"> wandered off.</span>
+      </h1>
+      <p class="mt-6 text-lg lg:text-[22px] text-cream-soft max-w-md mx-auto leading-relaxed">
+        The link may be old or mistyped — but the studio's still here. Let's get you
+        back to something useful.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3 justify-center">
+        <a href="/" class="btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3.5 rounded-full text-[15px] lg:text-[18px] font-semibold tracking-wide">
+          Back to home
+        </a>
+        <a href="/#contact" class="btn-ghost inline-flex items-center px-7 py-3.5 rounded-full text-[15px] lg:text-[18px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide">
+          Get in touch
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
