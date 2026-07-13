@@ -108,6 +108,15 @@ const services = [
                   <span>0{services.length}</span>
                 </span>
               </div>
+              <a
+                href={`/${s.slug}`}
+                class="group mt-7 inline-flex items-center gap-2 text-[15px] lg:text-[19px] font-medium text-cream border-b border-gold/50 pb-1 hover:border-gold transition-colors"
+              >
+                More about {s.eyebrow.toLowerCase()}
+                <svg class="transition-transform group-hover:translate-x-1" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </a>
             </div>
 
             {/* animated device */}

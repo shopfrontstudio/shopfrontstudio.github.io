@@ -1,0 +1,144 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HowItWorks from "../components/HowItWorks.astro";
+import { SERVICES } from "../data/services.js";
+
+export function getStaticPaths() {
+  return SERVICES.map((s) => ({ params: { service: s.slug }, props: { s } }));
+}
+
+const { s } = Astro.props;
+const siblings = SERVICES.filter((x) => x.slug !== s.slug);
+const url = `https://anaramarketing.com.au/${s.slug}`;
+---
+
+<Layout
+  title={s.metaTitle}
+  description={s.metaDescription}
+  breadcrumbs={[
+    { name: "Home", url: "https://anaramarketing.com.au/" },
+    { name: s.eyebrow, url },
+  ]}
+>
+  {/* ── Hero ─────────────────────────────────────────────────────────── */}
+  <section class="relative text-cream">
+    <div class="max-w-6xl mx-auto px-6 pt-28 pb-16 md:pt-40 md:pb-20">
+      <nav aria-label="Breadcrumb" class="mb-10 text-[12px] lg:text-[15px] tracking-wide text-cream-mute">
+        <a href="/" class="link-underline hover:text-cream transition-colors">Home</a>
+        <span class="mx-2 text-gold">/</span>
+        <span class="text-cream-soft">{s.eyebrow}</span>
+      </nav>
+
+      <div class="grid md:grid-cols-12 gap-10 md:gap-16 items-start">
+        <div class="md:col-span-7" data-reveal>
+          <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+            {s.eyebrow}
+          </div>
+          <h1 class="font-display display-tight text-5xl md:text-6xl lg:text-[5rem]">
+            <span class="gradient-cream">{s.headA}</span>
+            <br />
+            <span class="gradient-crimson italic">{s.headB}</span>
+          </h1>
+          <p class="mt-8 text-xl md:text-2xl lg:text-[28px] leading-relaxed text-cream-soft max-w-2xl">
+            {s.lead}
+          </p>
+          <div class="mt-10 flex flex-wrap items-center gap-4">
+            <a
+              href="/contact"
+              class="btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3.5 lg:px-9 lg:py-4 rounded-full text-[15px] lg:text-[19px] font-semibold tracking-wide"
+            >
+              Start a project
+              <svg class="btn-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+                <path d="M5 12h14M13 5l7 7-7 7" />
+              </svg>
+            </a>
+            <span class="inline-flex items-center gap-2 text-sm lg:text-[18px] font-medium px-4 py-2 rounded-full bg-graphite-soft border border-line-bright text-cream">
+              {s.price}
+            </span>
+          </div>
+        </div>
+
+        <div class="md:col-span-5 space-y-6 text-cream-soft text-lg lg:text-[23px] leading-[1.55]" data-reveal style="--reveal-delay: 120ms">
+          {s.body.map((p) => <p>{p}</p>)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* ── What's included ──────────────────────────────────────────────── */}
+  <section class="relative text-cream py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="hairline-gold max-w-3xl mb-14 md:mb-20 opacity-50"></div>
+      <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-8" data-reveal>
+        What's included
+      </div>
+      <ul class="grid sm:grid-cols-2 gap-x-10 gap-y-5 max-w-4xl" data-reveal style="--reveal-delay: 80ms">
+        {
+          s.included.map((b) => (
+            <li class="flex items-center gap-4 text-lg lg:text-[24px] text-cream border-b border-line/40 pb-5">
+              <span class="w-6 h-6 lg:w-8 lg:h-8 rounded-full flex items-center justify-center text-[11px] lg:text-[14px] font-bold shrink-0 bg-crimson-deep text-cream">
+                ✓
+              </span>
+              {b}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* ── How it works (shared) ────────────────────────────────────────── */}
+  <HowItWorks />
+
+  {/* ── Other services ───────────────────────────────────────────────── */}
+  <section class="relative text-cream py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="hairline-gold max-w-3xl mb-14 md:mb-20 opacity-50"></div>
+      <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-8" data-reveal>
+        Also from the studio
+      </div>
+      <div class="grid sm:grid-cols-3 gap-5" data-reveal style="--reveal-delay: 80ms">
+        {
+          siblings.map((x) => (
+            <a
+              href={`/${x.slug}`}
+              class="group block rounded-3xl bg-graphite border border-line hover:border-gold/50 p-7 lg:p-8 transition-colors glow-hover"
+            >
+              <div class="text-[11px] lg:text-[14px] uppercase tracking-[0.28em] text-gold mb-3">{x.eyebrow}</div>
+              <div class="font-display display-tight text-2xl lg:text-[2rem] text-cream">
+                {x.headA} {x.headB}
+              </div>
+              <div class="mt-5 inline-flex items-center gap-2 text-[14px] lg:text-[17px] text-cream-soft group-hover:text-cream transition-colors">
+                Explore
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* ── Contact CTA ──────────────────────────────────────────────────── */}
+  <section class="relative text-cream py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-6 text-center" data-reveal>
+      <h2 class="font-display display-tight text-4xl md:text-6xl">
+        <span class="gradient-cream">Tell us what</span>
+        <span class="gradient-crimson italic"> you're building.</span>
+      </h2>
+      <p class="mt-6 text-lg lg:text-[24px] text-cream-soft max-w-xl mx-auto leading-relaxed">
+        A short note is enough. We reply within one working day with honest next steps.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3 justify-center">
+        <a href="/contact" class="btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3.5 rounded-full text-[15px] lg:text-[19px] font-semibold tracking-wide">
+          Start a project
+        </a>
+        <a href="tel:+61456611244" class="btn-ghost inline-flex items-center px-7 py-3.5 rounded-full text-[15px] lg:text-[19px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide">
+          +61 456 611 244
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>

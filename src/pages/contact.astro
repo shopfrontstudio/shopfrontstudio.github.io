@@ -1,0 +1,23 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Contact from "../components/Contact.astro";
+---
+
+<Layout
+  title="Contact — Anara Marketing Solutions"
+  description="Tell us what you're building. We reply within one working day with honest next steps. Email, call, or send the form — Victoria-based, Australia-wide."
+  breadcrumbs={[
+    { name: "Home", url: "https://anaramarketing.com.au/" },
+    { name: "Contact", url: "https://anaramarketing.com.au/contact" },
+  ]}
+>
+  <h1 class="sr-only">Contact Anara Marketing Solutions</h1>
+  <div class="max-w-6xl mx-auto px-6 pt-28 md:pt-36">
+    <nav aria-label="Breadcrumb" class="text-[12px] lg:text-[15px] tracking-wide text-cream-mute">
+      <a href="/" class="link-underline hover:text-cream transition-colors">Home</a>
+      <span class="mx-2 text-gold">/</span>
+      <span class="text-cream-soft">Contact</span>
+    </nav>
+  </div>
+  <Contact />
+</Layout>
