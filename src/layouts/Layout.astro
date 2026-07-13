@@ -7,12 +7,14 @@ interface Props {
   title?: string;
   description?: string;
   noindex?: boolean;
+  breadcrumbs?: { name: string; url: string }[];
 }
 
 const {
   title = "Anara Marketing Solutions — Websites, social and catalogues for Australian small businesses",
   description = "Anara Marketing is a Victoria-based boutique studio creating websites, social content, catalogues and Google-connected digital presence for small businesses across Australia.",
   noindex = false,
+  breadcrumbs,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
@@ -86,6 +88,7 @@ const ogImage = new URL("/og-image.jpg", Astro.site).href;
         slogan: "Your shopfront, considered online.",
         url: "https://anaramarketing.com.au",
         email: "info@anaramarketing.com.au",
+        telephone: "+61456611244",
         image: ogImage,
         logo: new URL("/apple-touch-icon.png", Astro.site).href,
         founder: { "@type": "Person", name: "Mohammad Abdullah Ashraf", jobTitle: "Founder" },
@@ -106,6 +109,36 @@ const ogImage = new URL("/og-image.jpg", Astro.site).href;
         },
       })}
     />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "@id": "https://anaramarketing.com.au/#website",
+        name: "Anara Marketing Solutions",
+        alternateName: "Anara Marketing",
+        url: "https://anaramarketing.com.au",
+        publisher: { "@id": "https://anaramarketing.com.au/#business" },
+        inLanguage: "en-AU",
+      })}
+    />
+    {
+      breadcrumbs && breadcrumbs.length > 0 && (
+        <script
+          type="application/ld+json"
+          set:html={JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            itemListElement: breadcrumbs.map((c, i) => ({
+              "@type": "ListItem",
+              position: i + 1,
+              name: c.name,
+              item: c.url,
+            })),
+          })}
+        />
+      )
+    }
   </head>
   <body class="min-h-screen flex flex-col">
     <div class="intro-veil" aria-hidden="true"></div>
@@ -258,11 +291,23 @@ const ogImage = new URL("/og-image.jpg", Astro.site).href;
       }
 
       // ── Anchor navigation: native continuous scroll, no inertia layer ────
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
+      // Handles bare "#id" links and root-relative "/#id" links. Only
+      // intercepts when the target lives on the CURRENT page — a "/#services"
+      // click from a sub-page falls through and navigates home as normal.
+      document.querySelectorAll('a[href*="#"]').forEach((a) => {
         a.addEventListener("click", (e) => {
-          const id = a.getAttribute("href");
-          if (!id || id === "#") return;
-          const target = document.querySelector(id);
+          const raw = a.getAttribute("href");
+          if (!raw || raw === "#") return;
+          let hash = "";
+          try {
+            const u = new URL(raw, window.location.href);
+            if (u.pathname !== window.location.pathname) return; // let it navigate
+            hash = u.hash;
+          } catch (err) {
+            return;
+          }
+          if (!hash || hash === "#") return;
+          const target = document.querySelector(hash);
           if (!target) return;
           e.preventDefault();
           const y = target.getBoundingClientRect().top + window.scrollY - 64;

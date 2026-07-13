@@ -1,11 +1,13 @@
 ---
 const year = new Date().getFullYear();
 
-const nav = [
-  { href: "#services", label: "Services" },
-  { href: "#how", label: "Process" },
-  { href: "#about", label: "Studio" },
-  { href: "#contact", label: "Contact" },
+const explore = [
+  { href: "/websites", label: "Websites" },
+  { href: "/social", label: "Social content" },
+  { href: "/catalogues", label: "Catalogues" },
+  { href: "/google", label: "Google presence" },
+  { href: "/about", label: "About the studio" },
+  { href: "/contact", label: "Contact" },
 ];
 
 // TODO: replace these with the real Instagram / LinkedIn profile URLs.
@@ -19,11 +21,11 @@ const socials = [
   <div class="max-w-6xl mx-auto px-6 py-14 md:py-16">
     <div class="grid gap-10 md:gap-8 md:grid-cols-12" data-reveal>
       {/* Brand + social */}
-      <div class="md:col-span-5">
-        <div class="flex items-center gap-3">
+      <div class="md:col-span-4">
+        <a href="/" class="flex items-center gap-3">
           <img src="/images/anara-mark.png" alt="" class="w-9 h-9 lg:w-11 lg:h-11 block" aria-hidden="true" />
           <span class="font-display font-medium text-cream tracking-[0.18em] text-lg lg:text-2xl">ANARA</span>
-        </div>
+        </a>
         <p class="mt-4 text-[13px] lg:text-[16px] max-w-xs leading-relaxed">
           Marketing Solutions — websites, social, catalogues and Google-connected presence for Australian small businesses.
         </p>
@@ -54,8 +56,26 @@ const socials = [
         </div>
       </div>
 
+      {/* Explore — real pages, so Google has distinct URLs to list */}
+      <div class="md:col-span-4">
+        <div class="text-[11px] lg:text-[14px] font-medium uppercase tracking-[0.28em] text-gold mb-4">
+          Explore
+        </div>
+        <ul class="space-y-3 text-[14px] lg:text-[17px]">
+          {
+            explore.map((item) => (
+              <li>
+                <a href={item.href} class="link-underline hover:text-cream transition-colors">
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
       {/* Contact */}
-      <div class="md:col-span-5 md:col-start-8">
+      <div class="md:col-span-4">
         <div class="text-[11px] lg:text-[14px] font-medium uppercase tracking-[0.28em] text-gold mb-4">
           Contact
         </div>
@@ -63,6 +83,11 @@ const socials = [
           <li>
             <a href="mailto:info@anaramarketing.com.au" class="link-underline hover:text-cream transition-colors">
               info@anaramarketing.com.au
+            </a>
+          </li>
+          <li>
+            <a href="tel:+61456611244" class="link-underline hover:text-cream transition-colors">
+              +61 456 611 244
             </a>
           </li>
           <li>Victoria, Australia</li>

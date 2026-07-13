@@ -1,0 +1,117 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { SERVICES } from "../data/services.js";
+---
+
+<Layout
+  title="About the studio — Anara Marketing Solutions"
+  description="Anara Marketing is a Victoria-based boutique studio building websites, social content, catalogues and Google-connected presence for small businesses across Australia."
+  breadcrumbs={[
+    { name: "Home", url: "https://anaramarketing.com.au/" },
+    { name: "About", url: "https://anaramarketing.com.au/about" },
+  ]}
+>
+  <section class="relative text-cream">
+    <div class="max-w-6xl mx-auto px-6 pt-28 pb-16 md:pt-40 md:pb-20">
+      <nav aria-label="Breadcrumb" class="mb-10 text-[12px] lg:text-[15px] tracking-wide text-cream-mute">
+        <a href="/" class="link-underline hover:text-cream transition-colors">Home</a>
+        <span class="mx-2 text-gold">/</span>
+        <span class="text-cream-soft">About</span>
+      </nav>
+
+      <div class="grid md:grid-cols-12 gap-10 md:gap-20">
+        <div class="md:col-span-5" data-reveal>
+          <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-5">
+            The studio
+          </div>
+          <h1 class="font-display display-tight text-5xl md:text-6xl lg:text-[4.8rem]">
+            <span class="gradient-cream">A Victoria-based</span>
+            <br />
+            <span class="gradient-crimson italic">studio,</span>
+            <br />
+            <span class="gradient-cream">for businesses with</span>
+            <br />
+            <span class="text-cream-mute">a story to tell.</span>
+          </h1>
+        </div>
+
+        <div class="md:col-span-7 space-y-6 text-cream-soft text-xl lg:text-[27px] leading-[1.55]" data-reveal style="--reveal-delay: 120ms">
+          <p>
+            A small business shouldn't need a big-city agency to have a website worth
+            the visit, an Instagram worth following, or a catalogue worth handing to a
+            customer.
+          </p>
+          <p>
+            Anara works with cafés, boutiques, makers, tradies, wineries and service
+            businesses across Australia. We meet in person or over a call. We answer
+            the phone. We charge in writing, so what something costs is known before
+            it begins.
+          </p>
+          <div class="hairline-gold my-10 opacity-50"></div>
+          <p class="text-cream-mute text-base lg:text-[22px] leading-relaxed">
+            Anara is the Persian word for pomegranate — a fruit of many seeds, and to
+            us, many small beginnings. We believe every small business is a seed worth
+            tending, and we'd rather earn the work than pad an invoice.
+          </p>
+          <p class="text-cream-mute text-base lg:text-[22px] leading-relaxed">
+            The studio is led by <span class="text-cream-soft">Mohammad Abdullah Ashraf</span>,
+            who works with each client directly from the first coffee to the day it goes live.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* What we do — internal links to the service pages */}
+  <section class="relative text-cream py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="hairline-gold max-w-3xl mb-14 md:mb-20 opacity-50"></div>
+      <div class="text-[12px] lg:text-[18px] font-medium uppercase tracking-[0.30em] text-gold mb-8" data-reveal>
+        What we do
+      </div>
+      <div class="grid sm:grid-cols-2 gap-5" data-reveal style="--reveal-delay: 80ms">
+        {
+          SERVICES.map((x) => (
+            <a
+              href={`/${x.slug}`}
+              class="group block rounded-3xl bg-graphite border border-line hover:border-gold/50 p-7 lg:p-8 transition-colors glow-hover"
+            >
+              <div class="flex items-center justify-between gap-4">
+                <div>
+                  <div class="text-[11px] lg:text-[14px] uppercase tracking-[0.28em] text-gold mb-2">{x.eyebrow}</div>
+                  <div class="font-display display-tight text-2xl lg:text-[2.1rem] text-cream">
+                    {x.headA} {x.headB}
+                  </div>
+                </div>
+                <svg class="shrink-0 text-cream-mute group-hover:text-cream transition-colors" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M5 12h14M13 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {/* CTA */}
+  <section class="relative text-cream py-24 md:py-32">
+    <div class="max-w-4xl mx-auto px-6 text-center" data-reveal>
+      <h2 class="font-display display-tight text-4xl md:text-6xl">
+        <span class="gradient-cream">Let's start with</span>
+        <span class="gradient-crimson italic"> a coffee.</span>
+      </h2>
+      <p class="mt-6 text-lg lg:text-[24px] text-cream-soft max-w-xl mx-auto leading-relaxed">
+        No obligation, no jargon. Tell us what you're building and we'll tell you honestly how we can help.
+      </p>
+      <div class="mt-10 flex flex-wrap gap-3 justify-center">
+        <a href="/contact" class="btn-primary inline-flex items-center gap-2 bg-crimson-deep hover:bg-crimson text-cream px-7 py-3.5 rounded-full text-[15px] lg:text-[19px] font-semibold tracking-wide">
+          Get in touch
+        </a>
+        <a href="tel:+61456611244" class="btn-ghost inline-flex items-center px-7 py-3.5 rounded-full text-[15px] lg:text-[19px] font-medium text-cream border border-line-bright hover:border-gold/60 tracking-wide">
+          +61 456 611 244
+        </a>
+      </div>
+    </div>
+  </section>
+</Layout>
